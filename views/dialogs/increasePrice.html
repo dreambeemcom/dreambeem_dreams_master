@@ -1,0 +1,86 @@
+<md-dialog aria-label="Dream - Preis setzen">
+<form ng-cloak>
+<md-toolbar>
+    <div class="md-toolbar-tools">
+        <h2>Dream - Preis setzen</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+            <md-icon md-svg-src="furnybeem24" aria-label="Dialog schliessen"></md-icon>
+        </md-button>
+    </div>
+</md-toolbar>
+
+<md-dialog-content ng-init="initIncreaseProduct();">
+    <div class="md-dialog-content">
+
+        <h2>
+            <strong>
+                Dream - Preis eintragen
+            </strong>
+        </h2>
+
+        <h2 class="md-title">Dream - Preis</h2>
+
+        <p>
+            Hier kannst Du für das Produkt einen Preis festsetzen um mit Gewinn zu verkaufen.
+        </p>
+
+        <div layout="row" layout-wrap layout-align="start">
+            <div flex="33" flex-sm="33" flex-md="33" flex-xs="100">
+                <img src="{{img}}" width="180">
+            </div>
+            <div flex="33" flex-sm="33" flex-md="33" flex-xs="100">
+                <span>{{name}}</span>
+            </div>
+            <div flex="33" class="text-center" flex-sm="33" flex-md="33" flex-xs="100">
+                <span><strong>{{price}}</strong></span>
+            </div>
+        </div>
+
+        <div layout="row" layout-wrap layout-align="start">
+            <div flex="100" flex-sm="100" flex-md="100" flex-xs="100">
+                <h3>Basispreis: <strong>{{bprice}}</strong></h3>
+            </div>
+            <div flex="100" flex-sm="100" flex-md="100" flex-xs="100">
+                <h3>Dreampreis: <strong class="text-danger">{{dprice}}</strong></h3>
+            </div>
+            <div flex="100" flex-sm="100" flex-md="100" flex-xs="100">
+                <h3>Neuer Preis: <strong class="text-success">{{dreamPrice1}}</strong></h3><br>
+                <span class="text-small-middle">Preiserhöhung in % <strong>{{dreamPercent}}</strong></span><br>
+                <span class="text-small-middle"><strong class="text-success">Gewinn {{marge}}</strong></span>
+
+            </div>
+        </div>
+
+        <form name="dpForm" novalidate>
+            <div layout="row" layout-wrap layout-align="start">
+                <md-input-container flex="77" flex-sm="50" flex-md="50" flex-xs="100">
+                    <label>neuer Preis</label>
+                    <input type="text" id="dreamPrice" ng-model="dreamPrice" name="dreamPrice" required>
+                    <div ng-messages="dpForm.dreamPrice.$error">
+                        <div ng-message="required">Benötigt</div>
+                    </div>
+                </md-input-container>
+                <md-input-container flex="33" flex-sm="50" flex-md="50" flex-xs="100">
+                    <md-button ng-click="increasePr($event,dreamPrice);" type="submit" class="md-button md-raised md-warn">
+                        Dream - Price
+                    </md-button>
+                </md-input-container>
+            </div>
+        </form>
+
+        <div class="spinner" ng-show="increaseLoader">
+            <div class="double-bounce1"></div>
+            <div class="double-bounce2"></div>
+        </div>
+    </div>
+</md-dialog-content>
+
+
+<md-dialog-actions layout="row">
+    <md-button ng-click="hide();">
+        Schließen
+    </md-button>
+</md-dialog-actions>
+</form>
+</md-dialog>

@@ -1,0 +1,116 @@
+<md-dialog aria-label="Verfügbarkeit">
+    <form style="width: 100% !important;" ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Verfügbarkeit definieren</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="activity24" aria-label="Dialog schliessen"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content ng-init="initEvents();">
+            <div class="md-dialog-content">
+                <h1>
+                        Verfügbarkeit
+                </h1>
+                <p>
+                    Hier kannst Du Deine Verfügbarkeit für Events festlegen. Zuerst Event - Kategorie festlegen, Zeit, Tag und Ort bestimmen - eintragen und fertig!
+                </p>
+
+                <div class="spinner" ng-show="availabilityLoader">
+                    <div class="double-bounce1"></div>
+                    <div class="double-bounce2"></div>
+                </div>
+
+                <div layout="row" layout-wrap layout-align="start" flex>
+                    <div id="availability" flex="100" md-flex="100" sm-flex="100" xs-flex="100">
+                        <div layout="row" layout-wrap flex>
+                            <div class="text-center" flex-xs="100" flex="15" flex-sm="50" flex-md="50"><strong>Event - Kategorie</strong></div>
+                            <div class="text-center" flex-xs="100" flex="15" flex-sm="50" flex-md="50"><strong>Event</strong></div>
+                            <div class="text-center" flex-xs="100" flex="15" flex-sm="50" flex-md="50"><strong>verfügbar Uhrzeit</strong></div>
+                            <div class="text-center" flex-xs="100" flex="15" flex-sm="50" flex-md="50"><strong>verfügbar Wochentag</strong></div>
+                            <div class="text-center" flex-xs="100" flex="15" flex-sm="50" flex-md="50"><strong>verfügbar Ort</strong></div>
+                            <div class="text-center" flex-xs="100" flex="15" flex-sm="50" flex-md="50"><strong>Preis</strong></div>
+                        </div>
+                        <md-divider></md-divider>
+                        <div id="available">
+                            <div layout="row" class="p-t-lg" layout-wrap>
+                                <div class="text-center" flex-xs="100" flex="15" flex-sm="50" flex-md="50">
+                                    <md-select id="choseCategoryEvents" ng-model="choseCategoryEvents">
+                                        <md-option ng-value="first">Kategorie wählen</md-option>
+                                        <md-option ng-click="loadEvents(1);" ng-value="1">Allgemeine Treffen</md-option>
+                                        <md-option ng-click="loadEvents(2);" ng-value="2">Sporttreffen</md-option>
+                                        <md-option ng-click="loadEvents(3);" ng-value="3">Bildungstreffen</md-option>
+                                        <md-option ng-click="loadEvents(4);" ng-value="4">Fototreffen</md-option>
+                                        <md-option ng-click="loadEvents(5);" ng-value="5">Tanztreffen</md-option>
+                                    </md-select>
+                                </div>
+                                <div class="text-center" flex="15" flex-xs="100" id="catEvents" flex-sm="50" flex-md="50">
+
+                                </div>
+                                <div class="text-center" flex-xs="100" flex="15" id="availableTime" flex-sm="50" flex-md="50">
+
+                                </div>
+                                <div class="text-center" flex-xs="100" flex="15" id="availableDay" flex-sm="50" flex-md="50">
+
+                                </div>
+                                <div class="text-center" flex-xs="100" flex="15" id="availablePlace" flex-sm="50" flex-md="50">
+                                    <md-input-container>
+                                        <input type="text" placeholder="Postleitzahl" ng-model="plz_place">
+                                    </md-input-container>
+                                    <span ng-if="plzMessage"><strong class="text-danger">{{plzMessage}}</strong></span>
+                                    <md-select id="chosePlaceCompass" ng-model="chosePlaceCompass">
+                                        <md-option ng-value="first">Umkreis in km wählen</md-option>
+                                        <md-option ng-value="1">50 km</md-option>
+                                        <md-option ng-value="2">100 km</md-option>
+                                        <md-option ng-value="3">200 km</md-option>
+                                        <md-option ng-value="4">300 km</md-option>
+                                        <md-option ng-value="5">ganz Deutschland</md-option>
+                                    </md-select>
+                                </div>
+                                <div class="text-center" flex="15" flex-xs="100" flex-sm="50" flex-md="50">
+                                    <md-input-container>
+                                        <input type="text" placeholder="Preis (in €)" ng-model="price">
+                                    </md-input-container>
+                                    <md-input-container>
+                                        <input type="text" placeholder="Fahrtkosten (in €)" ng-model="roadPrice">
+                                    </md-input-container>
+                                </div>
+                            </div>
+                            <div layout="row" layout-wrap flex>
+                                <md-button ng-click="signinEvent($event,choseCategoryEvents,choseEvents,choseAvailabilityTime,choseAvailabilityDay,plz_place,chosePlaceCompass,price,roadPrice);" class="md-button md-raised md-warn">
+                                    Event eintragen
+                                </md-button>
+                            </div>
+                        </div>
+                        <md-divider></md-divider>
+                        <div id="events">
+                            <h2>Eingetragene Events</h2>
+                            <div layout="row" layout-wrap flex>
+                                <div class="text-center" flex-xs="100" flex="15" flex-sm="50" flex-md="50"><strong>Event</strong></div>
+                                <div class="text-center" flex-xs="100" flex="15" flex-sm="50" flex-md="50"><strong>verfügbar Uhrzeit</strong></div>
+                                <div class="text-center" flex-xs="100" flex="15" flex-sm="50" flex-md="50"><strong>verfügbar Wochentag</strong></div>
+                                <div class="text-center" flex-xs="100" flex="15" flex-sm="50" flex-md="50"><strong>verfügbar Ort (Umkreis in km)</strong></div>
+                                <div class="text-center" flex-xs="100" flex="15" flex-sm="50" flex-md="50"><strong>Preis</strong></div>
+                                <div class="text-center" flex-xs="100" flex="15" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+                            </div>
+                            <md-divider></md-divider>
+                            <div layout="row" id="eventList" layout-wrap flex>
+                                <span id="avMessage" ng-if="availableMessage.length > 0" class="text-danger">{{availableMessage}}</span>
+                            </div>
+                        </div>
+                        <md-divider></md-divider>
+                    </div>
+                </div>
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <md-button ng-click="cancel();">
+                Schließen
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

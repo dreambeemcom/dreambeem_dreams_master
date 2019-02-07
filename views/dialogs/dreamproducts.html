@@ -1,0 +1,806 @@
+<md-dialog aria-label="Dreamnews - Links">
+<form ng-cloak>
+<md-toolbar>
+    <div class="md-toolbar-tools">
+        <h2>Dreamproducts - Links</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+            <md-icon md-svg-src="dreamproducts24"></md-icon>
+        </md-button>
+    </div>
+</md-toolbar>
+
+<md-dialog-content>
+<div class="md-dialog-content">
+<h2>
+    <strong>
+        Dreamproduct - Links posten
+    </strong>
+</h2>
+<p>
+    Hier kannst Du aus Deinem Lagerbestand Produktlinks posten.
+</p>
+
+<div class="spinner" ng-show="dreamproductsLoader">
+    <div class="double-bounce1"></div>
+    <div class="double-bounce2"></div>
+</div>
+
+
+<div layout="row" layout-wrap layout-align="start">
+<md-content flex layout-padding class="md-padding" layout="column" id="dpContent">
+
+<md-tabs md-selected="0" md-border-bottom md-autoselect md-dynamic-height>
+<md-tab label="Baby & Kleinkind">
+    <md-content class="m-t" ng-init="initProductsBaby();">
+        <div id="dreamProductsBaby" flex="100" md-flex="100" sm-flex="100" xs-flex="100">
+            <div layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Bild</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Name</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Preis</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+            </div>
+            <md-divider></md-divider>
+            <div id="dreamProductsBabyLinks">
+                <div ng-if="babyMessage" class="text-center" flex-xs="100" flex="100" flex-sm="100" flex-md="100">
+                    <span class="text-danger"><strong>{{babyMessage}}</strong></span>
+                </div>
+                <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksBaby">
+                    <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                        <img src="{{link.main_image}}" alt="{{link.title}}" title="{{link.title}}" width="160">
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span class="text-middle"><strong>{{link.title}}</strong></span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span ng-if="link.d_price.length > 0 && link.dreamPrice == true" class="text-success"><strong>{{link.d_price}}</strong></span>
+                        <span ng-if="link.dreamPrice == false" class="text-danger">Zuerst Dreamprice definieren</span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <md-button ng-click="takeLinkProducts(link.productId,link.ownerId,link.title);" class="md-button md-raised md-primary">
+                            Übernehmen
+                        </md-button>
+                    </div>
+                    <md-divider id="d_{{$index}}"></md-divider>
+                </div>
+            </div>
+        </div>
+    </md-content>
+</md-tab>
+<md-tab label="Bekleidung & Accessoires" md-on-select="initProductsBekleidung();">
+    <md-content class="m-t">
+        <div id="dreamProductsBekleidung" flex="100" md-flex="100" sm-flex="100" xs-flex="100">
+            <div layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Bild</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Name</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Preis</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+            </div>
+            <md-divider></md-divider>
+            <div id="dreamProductsBekleidungLinks">
+                <div ng-if="bekleidungMessage" class="text-center" flex-xs="100" flex="100" flex-sm="100" flex-md="100">
+                    <span class="text-danger"><strong>{{bekleidungMessage}}</strong></span>
+                </div>
+                <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksBekleidung">
+                    <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                        <img src="{{link.main_image}}" alt="{{link.title}}" title="{{link.title}}" width="160">
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span class="text-middle"><strong>{{link.title}}</strong></span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span ng-if="link.d_price.length > 0 && link.dreamPrice == true" class="text-success"><strong>{{link.d_price}}</strong></span>
+                        <span ng-if="link.dreamPrice == false" class="text-danger">Zuerst Dreamprice definieren</span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <md-button ng-click="takeLinkProducts(link.productId,link.ownerId,link.title);" class="md-button md-raised md-primary">
+                            Übernehmen
+                        </md-button>
+                    </div>
+                    <md-divider id="d_{{$index}}"></md-divider>
+                </div>
+            </div>
+        </div>
+    </md-content>
+</md-tab>
+    <md-tab label="Bürobedarf" md-on-select="initProductsBuero();">
+        <md-content class="m-t">
+            <div id="dreamProductsBuero" flex="100" md-flex="100" sm-flex="100" xs-flex="100">
+                <div layout="row" layout-wrap flex>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Bild</strong></div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Name</strong></div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Preis</strong></div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+                </div>
+                <md-divider></md-divider>
+                <div id="dreamProductsBueroLinks">
+                    <div ng-if="bueroMessage" class="text-center" flex-xs="100" flex="100" flex-sm="100" flex-md="100">
+                        <span class="text-danger"><strong>{{bueroMessage}}</strong></span>
+                    </div>
+                    <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksBuero">
+                        <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                            <img src="{{link.main_image}}" alt="{{link.title}}" title="{{link.title}}" width="160">
+                        </div>
+                        <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                            <span class="text-middle"><strong>{{link.title}}</strong></span>
+                        </div>
+                        <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                            <span ng-if="link.d_price.length > 0 && link.dreamPrice == true" class="text-success"><strong>{{link.d_price}}</strong></span>
+                            <span ng-if="link.dreamPrice == false" class="text-danger">Zuerst Dreamprice definieren</span>
+                        </div>
+                        <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                            <md-button ng-click="takeLinkProducts(link.productId,link.ownerId,link.title);" class="md-button md-raised md-primary">
+                                Übernehmen
+                            </md-button>
+                        </div>
+                        <md-divider id="d_{{$index}}"></md-divider>
+                    </div>
+                </div>
+            </div>
+        </md-content>
+    </md-tab>
+    <md-tab label="Elektronik" md-on-select="initProductsElektronik();">
+        <md-content class="m-t">
+            <div id="dreamProductsElektronik" flex="100" md-flex="100" sm-flex="100" xs-flex="100">
+                <div layout="row" layout-wrap flex>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Bild</strong></div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Name</strong></div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Preis</strong></div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+                </div>
+                <md-divider></md-divider>
+                <div id="dreamProductsElektronikLinks">
+                    <div ng-if="elektronikMessage" class="text-center" flex-xs="100" flex="100" flex-sm="100" flex-md="100">
+                        <span class="text-danger"><strong>{{elektronikMessage}}</strong></span>
+                    </div>
+                    <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksElektronik">
+                        <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                            <img src="{{link.main_image}}" alt="{{link.title}}" title="{{link.title}}" width="160">
+                        </div>
+                        <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                            <span class="text-middle"><strong>{{link.title}}</strong></span>
+                        </div>
+                        <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                            <span ng-if="link.d_price.length > 0 && link.dreamPrice == true" class="text-success"><strong>{{link.d_price}}</strong></span>
+                            <span ng-if="link.dreamPrice == false" class="text-danger">Zuerst Dreamprice definieren</span>
+                        </div>
+                        <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                            <md-button ng-click="takeLinkProducts(link.productId,link.ownerId,link.title);" class="md-button md-raised md-primary">
+                                Übernehmen
+                            </md-button>
+                        </div>
+                        <md-divider id="d_{{$index}}"></md-divider>
+                    </div>
+                </div>
+            </div>
+        </md-content>
+    </md-tab>
+    <md-tab label="Fahrzeuge" md-on-select="initProductsFahrzeuge();">
+        <md-content class="m-t">
+            <div id="dreamProductsFahrzeuge" flex="100" md-flex="100" sm-flex="100" xs-flex="100">
+                <div layout="row" layout-wrap flex>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Bild</strong></div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Name</strong></div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Preis</strong></div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+                </div>
+                <md-divider></md-divider>
+                <div id="dreamProductsFahrzeugeLinks">
+                    <div ng-if="fahrzeugeMessage" class="text-center" flex-xs="100" flex="100" flex-sm="100" flex-md="100">
+                        <span class="text-danger"><strong>{{fahrzeugeMessage}}</strong></span>
+                    </div>
+                    <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksFahrzeuge">
+                        <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                            <img src="{{link.main_image}}" alt="{{link.title}}" title="{{link.title}}" width="160">
+                        </div>
+                        <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                            <span class="text-middle"><strong>{{link.title}}</strong></span>
+                        </div>
+                        <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                            <span ng-if="link.d_price.length > 0 && link.dreamPrice == true" class="text-success"><strong>{{link.d_price}}</strong></span>
+                            <span ng-if="link.dreamPrice == false" class="text-danger">Zuerst Dreamprice definieren</span>
+                        </div>
+                        <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                            <md-button ng-click="takeLinkProducts(link.productId,link.ownerId,link.title);" class="md-button md-raised md-primary">
+                                Übernehmen
+                            </md-button>
+                        </div>
+                        <md-divider id="d_{{$index}}"></md-divider>
+                    </div>
+                </div>
+            </div>
+        </md-content>
+    </md-tab>
+    <md-tab label="Für Erwachsene" md-on-select="initProductsErwachsene();">
+        <md-content class="m-t">
+            <div id="dreamProductsErwachsene" flex="100" md-flex="100" sm-flex="100" xs-flex="100">
+                <div layout="row" layout-wrap flex>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Bild</strong></div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Name</strong></div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Preis</strong></div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+                </div>
+                <md-divider></md-divider>
+                <div id="dreamProductsErwachseneLinks">
+                    <div ng-if="erwachseneMessage" class="text-center" flex-xs="100" flex="100" flex-sm="100" flex-md="100">
+                        <span class="text-danger"><strong>{{erwachseneMessage}}</strong></span>
+                    </div>
+                    <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksErwachsene">
+                        <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                            <img src="{{link.main_image}}" alt="{{link.title}}" title="{{link.title}}" width="160">
+                        </div>
+                        <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                            <span class="text-middle"><strong>{{link.title}}</strong></span>
+                        </div>
+                        <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                            <span ng-if="link.d_price.length > 0 && link.dreamPrice == true" class="text-success"><strong>{{link.d_price}}</strong></span>
+                            <span ng-if="link.dreamPrice == false" class="text-danger">Zuerst Dreamprice definieren</span>
+                        </div>
+                        <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                            <md-button ng-click="takeLinkProducts(link.productId,link.ownerId,link.title);" class="md-button md-raised md-primary">
+                                Übernehmen
+                            </md-button>
+                        </div>
+                        <md-divider id="d_{{$index}}"></md-divider>
+                    </div>
+                </div>
+            </div>
+        </md-content>
+    </md-tab>
+<md-tab label="Gesundheit & Schönheit" md-on-select="initProductsGesundheit();">
+    <md-content class="m-t">
+        <div id="dreamProductsGesundheit" flex="100" md-flex="100" sm-flex="100" xs-flex="100">
+            <div layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Bild</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Name</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Preis</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+            </div>
+            <md-divider></md-divider>
+            <div id="dreamProductsGesundheitLinks">
+                <div ng-if="gesundheitMessage" class="text-center" flex-xs="100" flex="100" flex-sm="100" flex-md="100">
+                    <span class="text-danger"><strong>{{gesundheitMessage}}</strong></span>
+                </div>
+                <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksGesundheit">
+                    <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                        <img src="{{link.main_image}}" alt="{{link.title}}" title="{{link.title}}" width="160">
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span class="text-middle"><strong>{{link.title}}</strong></span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span ng-if="link.d_price.length > 0 && link.dreamPrice == true" class="text-success"><strong>{{link.d_price}}</strong></span>
+                        <span ng-if="link.dreamPrice == false" class="text-danger">Zuerst Dreamprice definieren</span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <md-button ng-click="takeLinkProducts(link.productId,link.ownerId,link.title);" class="md-button md-raised md-primary">
+                            Übernehmen
+                        </md-button>
+                    </div>
+                    <md-divider id="d_{{$index}}"></md-divider>
+                </div>
+            </div>
+        </div>
+    </md-content>
+</md-tab>
+<md-tab label="Heim & Garten" md-on-select="initProductsHeim();">
+    <md-content class="m-t">
+        <div id="dreamProductsHeim" flex="100" md-flex="100" sm-flex="100" xs-flex="100">
+            <div layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Bild</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Name</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Preis</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+            </div>
+            <md-divider></md-divider>
+            <div id="dreamProductsHeimLinks">
+                <div ng-if="heimMessage" class="text-center" flex-xs="100" flex="100" flex-sm="100" flex-md="100">
+                    <span class="text-danger"><strong>{{heimMessage}}</strong></span>
+                </div>
+                <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksHeim">
+                    <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                        <img src="{{link.main_image}}" alt="{{link.title}}" title="{{link.title}}" width="160">
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span class="text-middle"><strong>{{link.title}}</strong></span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span ng-if="link.d_price.length > 0 && link.dreamPrice == true" class="text-success"><strong>{{link.d_price}}</strong></span>
+                        <span ng-if="link.dreamPrice == false" class="text-danger">Zuerst Dreamprice definieren</span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <md-button ng-click="takeLinkProducts(link.productId,link.ownerId,link.title);" class="md-button md-raised md-primary">
+                            Übernehmen
+                        </md-button>
+                    </div>
+                    <md-divider id="d_{{$index}}"></md-divider>
+                </div>
+            </div>
+        </div>
+    </md-content>
+</md-tab>
+<md-tab label="Heimwerkerbedarf" md-on-select="initProductsHeimwerker();">
+    <md-content class="m-t">
+        <div id="dreamProductsHeimwerker" flex="100" md-flex="100" sm-flex="100" xs-flex="100">
+            <div layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Bild</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Name</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Preis</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+            </div>
+            <md-divider></md-divider>
+            <div id="dreamProductsHeimwerkerLinks">
+                <div ng-if="heimwerkerMessage" class="text-center" flex-xs="100" flex="100" flex-sm="100" flex-md="100">
+                    <span class="text-danger"><strong>{{heimwerkerMessage}}</strong></span>
+                </div>
+                <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksHeimwerker">
+                    <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                        <img src="{{link.main_image}}" alt="{{link.title}}" title="{{link.title}}" width="160">
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span class="text-middle"><strong>{{link.title}}</strong></span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span ng-if="link.d_price.length > 0 && link.dreamPrice == true" class="text-success"><strong>{{link.d_price}}</strong></span>
+                        <span ng-if="link.dreamPrice == false" class="text-danger">Zuerst Dreamprice definieren</span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <md-button ng-click="takeLinkProducts(link.productId,link.ownerId,link.title);" class="md-button md-raised md-primary">
+                            Übernehmen
+                        </md-button>
+                    </div>
+                    <md-divider id="d_{{$index}}"></md-divider>
+                </div>
+            </div>
+        </div>
+    </md-content>
+</md-tab>
+<md-tab label="Kameras & Optik" md-on-select="initProductsKameras();">
+    <md-content class="m-t">
+        <div id="dreamProductsKameras" flex="100" md-flex="100" sm-flex="100" xs-flex="100">
+            <div layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Bild</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Name</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Preis</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+            </div>
+            <md-divider></md-divider>
+            <div id="dreamProductsKamerasLinks">
+                <div ng-if="kamerasMessage" class="text-center" flex-xs="100" flex="100" flex-sm="100" flex-md="100">
+                    <span class="text-danger"><strong>{{kamerasMessage}}</strong></span>
+                </div>
+                <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksKameras">
+                    <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                        <img src="{{link.main_image}}" alt="{{link.title}}" title="{{link.title}}" width="160">
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span class="text-middle"><strong>{{link.title}}</strong></span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span ng-if="link.d_price.length > 0 && link.dreamPrice == true" class="text-success"><strong>{{link.d_price}}</strong></span>
+                        <span ng-if="link.dreamPrice == false" class="text-danger">Zuerst Dreamprice definieren</span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <md-button ng-click="takeLinkProducts(link.productId,link.ownerId,link.title);" class="md-button md-raised md-primary">
+                            Übernehmen
+                        </md-button>
+                    </div>
+                    <md-divider id="d_{{$index}}"></md-divider>
+                </div>
+            </div>
+        </div>
+    </md-content>
+</md-tab>
+<md-tab label="Kunst und Unterhaltung" md-on-select="initProductsKunst();">
+    <md-content class="m-t">
+        <div id="dreamProductsKunst" flex="100" md-flex="100" sm-flex="100" xs-flex="100">
+            <div layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Bild</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Name</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Preis</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+            </div>
+            <md-divider></md-divider>
+            <div id="dreamProductsKunstLinks">
+                <div ng-if="kunstMessage" class="text-center" flex-xs="100" flex="100" flex-sm="100" flex-md="100">
+                    <span class="text-danger"><strong>{{kunstMessage}}</strong></span>
+                </div>
+                <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksKunst">
+                    <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                        <img src="{{link.main_image}}" alt="{{link.title}}" title="{{link.title}}" width="160">
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span class="text-middle"><strong>{{link.title}}</strong></span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span ng-if="link.d_price.length > 0 && link.dreamPrice == true" class="text-success"><strong>{{link.d_price}}</strong></span>
+                        <span ng-if="link.dreamPrice == false" class="text-danger">Zuerst Dreamprice definieren</span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <md-button ng-click="takeLinkProducts(link.productId,link.ownerId,link.title);" class="md-button md-raised md-primary">
+                            Übernehmen
+                        </md-button>
+                    </div>
+                    <md-divider id="d_{{$index}}"></md-divider>
+                </div>
+            </div>
+        </div>
+    </md-content>
+</md-tab>
+<md-tab label="Medien" md-on-select="initProductsMedien();">
+    <md-content class="m-t">
+        <div id="dreamProductsMedien" flex="100" md-flex="100" sm-flex="100" xs-flex="100">
+            <div layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Bild</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Name</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Preis</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+            </div>
+            <md-divider></md-divider>
+            <div id="dreamProductsMedienLinks">
+                <div ng-if="medienMessage" class="text-center" flex-xs="100" flex="100" flex-sm="100" flex-md="100">
+                    <span class="text-danger"><strong>{{medienMessage}}</strong></span>
+                </div>
+                <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksMedien">
+                    <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                        <img src="{{link.main_image}}" alt="{{link.title}}" title="{{link.title}}" width="160">
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span class="text-middle"><strong>{{link.title}}</strong></span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span ng-if="link.d_price.length > 0 && link.dreamPrice == true" class="text-success"><strong>{{link.d_price}}</strong></span>
+                        <span ng-if="link.dreamPrice == false" class="text-danger">Zuerst Dreamprice definieren</span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <md-button ng-click="takeLinkProducts(link.productId,link.ownerId,link.title);" class="md-button md-raised md-primary">
+                            Übernehmen
+                        </md-button>
+                    </div>
+                    <md-divider id="d_{{$index}}"></md-divider>
+                </div>
+            </div>
+        </div>
+    </md-content>
+</md-tab>
+<md-tab label="Möbel" md-on-select="initProductsMoebel();">
+    <md-content class="m-t">
+        <div id="dreamProductsMoebel" flex="100" md-flex="100" sm-flex="100" xs-flex="100">
+            <div layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Bild</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Name</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Preis</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+            </div>
+            <md-divider></md-divider>
+            <div id="dreamProductsMoebelLinks">
+                <div ng-if="moebelMessage" class="text-center" flex-xs="100" flex="100" flex-sm="100" flex-md="100">
+                    <span class="text-danger"><strong>{{moebelMessage}}</strong></span>
+                </div>
+                <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksMoebel">
+                    <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                        <img src="{{link.main_image}}" alt="{{link.title}}" title="{{link.title}}" width="160">
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span class="text-middle"><strong>{{link.title}}</strong></span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span ng-if="link.d_price.length > 0 && link.dreamPrice == true" class="text-success"><strong>{{link.d_price}}</strong></span>
+                        <span ng-if="link.dreamPrice == false" class="text-danger">Zuerst Dreamprice definieren</span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <md-button ng-click="takeLinkProducts(link.productId,link.ownerId,link.title);" class="md-button md-raised md-primary">
+                            Übernehmen
+                        </md-button>
+                    </div>
+                    <md-divider id="d_{{$index}}"></md-divider>
+                </div>
+            </div>
+        </div>
+    </md-content>
+</md-tab>
+<md-tab label="Nahrungsmittel, Getränke & Tabak" md-on-select="initProductsNahrung();">
+    <md-content class="m-t">
+        <div id="dreamProductsNahrung" flex="100" md-flex="100" sm-flex="100" xs-flex="100">
+            <div layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Bild</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Name</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Preis</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+            </div>
+            <md-divider></md-divider>
+            <div id="dreamProductsNahrungLinks">
+                <div ng-if="nahrungMessage" class="text-center" flex-xs="100" flex="100" flex-sm="100" flex-md="100">
+                    <span class="text-danger"><strong>{{nahrungMessage}}</strong></span>
+                </div>
+                <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksNahrung">
+                    <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                        <img src="{{link.main_image}}" alt="{{link.title}}" title="{{link.title}}" width="160">
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span class="text-middle"><strong>{{link.title}}</strong></span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span ng-if="link.d_price.length > 0 && link.dreamPrice == true" class="text-success"><strong>{{link.d_price}}</strong></span>
+                        <span ng-if="link.dreamPrice == false" class="text-danger">Zuerst Dreamprice definieren</span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <md-button ng-click="takeLinkProducts(link.productId,link.ownerId,link.title);" class="md-button md-raised md-primary">
+                            Übernehmen
+                        </md-button>
+                    </div>
+                    <md-divider id="d_{{$index}}"></md-divider>
+                </div>
+            </div>
+        </div>
+    </md-content>
+</md-tab>
+<md-tab label="Religion & Feierlichkeiten" md-on-select="initProductsReligion();">
+    <md-content class="m-t">
+        <div id="dreamProductsReligion" flex="100" md-flex="100" sm-flex="100" xs-flex="100">
+            <div layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Bild</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Name</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Preis</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+            </div>
+            <md-divider></md-divider>
+            <div id="dreamProductsReligionLinks">
+                <div ng-if="religionMessage" class="text-center" flex-xs="100" flex="100" flex-sm="100" flex-md="100">
+                    <span class="text-danger"><strong>{{religionMessage}}</strong></span>
+                </div>
+                <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksReligion">
+                    <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                        <img src="{{link.main_image}}" alt="{{link.title}}" title="{{link.title}}" width="160">
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span class="text-middle"><strong>{{link.title}}</strong></span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span ng-if="link.d_price.length > 0 && link.dreamPrice == true" class="text-success"><strong>{{link.d_price}}</strong></span>
+                        <span ng-if="link.dreamPrice == false" class="text-danger">Zuerst Dreamprice definieren</span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <md-button ng-click="takeLinkProducts(link.productId,link.ownerId,link.title);" class="md-button md-raised md-primary">
+                            Übernehmen
+                        </md-button>
+                    </div>
+                    <md-divider id="d_{{$index}}"></md-divider>
+                </div>
+            </div>
+        </div>
+    </md-content>
+</md-tab>
+<md-tab label="Software" md-on-select="initProductsSoftware();">
+    <md-content class="m-t">
+        <div id="dreamProductsSoftware" flex="100" md-flex="100" sm-flex="100" xs-flex="100">
+            <div layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Bild</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Name</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Preis</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+            </div>
+            <md-divider></md-divider>
+            <div id="dreamProductsSoftwareLinks">
+                <div ng-if="softwareMessage" class="text-center" flex-xs="100" flex="100" flex-sm="100" flex-md="100">
+                    <span class="text-danger"><strong>{{softwareMessage}}</strong></span>
+                </div>
+                <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksSoftwarey">
+                    <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                        <img src="{{link.main_image}}" alt="{{link.title}}" title="{{link.title}}" width="160">
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span class="text-middle"><strong>{{link.title}}</strong></span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span ng-if="link.d_price.length > 0 && link.dreamPrice == true" class="text-success"><strong>{{link.d_price}}</strong></span>
+                        <span ng-if="link.dreamPrice == false" class="text-danger">Zuerst Dreamprice definieren</span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <md-button ng-click="takeLinkProducts(link.productId,link.ownerId,link.title);" class="md-button md-raised md-primary">
+                            Übernehmen
+                        </md-button>
+                    </div>
+                    <md-divider id="d_{{$index}}"></md-divider>
+                </div>
+            </div>
+        </div>
+    </md-content>
+</md-tab>
+<md-tab label="Spielzeuge & Spiele" md-on-select="initProductsSpielzeug();">
+    <md-content class="m-t">
+        <div id="dreamProductsSpielzeug" flex="100" md-flex="100" sm-flex="100" xs-flex="100">
+            <div layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Bild</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Name</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Preis</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+            </div>
+            <md-divider></md-divider>
+            <div id="dreamProductsSpielzeugLinks">
+                <div ng-if="spielzeugMessage" class="text-center" flex-xs="100" flex="100" flex-sm="100" flex-md="100">
+                    <span class="text-danger"><strong>{{spielzeugMessage}}</strong></span>
+                </div>
+                <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksSpielzeug">
+                    <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                        <img src="{{link.main_image}}" alt="{{link.title}}" title="{{link.title}}" width="160">
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span class="text-middle"><strong>{{link.title}}</strong></span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span ng-if="link.d_price.length > 0 && link.dreamPrice == true" class="text-success"><strong>{{link.d_price}}</strong></span>
+                        <span ng-if="link.dreamPrice == false" class="text-danger">Zuerst Dreamprice definieren</span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <md-button ng-click="takeLinkProducts(link.productId,link.ownerId,link.title);" class="md-button md-raised md-primary">
+                            Übernehmen
+                        </md-button>
+                    </div>
+                    <md-divider id="d_{{$index}}"></md-divider>
+                </div>
+            </div>
+        </div>
+    </md-content>
+</md-tab>
+<md-tab label="Sportartikel" md-on-select="initProductsSport();">
+    <md-content class="m-t">
+        <div id="dreamProductsSport" flex="100" md-flex="100" sm-flex="100" xs-flex="100">
+            <div layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Bild</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Name</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Preis</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+            </div>
+            <md-divider></md-divider>
+            <div id="dreamProductsSportLinks">
+                <div ng-if="sportMessage" class="text-center" flex-xs="100" flex="100" flex-sm="100" flex-md="100">
+                    <span class="text-danger"><strong>{{sportMessage}}</strong></span>
+                </div>
+                <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksSport">
+                    <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                        <img src="{{link.main_image}}" alt="{{link.title}}" title="{{link.title}}" width="160">
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span class="text-middle"><strong>{{link.title}}</strong></span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span ng-if="link.d_price.length > 0 && link.dreamPrice == true" class="text-success"><strong>{{link.d_price}}</strong></span>
+                        <span ng-if="link.dreamPrice == false" class="text-danger">Zuerst Dreamprice definieren</span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <md-button ng-click="takeLinkProducts(link.productId,link.ownerId,link.title);" class="md-button md-raised md-primary">
+                            Übernehmen
+                        </md-button>
+                    </div>
+                    <md-divider id="d_{{$index}}"></md-divider>
+                </div>
+            </div>
+        </div>
+    </md-content>
+</md-tab>
+<md-tab label="Taschen & Gepäck" md-on-select="initProductsTaschen();">
+    <md-content class="m-t">
+        <div id="dreamProductsTaschen" flex="100" md-flex="100" sm-flex="100" xs-flex="100">
+            <div layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Bild</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Name</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Preis</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+            </div>
+            <md-divider></md-divider>
+            <div id="dreamProductsTaschenLinks">
+                <div ng-if="taschenMessage" class="text-center" flex-xs="100" flex="100" flex-sm="100" flex-md="100">
+                    <span class="text-danger"><strong>{{taschenMessage}}</strong></span>
+                </div>
+                <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksTaschen">
+                    <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                        <img src="{{link.main_image}}" alt="{{link.title}}" title="{{link.title}}" width="160">
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span class="text-middle"><strong>{{link.title}}</strong></span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span ng-if="link.d_price.length > 0 && link.dreamPrice == true" class="text-success"><strong>{{link.d_price}}</strong></span>
+                        <span ng-if="link.dreamPrice == false" class="text-danger">Zuerst Dreamprice definieren</span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <md-button ng-click="takeLinkProducts(link.productId,link.ownerId,link.title);" class="md-button md-raised md-primary">
+                            Übernehmen
+                        </md-button>
+                    </div>
+                    <md-divider id="d_{{$index}}"></md-divider>
+                </div>
+            </div>
+        </div>
+    </md-content>
+</md-tab>
+<md-tab label="Tiere & Tierbedarf" md-on-select="initProductsTiere();">
+    <md-content class="m-t">
+        <div id="dreamProductsTiere" flex="100" md-flex="100" sm-flex="100" xs-flex="100">
+            <div layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Bild</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Name</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Preis</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+            </div>
+            <md-divider></md-divider>
+            <div id="dreamProductsTiereLinks">
+                <div ng-if="tiereMessage" class="text-center" flex-xs="100" flex="100" flex-sm="100" flex-md="100">
+                    <span class="text-danger"><strong>{{tiereMessage}}</strong></span>
+                </div>
+                <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksTiere">
+                    <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                        <img src="{{link.main_image}}" alt="{{link.title}}" title="{{link.title}}" width="160">
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span class="text-middle"><strong>{{link.title}}</strong></span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span ng-if="link.d_price.length > 0 && link.dreamPrice == true" class="text-success"><strong>{{link.d_price}}</strong></span>
+                        <span ng-if="link.dreamPrice == false" class="text-danger">Zuerst Dreamprice definieren</span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <md-button ng-click="takeLinkProducts(link.productId,link.ownerId,link.title);" class="md-button md-raised md-primary">
+                            Übernehmen
+                        </md-button>
+                    </div>
+                    <md-divider id="d_{{$index}}"></md-divider>
+                </div>
+            </div>
+        </div>
+    </md-content>
+</md-tab>
+<md-tab label="Wirtschaft & Industrie" md-on-select="initProductsWirtschaft();">
+    <md-content class="m-t">
+        <div id="dreamProductsWirtschaft" flex="100" md-flex="100" sm-flex="100" xs-flex="100">
+            <div layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Bild</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Name</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Preis</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+            </div>
+            <md-divider></md-divider>
+            <div id="dreamProductsWirtschaftLinks">
+                <div ng-if="wirtschaftMessage" class="text-center" flex-xs="100" flex="100" flex-sm="100" flex-md="100">
+                    <span class="text-danger"><strong>{{wirtschaftMessage}}</strong></span>
+                </div>
+                <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksWirtschaft">
+                    <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                        <img src="{{link.main_image}}" alt="{{link.title}}" title="{{link.title}}" width="160">
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span class="text-middle"><strong>{{link.title}}</strong></span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span ng-if="link.d_price.length > 0 && link.dreamPrice == true" class="text-success"><strong>{{link.d_price}}</strong></span>
+                        <span ng-if="link.dreamPrice == false" class="text-danger">Zuerst Dreamprice definieren</span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <md-button ng-click="takeLinkProducts(link.productId,link.ownerId,link.title);" class="md-button md-raised md-primary">
+                            Übernehmen
+                        </md-button>
+                    </div>
+                    <md-divider id="d_{{$index}}"></md-divider>
+                </div>
+            </div>
+        </div>
+    </md-content>
+</md-tab>
+</md-tabs>
+</md-content>
+</div>
+
+<div layout="row" layout-wrap layout-align="start" flex>
+
+</div>
+</div>
+</md-dialog-content>
+
+<md-dialog-actions layout="row">
+    <md-button ng-click="cancel($window);">
+        Schließen
+    </md-button>
+</md-dialog-actions>
+</form>
+</md-dialog>

@@ -1,0 +1,46 @@
+<md-dialog aria-label="Dream - Link">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Dream - Link</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="plink24" aria-label="Dialog schliessen"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content ng-init="initProductLink();">
+            <div class="md-dialog-content">
+
+                <h2>
+                    <strong>
+                        Dream - Link
+                    </strong>
+                </h2>
+
+                <p>
+                    Hier kannst Du Deinen Dream - Link kopieren und weitergeben.
+                </p>
+
+                <div layout="row" layout-wrap layout-align="start">
+                    <md-input-container flex="100" flex-sm="100" flex-md="100" flex-xs="100">
+                        <input type="text" value="{{dreamLink}}" ng-model="dreamLink" name="dreamLink">
+                    </md-input-container>
+                </div>
+
+                <div class="spinner" ng-show="plinkLoader">
+                    <div class="double-bounce1"></div>
+                    <div class="double-bounce2"></div>
+                </div>
+            </div>
+        </md-dialog-content>
+
+
+        <md-dialog-actions layout="row">
+            <md-button ng-click="hide();">
+                Schließen
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

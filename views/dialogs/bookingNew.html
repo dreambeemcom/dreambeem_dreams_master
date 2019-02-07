@@ -1,0 +1,37 @@
+<md-dialog aria-label="Buchung">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Buchung</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="booking24" aria-label="Dialog schliessen"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <h2>
+                    <strong>
+                        Buchung
+                    </strong>
+                </h2>
+                <p>
+                    Deine Buchung ist bei uns eingegangen und Dein Angebot wurde an die entsprechende Person weitergeleitet.
+                </p>
+
+                <div class="spinner" ng-show="cartLoader">
+                    <div class="double-bounce1"></div>
+                    <div class="double-bounce2"></div>
+                </div>
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <md-button ng-click="cancel($window);">
+                Ok
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

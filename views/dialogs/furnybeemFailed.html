@@ -1,0 +1,25 @@
+<md-dialog aria-label="Furnybeem Failed">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Furnybeem - keine freien Ressourcen</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="alertFalse24" aria-label="Dialog schliessen"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <p>Danke für Deinen Dreamshare, momentan stehen keine freien Ressourcen zur Verfügung. Bitte versuche es später erneut.</p>
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <md-button ng-click="reloadRoute($window);">
+                Ok
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

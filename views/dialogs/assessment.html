@@ -1,0 +1,99 @@
+<md-dialog aria-label="Bewerten">
+    <form style="width: 100% !important;" ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Bewertung abgeben</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="assessment24" aria-label="Dialog schliessen"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-content ng-init="getAssessmentBooking();">
+            <div class="md-dialog-content">
+                <h1>
+                    Bewertung abgeben
+                </h1>
+                <p>
+                    Hier kannst Du eine Bewertung für ein Treffen abgeben. Daraufhin bekommt der Dream eine Entlohnung.
+                </p>
+
+                <div class="spinner" ng-show="assessmentLoader">
+                    <div class="double-bounce1"></div>
+                    <div class="double-bounce2"></div>
+                </div>
+
+                <div layout="row" layout-wrap layout-align="start" flex>
+                    <div id="assessmentBooking" flex="100" flex-md="100" flex-sm="100" flex-xs="100">
+                        <div layout="row" layout-wrap flex>
+                            <div class="text-warning text-center" style="font-size: 16px;" flex-xs="100" flex="20" flex-sm="33" flex-md="33"><strong>Buchung</strong></div>
+                            <div class="text-warning text-center" style="font-size: 16px;" flex-xs="100" flex="20" flex-sm="33" flex-md="33"><strong>Personen</strong></div>
+                            <div class="text-warning text-center" style="font-size: 16px;" flex-xs="100" flex="20" flex-sm="33" flex-md="33"><strong>Ort</strong></div>
+                            <div class="text-warning text-center" style="font-size: 16px;" flex-xs="100" flex="20" flex-sm="33" flex-md="33"><strong>Buchungsdetails</strong></div>
+                            <div class="text-warning text-center" style="font-size: 16px;" flex-xs="100" flex="20" flex-sm="33" flex-md="33"><strong>Status</strong></div>
+                        </div>
+                        <md-divider style="text-decoration: bolder"></md-divider>
+                    </div>
+                </div>
+                <div layout="row" layout-wrap layout-align="start" flex>
+                    <span class="text-danger" ng-if="assessmentBookingMessage"><strong>{{assessmentBookingMessage}}</strong></span>
+                    <div ng-repeat="bookings in assessmentBookings" flex-xs="100" flex="100" flex-sm="100" flex-md="100" layout="row" layout-wrap flex>
+                        <div class="text-center" flex-xs="100" flex="20" flex-sm="33" flex-md="33">
+                            {{bookings.bId}}
+                        </div>
+                        <div class="text-center" flex-xs="100" flex="20" flex-sm="33" flex-md="33">
+                            <strong>{{bookings.bookerPerson}}</strong> bucht <strong>{{bookings.bookedPerson}}</strong>
+                        </div>
+                        <div class="text-center" flex-xs="100" flex="20" flex-sm="33" flex-md="33">
+                            <strong>Start:</strong><strong class="text-danger"> {{bookings.start}}</strong><br>
+                            <strong>Ziel:</strong><strong class="text-danger"> {{bookings.destination}}</strong>
+                        </div>
+                        <div class="text-center" flex-xs="100" flex="20" flex-sm="33" flex-md="33">
+                            {{bookings.ecb}}<br>
+                            {{bookings.eb}}<br>
+                            {{bookings.dateBooking}}<br>
+                            {{bookings.time}} Uhr<br>
+                            <strong class="text-success">{{bookings.bookingPrice}}</strong>
+                        </div>
+                        <div class="text-center" flex-xs="100" flex="20" flex-sm="33" flex-md="33">
+                            <strong class="text-danger">{{bookings.status}}</strong><br>
+                        </div>
+                    </div>
+                </div>
+                <div layout="row" layout-wrap layout-align="start" flex>
+                    <h2><strong>Bewertung</strong></h2>
+                    </div>
+                <div layout="row" layout-wrap layout-align="start" flex>
+                    <div flex="100" sm-flex="100" md-flex="100" xs-flex="100">
+                        <strong>Geld für Dream: <span class="text-big text-success"> {{assessmentBookingsDreamMoney}}</span></strong>
+                        </div>
+                    <md-input-container flex="100" sm-flex="100" md-flex="100" xs-flex="100">
+                        <label>Bewertung</label>
+                        <input type="text" id="assessmentText" name="assessmentText" ng-model="assessmentText">
+                    </md-input-container>
+                    <div flex="100" sm-flex="100" md-flex="100" xs-flex="100">
+                        <md-radio-group ng-model="assass">
+                            <md-radio-button ng-repeat="it in assessmentData"
+                                             ng-value="it.value"
+                                             aria-label="{{it.title}}">{{it.title}}
+                                <md-icon md-svg-icon="{{it.id}}"></md-icon>
+                            </md-radio-button>
+                        </md-radio-group>
+                    </div>
+                    <div flex="100" sm-flex="100" md-flex="100" xs-flex="100">
+                        <md-button ng-click="makeAssessment($event,bid);" class="m-l-lg md-button md-raised md-warn">
+                            Bewerten
+                        </md-button>
+                    </div>
+                </div>
+            </div>
+        </md-content>
+
+        <md-dialog-actions layout="row">
+            <md-button ng-click="cancel();">
+                Schließen
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

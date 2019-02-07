@@ -1,0 +1,114 @@
+<div ng-controller="MainCtrl">
+    <div ng-init="checkLogin();"></div>
+
+    <div ng-include="'views/document/customerheader.html'"></div>
+
+    <div ng-include="'views/sidenavs/customermenu.html'"></div>
+
+    <div ng-include="'views/sidenavs/dreambeem.html'"></div>
+
+    <div ng-include="'views/sidenavs/furnybeem.html'"></div>
+
+</div>
+
+<div layout="column" ng-cloak ng-controller="SettingsCtrl" ng-init="initGeneralSettings();">
+
+    <md-content flex layout-padding class="md-padding" layout="column" flex>
+        <h2 class="md-title">Einstellungen</h2>
+
+        <form name="settingsForm" novalidate ng-submit="submitSettings($event,setting1,setting2,setting3,setting4,setting5,setting6,setting7,setting8,setting9,setting10,setting11,setting12);">
+            <div layout="row" layout-align="start" flex>
+                <md-input-container>
+                    <md-checkbox ng-model="setting1" name="setting1" ng-click="chipsConfig('setting1');" class="md-primary" aria-label="">
+                        Alle Dreambeems auf Beem - Line empfangen
+                    </md-checkbox>
+                </md-input-container>
+            </div>
+            <div layout="row" layout-align="start" flex>
+                <md-input-container>
+                    <md-checkbox ng-model="setting2" name="setting2" ng-click="chipsConfig('setting2');" class="md-primary" aria-label="">
+                        Alle Furnybeems auf Beem - Line empfangen
+                    </md-checkbox>
+                </md-input-container>
+            </div>
+            <div layout="row" layout-align="start" flex>
+                <md-input-container>
+                    <md-checkbox ng-model="setting3" name="setting3" ng-click="chipsConfig('setting3');" class="md-primary" aria-label="">
+                        Alle Productbeems auf Beem - Line empfangen
+                    </md-checkbox>
+                </md-input-container>
+            </div>
+            <div layout="row" layout-align="start" flex>
+                <md-input-container>
+                    <md-checkbox ng-model="setting10" name="setting10" class="md-primary" ng-click="chipsConfig('setting10');" aria-label="">
+                        Nur Dreambeems empfangen, die den Chips - Einstellungen entsprechen
+                    </md-checkbox>
+                </md-input-container>
+            </div>
+            <div layout="row" layout-align="start" flex>
+                <md-input-container>
+                    <md-checkbox ng-model="setting11" name="setting11" ng-click="chipsConfig('setting11');" class="md-primary" aria-label="">
+                        Nur Furnybeems empfangen, die den Chips - Einstellungen entsprechen
+                    </md-checkbox>
+                </md-input-container>
+            </div>
+            <div layout="row" layout-align="start" flex>
+                <md-input-container>
+                    <md-checkbox ng-model="setting12" name="setting12" ng-click="chipsConfig('setting12');" class="md-primary" aria-label="">
+                        Nur Productbeems empfangen, die den Chips - Einstellungen entsprechen
+                    </md-checkbox>
+                </md-input-container>
+            </div>
+            <hr>
+            <div layout="row" layout-align="start" flex>
+                <md-input-container>
+                    <md-checkbox ng-model="setting4" name="setting4" class="md-primary" aria-label="">
+                        Benachrichtigen, wenn mit Dreambeem Guthaben verdient wurde
+                    </md-checkbox>
+                </md-input-container>
+            </div>
+            <div layout="row" layout-align="start" flex>
+                <md-input-container>
+                    <md-checkbox ng-model="setting5" name="setting5" class="md-primary" aria-label="">
+                        Benachrichtigen, wenn passende Angebote auf Beem - Line vorhanden sind
+                    </md-checkbox>
+                </md-input-container>
+            </div>
+            <div layout="row" layout-align="start" flex>
+                <md-input-container>
+                    <md-checkbox ng-model="setting6" name="setting6" class="md-primary" aria-label="">
+                        Benachrichtigen, wenn eine Nachricht empfangen wurde
+                    </md-checkbox>
+                </md-input-container>
+            </div>
+            <div layout="row" layout-align="start" flex>
+                <md-input-container>
+                    <md-checkbox ng-model="setting7" name="setting7" class="md-primary" aria-label="">
+                        Benachrichtigen, wenn Bewertung abgegeben werden muss
+                    </md-checkbox>
+                </md-input-container>
+            </div>
+            <div layout="row" layout-align="start" flex>
+                <md-input-container>
+                    <md-checkbox ng-model="setting8" name="setting8" class="md-primary" aria-label="">
+                        Benachrichtigen, wenn Produkt verschickt worden ist
+                    </md-checkbox>
+                </md-input-container>
+            </div>
+            <div layout="row" layout-align="start" flex>
+                <md-input-container>
+                    <md-checkbox ng-model="setting9" name="setting9" class="md-primary" aria-label="">
+                        Benachrichtigen, wenn Bestellung vom Verkäufer storniert wurde
+                    </md-checkbox>
+                </md-input-container>
+            </div>
+            <div layout="row" layout-align="end" flex>
+                <md-input-container>
+                    <md-button type="submit" ng-disabled="settingsForm.$invalid" class="md-button md-raised md-warn">
+                        Speichern
+                    </md-button>
+                </md-input-container>
+            </div>
+        </form>
+    </md-content>
+</div>

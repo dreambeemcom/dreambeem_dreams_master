@@ -1,0 +1,110 @@
+<md-dialog aria-label="Warenkorb">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Warenkorb</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="shoppingcart24" aria-label="Dialog schliessen"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <h2>
+                    <strong>
+                        Warenkorb
+                    </strong>
+                </h2>
+                <p>
+                    Hier kannst Du Deine Waren einsehen und damit zur Kasse gehen
+                </p>
+
+                <div class="spinner" ng-show="cartLoader">
+                    <div class="double-bounce1"></div>
+                    <div class="double-bounce2"></div>
+                </div>
+
+                <div layout="row" layout-wrap layout-align="start" flex>
+                    <div id="cart" flex="100" md-flex="100" sm-flex="100" xs-flex="100">
+                        <div layout="row" layout-wrap flex>
+                            <div class="text-center" flex-xs="100" flex="20" flex-sm="50" flex-md="50"><strong>Produktbild</strong></div>
+                            <div class="text-center" flex-xs="100" flex="20" flex-sm="50" flex-md="50"><strong>Menge</strong></div>
+                            <div class="text-center" flex-xs="100" flex="20" flex-sm="50" flex-md="50"><strong>Name</strong></div>
+                            <div class="text-center" flex-xs="100" flex="20" flex-sm="50" flex-md="50"><strong>Preis</strong></div>
+                            <div class="text-center" flex-xs="100" flex="20" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+                        </div>
+                        <md-divider></md-divider>
+                        <div id="cart_positions">
+                            <div ng-if="cartMessage.length > 0"><span><strong class="text-primary">{{cartMessage}}</strong></span></div>
+                            <div ng-if="cartNumber > 0" layout="row" class="p-t-lg" layout-wrap ng-repeat="p in products.data" id="pp_{{$index}}">
+                                <div class="text-center" flex-xs="100" flex="20" flex-sm="50" flex-md="50">
+                                    <img src="{{p[0].main_image}}" width="120">
+                                </div>
+                                <div class="text-center" flex="20" flex-xs="100" flex-sm="50" flex-md="50">
+                                    <span><strong>{{products.dataIdsQua[$index]}}</strong></span>
+                                </div>
+                                <div class="text-center" flex-xs="100" flex="20" flex-sm="50" flex-md="50">
+                                    {{p[0].title}}
+                                </div>
+                                <div class="text-center" flex-xs="100" flex="20" flex-sm="50" flex-md="50">
+                                    <strong ng-if="p[0].dream_price">
+                                        {{p[0].dream_price}}
+                                    </strong>
+                                    <strong ng-if="p[0].selling_price && !p[0].dream_price">
+                                        {{p[0].selling_price}}
+                                    </strong>
+
+                                </div>
+                                <div class="text-center" flex="20" flex-xs="100" flex-sm="50" flex-md="50">
+                                    <md-icon md-svg-src="delete24" aria-label="Entfernen" ng-click="deleteProduct(p[0].productId,$index);"></md-icon>
+                                </div>
+                                <md-divider id="d_{{$index}}"></md-divider>
+                            </div>
+                        </div>
+                        <md-divider></md-divider>
+                        <div id="cartSums">
+                            <div layout="row" layout-wrap layout-align="start" flex>
+                                <div flex-xs="100" flex="50" flex-sm="50" flex-md="50">
+                                    <span>Preis inkl. MwSt</span>
+                                </div>
+                                <div flex-xs="100" flex="50" flex-sm="50" flex-md="50">
+                                    <span><strong id="sumProducts">{{products.dataSumProducts}}</strong></span>
+                                </div>
+                            </div>
+                            <div layout="row" layout-wrap layout-align="start" flex>
+                                <div flex-xs="100" flex="50" flex-sm="50" flex-md="50">
+                                    <span>Preis Versand</span>
+                                </div>
+                                <div flex-xs="100" flex="50" flex-sm="50" flex-md="50">
+                                    <span><strong id="sumShipping">{{products.dataSumShipping}}</strong></span>
+                                </div>
+                            </div>
+                            <div layout="row" layout-wrap layout-align="start" flex>
+                                <div flex-xs="100" flex="50" flex-sm="50" flex-md="50">
+                                    <span><strong>Preis Gesamt inkl. MwSt</strong></span>
+                                </div>
+                                <div class="text-primary" flex-xs="100" flex="50" flex-sm="50" flex-md="50">
+                                    <span><strong id="sumAll">{{products.dataSumAll}}</strong></span>
+                                </div>
+                            </div>
+                        </div>
+                        <md-divider></md-divider>
+                        <div layout="row" layout-wrap layout-align="start" flex>
+                            <md-button ng-click="checkoutMember();" class="md-button md-raised md-warn">
+                                Zur Kasse
+                            </md-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <md-button ng-click="cancel($window);">
+                Ok
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

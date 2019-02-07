@@ -1,0 +1,72 @@
+<md-dialog aria-label="Auf Facebook posten">
+<form ng-cloak>
+<md-toolbar>
+    <div class="md-toolbar-tools">
+        <h2>Profile</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+            <md-icon md-svg-src="booking24" aria-label="Dialog schliessen"></md-icon>
+        </md-button>
+    </div>
+</md-toolbar>
+
+<md-dialog-content>
+<div class="md-dialog-content">
+<h2>
+    <strong>
+        Social Media Profile
+    </strong>
+</h2>
+<h2 class="md-title">Profile</h2>
+<p>
+    Hier kannst Du Social Media Profile auswählen und Dir den Dream anschauen.
+</p>
+
+<div class="spinner" ng-show="profileLoader">
+    <div class="double-bounce1"></div>
+    <div class="double-bounce2"></div>
+</div>
+
+<form>
+<div layout="row" layout-wrap layout-align="start">
+<md-content flex layout-padding class="md-padding" layout="column" ng-init="init();">
+<md-input-container>
+    <input type="text" placeholder="Facebook - Profil" ng-model="fbl">
+    <a href="{{fbl}}" target="_blank">
+        <md-icon md-svg-src="link24" class="material-icons md-24"></md-icon>
+        <span class="text-small">{{fbl}}</span>
+    </a>
+</md-input-container>
+    <md-input-container>
+        <input type="text" placeholder="Twitter - Website" ng-model="twl">
+        <a href="{{twl}}" target="_blank">
+            <md-icon md-svg-src="link24" class="material-icons md-24"></md-icon>
+            <span class="text-small">{{twl}}</span>
+        </a>
+    </md-input-container>
+    <md-input-container>
+        <input type="text" placeholder="Instagram - Profil" ng-model="inl">
+        <a href="{{inl}}" target="_blank">
+            <md-icon md-svg-src="link24" class="material-icons md-24"></md-icon>
+            <span class="text-small">{{inl}}</span>
+        </a>
+    </md-input-container>
+    <md-button ng-click="cancel();" class="md-button md-raised md-warn">
+        Übernehmen
+    </md-button>
+</md-content>
+</div>
+
+<div layout="row" layout-wrap layout-align="start" flex>
+
+</div>
+</div>
+</md-dialog-content>
+
+<md-dialog-actions layout="row">
+    <md-button ng-click="cancel($window);">
+        Schließen
+    </md-button>
+</md-dialog-actions>
+</form>
+</md-dialog>

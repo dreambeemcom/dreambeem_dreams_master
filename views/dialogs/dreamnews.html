@@ -1,0 +1,883 @@
+<md-dialog aria-label="Dreamnews - Links">
+<form ng-cloak>
+<md-toolbar>
+    <div class="md-toolbar-tools">
+        <h2>Dreamnews - Links</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+            <md-icon md-svg-src="dreamnews24"></md-icon>
+        </md-button>
+    </div>
+</md-toolbar>
+
+<md-dialog-content>
+<div class="md-dialog-content">
+<h2>
+    <strong>
+        Dreamnews - Links posten
+    </strong>
+</h2>
+<p>
+    Hier kannst Du aus unserer großen Auswahl an Nachrichten - Links posten.
+</p>
+
+<div class="spinner" ng-show="twitterLoader">
+    <div class="double-bounce1"></div>
+    <div class="double-bounce2"></div>
+</div>
+
+<div class="spinner" ng-show="dreamnewsLoader">
+    <div class="double-bounce1"></div>
+    <div class="double-bounce2"></div>
+</div>
+
+
+<div layout="row" layout-wrap layout-align="start">
+<md-content flex layout-padding class="md-padding" layout="column" id="twitterContent">
+
+<md-tabs md-selected="0" md-border-bottom md-autoselect md-dynamic-height>
+<md-tab label="Alles">
+    <md-content class="m-t">
+        <div id="dreamNewsAll" flex="100" md-flex="100" sm-flex="100" xs-flex="100" ng-init="initCategoryAlles();">
+            <div layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Titel</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Beschreibung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Veröffentlichung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+            </div>
+            <md-divider></md-divider>
+            <div id="dreamNewsAllLinks">
+                <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksAlles">
+                    <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                        <span><strong>{{link.title}}</strong></span>
+                        <a href="{{link.link}}" target="_blank">
+                            <md-icon md-svg-src="link24" class="material-icons md-24"></md-icon>
+                            <span class="text-small">{{link.mainSource}}</span>
+                        </a>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span class="text-middle">{{link.description}}</span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        {{link.pDate}}
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <md-button ng-click="takeLink(link.id);" class="md-button md-raised md-primary">
+                            Übernehmen
+                        </md-button>
+                    </div>
+                    <md-divider id="d_{{$index}}"></md-divider>
+                </div>
+            </div>
+        </div>
+    </md-content>
+</md-tab>
+<md-tab label="Videos" md-on-select="initCategoryVideos();">
+    <md-content class="m-t">
+        <div id="dreamNewsVideos" flex="100" md-flex="100" sm-flex="100" xs-flex="100">
+            <div layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Titel</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Beschreibung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Veröffentlichung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+            </div>
+            <md-divider></md-divider>
+            <div id="dreamNewsVideosLinks">
+                <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksVideos">
+                    <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                        <span><strong>{{link.title}}</strong></span>
+                        <a href="{{link.link}}" target="_blank">
+                            <md-icon md-svg-src="link24" class="material-icons md-24"></md-icon>
+                            <span class="text-small">{{link.mainSource}}</span>
+                        </a>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span class="text-middle">{{link.description}}</span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        {{link.pDate}}
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <md-button ng-click="takeLink(link.id,'furnybeemlink');" class="md-button md-raised md-primary">
+                            Übernehmen
+                        </md-button>
+                    </div>
+                    <md-divider id="d_{{$index}}"></md-divider>
+                </div>
+            </div>
+        </div>
+    </md-content>
+</md-tab>
+<md-tab label="Tag" md-on-select="initCategoryTag();">
+    <md-content class="m-t">
+        <div id="dreamNewsTag" flex="100" md-flex="100" sm-flex="100" xs-flex="100" ng-init="">
+            <div layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Titel</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Beschreibung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Veröffentlichung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+            </div>
+            <md-divider></md-divider>
+            <div id="dreamNewsTagLinks">
+                <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksTag">
+                    <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                        <span><strong>{{link.title}}</strong></span>
+                        <a href="{{link.link}}" target="_blank">
+                            <md-icon md-svg-src="link24" class="material-icons md-24"></md-icon>
+                            <span class="text-small">{{link.mainSource}}</span>
+                        </a>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span class="text-middle">{{link.description}}</span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        {{link.pDate}}
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <md-button ng-click="takeLink(link.id,'furnybeemlink');" class="md-button md-raised md-primary">
+                            Übernehmen
+                        </md-button>
+                    </div>
+                    <md-divider id="d_{{$index}}"></md-divider>
+                </div>
+            </div>
+        </div>
+    </md-content>
+</md-tab>
+<md-tab label="Politik" md-on-select="initCategoryPolitik();">
+    <md-content class="m-t">
+        <div id="dreamNewsPolitik" flex="100" md-flex="100" sm-flex="100" xs-flex="100" ng-init="">
+            <div layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Titel</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Beschreibung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Veröffentlichung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+            </div>
+            <md-divider></md-divider>
+            <div id="dreamNewsPolitikLinks">
+                <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksPolitik">
+                    <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                        <span><strong>{{link.title}}</strong></span>
+                        <a href="{{link.link}}" target="_blank">
+                            <md-icon md-svg-src="link24" class="material-icons md-24"></md-icon>
+                            <span class="text-small">{{link.mainSource}}</span>
+                        </a>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span class="text-middle">{{link.description}}</span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        {{link.pDate}}
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <md-button ng-click="takeLink(link.id,'furnybeemlink');" class="md-button md-raised md-primary">
+                            Übernehmen
+                        </md-button>
+                    </div>
+                    <md-divider id="d_{{$index}}"></md-divider>
+                </div>
+            </div>
+        </div>
+    </md-content>
+</md-tab>
+<md-tab label="Panorama" md-on-select="initCategoryPanorama();">
+    <md-content class="m-t">
+        <div id="dreamNewsPanorama" flex="100" md-flex="100" sm-flex="100" xs-flex="100" ng-init="">
+            <div layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Titel</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Beschreibung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Veröffentlichung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+            </div>
+            <md-divider></md-divider>
+            <div id="dreamNewsPanoramaLinks">
+                <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksPanorama">
+                    <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                        <span><strong>{{link.title}}</strong></span>
+                        <a href="{{link.link}}" target="_blank">
+                            <md-icon md-svg-src="link24" class="material-icons md-24"></md-icon>
+                            <span class="text-small">{{link.mainSource}}</span>
+                        </a>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span class="text-middle">{{link.description}}</span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        {{link.pDate}}
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <md-button ng-click="takeLink(link.id,'furnybeemlink');" class="md-button md-raised md-primary">
+                            Übernehmen
+                        </md-button>
+                    </div>
+                    <md-divider id="d_{{$index}}"></md-divider>
+                </div>
+            </div>
+        </div>
+    </md-content>
+</md-tab>
+<md-tab label="Sport" md-on-select="initCategorySport();">
+    <md-content class="m-t">
+        <div id="dreamNewsSport" flex="100" md-flex="100" sm-flex="100" xs-flex="100" ng-init="">
+            <div layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Titel</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Beschreibung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Veröffentlichung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+            </div>
+            <md-divider></md-divider>
+            <div id="dreamNewsSportLinks">
+                <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksSport">
+                    <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                        <span><strong>{{link.title}}</strong></span>
+                        <a href="{{link.link}}" target="_blank">
+                            <md-icon md-svg-src="link24" class="material-icons md-24"></md-icon>
+                            <span class="text-small">{{link.mainSource}}</span>
+                        </a>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span class="text-middle">{{link.description}}</span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        {{link.pDate}}
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <md-button ng-click="takeLink(link.id,'furnybeemlink');" class="md-button md-raised md-primary">
+                            Übernehmen
+                        </md-button>
+                    </div>
+                    <md-divider id="d_{{$index}}"></md-divider>
+                </div>
+            </div>
+        </div>
+    </md-content>
+</md-tab>
+<md-tab label="Kultur" md-on-select="initCategoryKultur();">
+    <md-content class="m-t">
+        <div id="dreamNewsKultur" flex="100" md-flex="100" sm-flex="100" xs-flex="100" ng-init="">
+            <div layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Titel</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Beschreibung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Veröffentlichung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+            </div>
+            <md-divider></md-divider>
+            <div id="dreamNewsKulturLinks">
+                <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksKultur">
+                    <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                        <span><strong>{{link.title}}</strong></span>
+                        <a href="{{link.link}}" target="_blank">
+                            <md-icon md-svg-src="link24" class="material-icons md-24"></md-icon>
+                            <span class="text-small">{{link.mainSource}}</span>
+                        </a>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span class="text-middle">{{link.description}}</span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        {{link.pDate}}
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <md-button ng-click="takeLink(link.id,'furnybeemlink');" class="md-button md-raised md-primary">
+                            Übernehmen
+                        </md-button>
+                    </div>
+                    <md-divider id="d_{{$index}}"></md-divider>
+                </div>
+            </div>
+        </div>
+    </md-content>
+</md-tab>
+<md-tab label="Wirtschaft" md-on-select="initCategoryWirtschaft();">
+    <md-content class="m-t">
+        <div id="dreamNewsWirtschaft" flex="100" md-flex="100" sm-flex="100" xs-flex="100" ng-init="">
+            <div layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Titel</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Beschreibung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Veröffentlichung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+            </div>
+            <md-divider></md-divider>
+            <div id="dreamNewsWirtschaftLinks">
+                <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksWirtschaft">
+                    <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                        <span><strong>{{link.title}}</strong></span>
+                        <a href="{{link.link}}" target="_blank">
+                            <md-icon md-svg-src="link24" class="material-icons md-24"></md-icon>
+                            <span class="text-small">{{link.mainSource}}</span>
+                        </a>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span class="text-middle">{{link.description}}</span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        {{link.pDate}}
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <md-button ng-click="takeLink(link.id,'furnybeemlink');" class="md-button md-raised md-primary">
+                            Übernehmen
+                        </md-button>
+                    </div>
+                    <md-divider id="d_{{$index}}"></md-divider>
+                </div>
+            </div>
+        </div>
+    </md-content>
+</md-tab>
+<md-tab label="Auto" md-on-select="initCategoryAuto();">
+    <md-content class="m-t">
+        <div id="dreamNewsAuto" flex="100" md-flex="100" sm-flex="100" xs-flex="100" ng-init="">
+            <div layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Titel</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Beschreibung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Veröffentlichung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+            </div>
+            <md-divider></md-divider>
+            <div id="dreamNewsAutoLinks">
+                <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksAuto">
+                    <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                        <span><strong>{{link.title}}</strong></span>
+                        <a href="{{link.link}}" target="_blank">
+                            <md-icon md-svg-src="link24" class="material-icons md-24"></md-icon>
+                            <span class="text-small">{{link.mainSource}}</span>
+                        </a>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span class="text-middle">{{link.description}}</span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        {{link.pDate}}
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <md-button ng-click="takeLink(link.id,'furnybeemlink');" class="md-button md-raised md-primary">
+                            Übernehmen
+                        </md-button>
+                    </div>
+                    <md-divider id="d_{{$index}}"></md-divider>
+                </div>
+            </div>
+        </div>
+    </md-content>
+</md-tab>
+<md-tab label="Gesundheit" md-on-select="initCategoryGesundheit();">
+    <md-content class="m-t">
+        <div id="dreamNewsGesundheit" flex="100" md-flex="100" sm-flex="100" xs-flex="100" ng-init="">
+            <div layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Titel</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Beschreibung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Veröffentlichung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+            </div>
+            <md-divider></md-divider>
+            <div id="dreamNewsGesundheitLinks">
+                <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksGesundheit">
+                    <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                        <span><strong>{{link.title}}</strong></span>
+                        <a href="{{link.link}}" target="_blank">
+                            <md-icon md-svg-src="link24" class="material-icons md-24"></md-icon>
+                            <span class="text-small">{{link.mainSource}}</span>
+                        </a>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span class="text-middle">{{link.description}}</span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        {{link.pDate}}
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <md-button ng-click="takeLink(link.id,'furnybeemlink');" class="md-button md-raised md-primary">
+                            Übernehmen
+                        </md-button>
+                    </div>
+                    <md-divider id="d_{{$index}}"></md-divider>
+                </div>
+            </div>
+        </div>
+    </md-content>
+</md-tab>
+<md-tab label="Lifestyle" md-on-select="initCategoryLifestyle();">
+    <md-content class="m-t">
+        <div id="dreamNewsLifestyle" flex="100" md-flex="100" sm-flex="100" xs-flex="100" ng-init="">
+            <div layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Titel</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Beschreibung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Veröffentlichung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+            </div>
+            <md-divider></md-divider>
+            <div id="dreamNewsLifestyleLinks">
+                <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksLifestyle">
+                    <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                        <span><strong>{{link.title}}</strong></span>
+                        <a href="{{link.link}}" target="_blank">
+                            <md-icon md-svg-src="link24" class="material-icons md-24"></md-icon>
+                            <span class="text-small">{{link.mainSource}}</span>
+                        </a>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span class="text-middle">{{link.description}}</span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        {{link.pDate}}
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <md-button ng-click="takeLink(link.id,'furnybeemlink');" class="md-button md-raised md-primary">
+                            Übernehmen
+                        </md-button>
+                    </div>
+                    <md-divider id="d_{{$index}}"></md-divider>
+                </div>
+            </div>
+        </div>
+    </md-content>
+</md-tab>
+<md-tab label="Genuss" md-on-select="initCategoryGenuss();">
+    <md-content class="m-t">
+        <div id="dreamNewsGenuss" flex="100" md-flex="100" sm-flex="100" xs-flex="100" ng-init="">
+            <div layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Titel</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Beschreibung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Veröffentlichung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+            </div>
+            <md-divider></md-divider>
+            <div id="dreamNewsGenussLinks">
+                <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksGenuss">
+                    <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                        <span><strong>{{link.title}}</strong></span>
+                        <a href="{{link.link}}" target="_blank">
+                            <md-icon md-svg-src="link24" class="material-icons md-24"></md-icon>
+                            <span class="text-small">{{link.mainSource}}</span>
+                        </a>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span class="text-middle">{{link.description}}</span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        {{link.pDate}}
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <md-button ng-click="takeLink(link.id,'furnybeemlink');" class="md-button md-raised md-primary">
+                            Übernehmen
+                        </md-button>
+                    </div>
+                    <md-divider id="d_{{$index}}"></md-divider>
+                </div>
+            </div>
+        </div>
+    </md-content>
+</md-tab>
+<md-tab label="Familie" md-on-select="initCategoryFamilie();">
+    <md-content class="m-t">
+        <div id="dreamNewsFamilie" flex="100" md-flex="100" sm-flex="100" xs-flex="100" ng-init="">
+            <div layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Titel</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Beschreibung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Veröffentlichung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+            </div>
+            <md-divider></md-divider>
+            <div id="dreamNewsFamilieLinks">
+                <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksFamilie">
+                    <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                        <span><strong>{{link.title}}</strong></span>
+                        <a href="{{link.link}}" target="_blank">
+                            <md-icon md-svg-src="link24" class="material-icons md-24"></md-icon>
+                            <span class="text-small">{{link.mainSource}}</span>
+                        </a>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span class="text-middle">{{link.description}}</span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        {{link.pDate}}
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <md-button ng-click="takeLink(link.id,'furnybeemlink');" class="md-button md-raised md-primary">
+                            Übernehmen
+                        </md-button>
+                    </div>
+                    <md-divider id="d_{{$index}}"></md-divider>
+                </div>
+            </div>
+        </div>
+    </md-content>
+</md-tab>
+<md-tab label="Wetter" md-on-select="initCategoryWetter();">
+    <md-content class="m-t">
+        <div id="dreamNewsWetter" flex="100" md-flex="100" sm-flex="100" xs-flex="100" ng-init="">
+            <div layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Titel</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Beschreibung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Veröffentlichung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+            </div>
+            <md-divider></md-divider>
+            <div id="dreamNewsWetterLinks">
+                <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksWetter">
+                    <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                        <span><strong>{{link.title}}</strong></span>
+                        <a href="{{link.link}}" target="_blank">
+                            <md-icon md-svg-src="link24" class="material-icons md-24"></md-icon>
+                            <span class="text-small">{{link.mainSource}}</span>
+                        </a>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span class="text-middle">{{link.description}}</span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        {{link.pDate}}
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <md-button ng-click="takeLink(link.id,'furnybeemlink');" class="md-button md-raised md-primary">
+                            Übernehmen
+                        </md-button>
+                    </div>
+                    <md-divider id="d_{{$index}}"></md-divider>
+                </div>
+            </div>
+        </div>
+    </md-content>
+</md-tab>
+<md-tab label="Digital" md-on-select="initCategoryDigital();">
+    <md-content class="m-t">
+        <div id="dreamNewsDigital" flex="100" md-flex="100" sm-flex="100" xs-flex="100" ng-init="">
+            <div layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Titel</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Beschreibung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Veröffentlichung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+            </div>
+            <md-divider></md-divider>
+            <div id="dreamNewsDigitalLinks">
+                <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksDigital">
+                    <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                        <span><strong>{{link.title}}</strong></span>
+                        <a href="{{link.link}}" target="_blank">
+                            <md-icon md-svg-src="link24" class="material-icons md-24"></md-icon>
+                            <span class="text-small">{{link.mainSource}}</span>
+                        </a>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span class="text-middle">{{link.description}}</span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        {{link.pDate}}
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <md-button ng-click="takeLink(link.id,'furnybeemlink');" class="md-button md-raised md-primary">
+                            Übernehmen
+                        </md-button>
+                    </div>
+                    <md-divider id="d_{{$index}}"></md-divider>
+                </div>
+            </div>
+        </div>
+    </md-content>
+</md-tab>
+<md-tab label="Wissen" md-on-select="initCategoryWissen();">
+    <md-content class="m-t">
+        <div id="dreamNewsWissen" flex="100" md-flex="100" sm-flex="100" xs-flex="100" ng-init="">
+            <div layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Titel</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Beschreibung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Veröffentlichung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+            </div>
+            <md-divider></md-divider>
+            <div id="dreamNewsWissenLinks">
+                <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksWissen">
+                    <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                        <span><strong>{{link.title}}</strong></span>
+                        <a href="{{link.link}}" target="_blank">
+                            <md-icon md-svg-src="link24" class="material-icons md-24"></md-icon>
+                            <span class="text-small">{{link.mainSource}}</span>
+                        </a>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span class="text-middle">{{link.description}}</span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        {{link.pDate}}
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <md-button ng-click="takeLink(link.id,'furnybeemlink');" class="md-button md-raised md-primary">
+                            Übernehmen
+                        </md-button>
+                    </div>
+                    <md-divider id="d_{{$index}}"></md-divider>
+                </div>
+            </div>
+        </div>
+    </md-content>
+</md-tab>
+<md-tab label="Reise" md-on-select="initCategoryReise();">
+    <md-content class="m-t">
+        <div id="dreamNewsReise" flex="100" md-flex="100" sm-flex="100" xs-flex="100" ng-init="">
+            <div layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Titel</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Beschreibung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Veröffentlichung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+            </div>
+            <md-divider></md-divider>
+            <div id="dreamNewsReiseLinks">
+                <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksReise">
+                    <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                        <span><strong>{{link.title}}</strong></span>
+                        <a href="{{link.link}}" target="_blank">
+                            <md-icon md-svg-src="link24" class="material-icons md-24"></md-icon>
+                            <span class="text-small">{{link.mainSource}}</span>
+                        </a>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span class="text-middle">{{link.description}}</span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        {{link.pDate}}
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <md-button ng-click="takeLink(link.id,'furnybeemlink');" class="md-button md-raised md-primary">
+                            Übernehmen
+                        </md-button>
+                    </div>
+                    <md-divider id="d_{{$index}}"></md-divider>
+                </div>
+            </div>
+        </div>
+    </md-content>
+</md-tab>
+<md-tab label="Eilmeldungen" md-on-select="initCategoryEilmeldungen();">
+    <md-content class="m-t">
+        <div id="dreamNewsEilmeldungen" flex="100" md-flex="100" sm-flex="100" xs-flex="100" ng-init="">
+            <div layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Titel</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Beschreibung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Veröffentlichung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+            </div>
+            <md-divider></md-divider>
+            <div id="dreamNewsEilmeldungenLinks">
+                <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksEilmeldungen">
+                    <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                        <span><strong>{{link.title}}</strong></span>
+                        <a href="{{link.link}}" target="_blank">
+                            <md-icon md-svg-src="link24" class="material-icons md-24"></md-icon>
+                            <span class="text-small">{{link.mainSource}}</span>
+                        </a>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span class="text-middle">{{link.description}}</span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        {{link.pDate}}
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <md-button ng-click="takeLink(link.id,'furnybeemlink');" class="md-button md-raised md-primary">
+                            Übernehmen
+                        </md-button>
+                    </div>
+                    <md-divider id="d_{{$index}}"></md-divider>
+                </div>
+            </div>
+        </div>
+    </md-content>
+</md-tab>
+<md-tab label="Meldungen" md-on-select="initCategoryMeldungen();">
+    <md-content class="m-t">
+        <div id="dreamNewsMeldungen" flex="100" md-flex="100" sm-flex="100" xs-flex="100" ng-init="">
+            <div layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Titel</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Beschreibung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Veröffentlichung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+            </div>
+            <md-divider></md-divider>
+            <div id="dreamNewsMeldungenLinks">
+                <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksMeldungen">
+                    <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                        <span><strong>{{link.title}}</strong></span>
+                        <a href="{{link.link}}" target="_blank">
+                            <md-icon md-svg-src="link24" class="material-icons md-24"></md-icon>
+                            <span class="text-small">{{link.mainSource}}</span>
+                        </a>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span class="text-middle">{{link.description}}</span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        {{link.pDate}}
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <md-button ng-click="takeLink(link.id,'furnybeemlink');" class="md-button md-raised md-primary">
+                            Übernehmen
+                        </md-button>
+                    </div>
+                    <md-divider id="d_{{$index}}"></md-divider>
+                </div>
+            </div>
+        </div>
+    </md-content>
+</md-tab>
+<md-tab label="Ausland" md-on-select="initCategoryAusland();">
+    <md-content class="m-t">
+        <div id="dreamNewsAusland" flex="100" md-flex="100" sm-flex="100" xs-flex="100" ng-init="">
+            <div layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Titel</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Beschreibung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Veröffentlichung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+            </div>
+            <md-divider></md-divider>
+            <div id="dreamNewsAuslandLinks">
+                <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksAusland">
+                    <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                        <span><strong>{{link.title}}</strong></span>
+                        <a href="{{link.link}}" target="_blank">
+                            <md-icon md-svg-src="link24" class="material-icons md-24"></md-icon>
+                            <span class="text-small">{{link.mainSource}}</span>
+                        </a>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span class="text-middle">{{link.description}}</span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        {{link.pDate}}
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <md-button ng-click="takeLink(link.id,'furnybeemlink');" class="md-button md-raised md-primary">
+                            Übernehmen
+                        </md-button>
+                    </div>
+                    <md-divider id="d_{{$index}}"></md-divider>
+                </div>
+            </div>
+        </div>
+    </md-content>
+</md-tab>
+<md-tab label="Immobilien" md-on-select="initCategoryImmobilien();">
+    <md-content class="m-t">
+        <div id="dreamNewsImmobilien" flex="100" md-flex="100" sm-flex="100" xs-flex="100" ng-init="">
+            <div layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Titel</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Beschreibung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Veröffentlichung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+            </div>
+            <md-divider></md-divider>
+            <div id="dreamNewsImmobilienLinks">
+                <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksImmobilien">
+                    <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                        <span><strong>{{link.title}}</strong></span>
+                        <a href="{{link.link}}" target="_blank">
+                            <md-icon md-svg-src="link24" class="material-icons md-24"></md-icon>
+                            <span class="text-small">{{link.mainSource}}</span>
+                        </a>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span class="text-middle">{{link.description}}</span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        {{link.pDate}}
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <md-button ng-click="takeLink(link.id,'furnybeemlink');" class="md-button md-raised md-primary">
+                            Übernehmen
+                        </md-button>
+                    </div>
+                    <md-divider id="d_{{$index}}"></md-divider>
+                </div>
+            </div>
+        </div>
+    </md-content>
+</md-tab>
+<md-tab label="Finanzen" md-on-select="initCategoryFinanzen();">
+    <md-content class="m-t">
+        <div id="dreamNewsFinanzen" flex="100" md-flex="100" sm-flex="100" xs-flex="100" ng-init="">
+            <div layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Titel</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Beschreibung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Veröffentlichung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+            </div>
+            <md-divider></md-divider>
+            <div id="dreamNewsFinanzenLinks">
+                <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksFinanzen">
+                    <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                        <span><strong>{{link.title}}</strong></span>
+                        <a href="{{link.link}}" target="_blank">
+                            <md-icon md-svg-src="link24" class="material-icons md-24"></md-icon>
+                            <span class="text-small">{{link.mainSource}}</span>
+                        </a>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span class="text-middle">{{link.description}}</span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        {{link.pDate}}
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <md-button ng-click="takeLink(link.id,'furnybeemlink');" class="md-button md-raised md-primary">
+                            Übernehmen
+                        </md-button>
+                    </div>
+                    <md-divider id="d_{{$index}}"></md-divider>
+                </div>
+            </div>
+        </div>
+    </md-content>
+</md-tab>
+<md-tab label="Börse" md-on-select="initCategoryBoerse();">
+    <md-content class="m-t">
+        <div id="dreamNewsBoerse" flex="100" md-flex="100" sm-flex="100" xs-flex="100" ng-init="">
+            <div layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Titel</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Beschreibung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Veröffentlichung</strong></div>
+                <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50"><strong>Aktion</strong></div>
+            </div>
+            <md-divider></md-divider>
+            <div id="dreamNewsBoerseLinks">
+                <div layout="row" class="p-t-lg" layout-wrap ng-repeat="link in linksBoerse">
+                    <div class="text-center" flex="25" flex-xs="100" flex-sm="50" flex-md="50">
+                        <span><strong>{{link.title}}</strong></span>
+                        <a href="{{link.link}}" target="_blank">
+                            <md-icon md-svg-src="link24" class="material-icons md-24"></md-icon>
+                            <span class="text-small">{{link.mainSource}}</span>
+                        </a>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <span class="text-middle">{{link.description}}</span>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        {{link.pDate}}
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="25" flex-sm="50" flex-md="50">
+                        <md-button ng-click="takeLink(link.id,'furnybeemlink');" class="md-button md-raised md-primary">
+                            Übernehmen
+                        </md-button>
+                    </div>
+                    <md-divider id="d_{{$index}}"></md-divider>
+                </div>
+            </div>
+        </div>
+    </md-content>
+</md-tab>
+</md-tabs>
+</md-content>
+</div>
+
+<div layout="row" layout-wrap layout-align="start" flex>
+
+</div>
+</div>
+</md-dialog-content>
+
+<md-dialog-actions layout="row">
+    <md-button ng-click="cancel($window);">
+        Schließen
+    </md-button>
+</md-dialog-actions>
+</form>
+</md-dialog>
