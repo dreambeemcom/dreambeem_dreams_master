@@ -1,0 +1,131 @@
+<div class="header" ng-cloak>
+    <div class="container" ng-init="initDreambeem();">
+        <a class="navbar-brand pull-left" href="/"><img width="35" src="images/db_logo.png"></a>
+        <div layout="row" layout-wrap layout-align="start" flex id="status" ng-cloak>
+            <div class="center-block m-t" flex="25" flex-md="50" flex-sm="50" flex-xs="100">
+                <md-icon class="pull-left" md-svg-src="amount24" class="material-icons"></md-icon>
+                <span class="pull-left">Guthaben: </span>
+                <strong id="walletEuro">
+                    <ng-count-up from="0" to="{{walletEuro}}" decimals="2" duration="9" delay="500" options="optionsCount">
+
+                    </ng-count-up> €
+                </strong>
+            </div>
+            <div class="center-block m-t" flex="25" flex-md="50" flex-sm="50" flex-xs="100">
+                <md-icon class="pull-left" md-svg-src="dreamsWallet24" class="material-icons"></md-icon>
+                <span class="pull-left">Dreams Guthaben: </span>
+                <strong id="walletDreams">
+                    <ng-count-up from="0" to="{{walletDreams}}" decimals="0" duration="9" delay="500" options="optionsCount">
+
+                    </ng-count-up>
+                </strong>
+            </div>
+            <div class="center-block m-t" flex="25" flex-md="50" flex-sm="50" flex-xs="100">
+                <md-icon class="pull-left" md-svg-src="dreambeem24" class="material-icons"></md-icon>
+                <span class="pull-left">Dreambeems: </span>
+                <strong id="dreambeems">
+                    <ng-count-up from="0" to="{{dreambeems}}" decimals="0" duration="9" delay="500" options="optionsCount">
+
+                    </ng-count-up>
+                </strong>
+            </div>
+            <div class="center-block m-t" flex="25" flex-md="50" flex-sm="50" flex-xs="100">
+                <md-icon class="pull-left" md-svg-src="furnybeem24" class="material-icons"></md-icon>
+                <span class="pull-left">Dreamshares: </span>
+                <strong id="furnybeems"><ng-count-up from="0" to="{{furnybeems}}" decimals="0" duration="9" delay="500" options="optionsCount">
+
+                </ng-count-up> </strong>
+            </div>
+        </div>
+        <div layout="row" layout-wrap layout-align="start" flex id="sidenavs" ng-cloak>
+            <div class="center-block m-t" flex="20" flex-md="33" flex-sm="33" flex-xs="100">
+                <div class="pull-left">
+                    <md-button ng-click="toggleMenuLeft()" class="md-raised">
+                        Merchant Center
+                    </md-button>
+                </div>
+            </div>
+            <div class="center-block m-t" flex="20" flex-md="33" flex-sm="33" flex-xs="100">
+                <div class="pull-left center-block">
+                    <md-button ng-click="beemline()" class="md-raised">
+                        Beemline
+                    </md-button>
+                </div>
+            </div>
+            <div class="center-block m-t" flex="20" flex-md="33" flex-sm="33" flex-xs="100">
+                <div class="pull-left m-icon-standard">
+                    <md-icon md-svg-src="dreambeem24" class="material-icons"></md-icon>
+                </div>
+                <div class="pull-left">
+                    <md-button ng-click="toggleDreambeemLeft()" class="md-raised">
+                        Dreambeem
+                    </md-button>
+                </div>
+            </div>
+            <div class="center-block m-t" flex="40" flex-md="33" flex-sm="33" flex-xs="100" ng-controller="BeemlineCtrl">
+                <div layout-align="center" class="pull-left">
+                    <md-menu>
+                        <md-button style="border-radius: 50%; box-sizing: content-box;width: 50px;
+                                height: 50px; min-width: 50px;" aria-label="Open phone interactions menu" ng-click="openMenu($mdMenu, $event)">
+                            <!-- <img style="vertical-align: middle;" ng-src="{{profilePic}}" class="pull-left" alt="{{fullname}}"> -->
+                            <strong class="text-small">{{fullname.substr(0,fullname.indexOf(' '))}}</strong>
+                        </md-button>
+                        <md-menu-content width="4">
+                            <md-menu-item ng-if="kind === 'facebook'">
+                                <md-button ng-click="FBNewsPosting($event);">
+                                    <md-icon md-svg-icon="furnybeem24" md-menu-align-target></md-icon>
+                                    Auf Facebook Nachrichten posten
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item ng-if="kind === 'facebook'">
+                                <md-button ng-click="FBProductsPosting($event);">
+                                    <md-icon md-svg-icon="furnybeem24" md-menu-align-target></md-icon>
+                                    Auf Facebook Produkte posten
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item ng-if="kind === 'twitter'">
+                                <md-button ng-click="TWNewsPosting($event);">
+                                    <md-icon md-svg-icon="furnybeem24"></md-icon>
+                                    Nachrichten twittern
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item ng-if="kind === 'twitter'">
+                                <md-button ng-click="TWProductsPosting($event);">
+                                    <md-icon md-svg-icon="furnybeem24"></md-icon>
+                                    Produkte twittern
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item ng-if="kind === 'twitter'">
+                                <md-button ng-click="TWFollowers($event);">
+                                    <md-icon md-svg-icon="furnybeem24"></md-icon>
+                                    Follower finden
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-divider></md-menu-divider>
+                            <md-menu-item>
+                                <a href="https://dreams.dreambeem.com/logout/">
+                                    <md-button>
+                                        <md-icon md-svg-icon="logout24"></md-icon>
+                                        Logout
+                                    </md-button>
+                                </a>
+                            </md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+                </div>
+                <div class="pull-left m-t">
+                    <md-icon md-svg-src="shoppingcart24" ng-click="openCart($event,'cart');" class="material-icons"></md-icon>
+                    <div id="cartBubble">
+                        <div class="circle" style="margin-top: -40px; margin-left: 10px;">
+                            <span><strong class="cartNumber">{{cartNumber}}</strong></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="pull-left m-t">
+                    <strong>{{fame}} Fame</strong>
+                    <md-icon md-svg-src="fame24" class="material-icons"></md-icon>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

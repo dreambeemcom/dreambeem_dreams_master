@@ -1,0 +1,158 @@
+<md-sidenav id="furnybeem" class="md-sidenav-left furnybeem-nav-width furnybeem-nav-height overlay" style="overflow: auto;" md-component-id="FurnybeemLeft"
+            md-disable-backdrop md-whiteframe="4" ng-cloak>
+
+    <md-toolbar style="padding-left: 16px" class="md-theme-indigo">
+        <md-icon style="margin-top: 20px; margin-left: 2px;" md-svg-src="furnybeem24" class="material-icons"></md-icon>
+        <h1 class="md-toolbar-tools">Dreamshare</h1>
+    </md-toolbar>
+
+    <md-content style="padding: 16px;">
+        <div layout="row" layout-wrap layout-align="start" flex>
+            <div class="m-t" flex="100" flex-md="100" flex-sm="100" flex-xs="100">
+                <span>
+                    Tief in die sozialen Medien eindringen! <strong>Neu</strong> klicken, Link, Text und Reichweite wählen und losbeemen!
+                    Du erreichst mit einem Dreamshare eine hohe Zahl an Personen im Facebook oder Twitter Netzwerk. Facebook - Person * 0,008 €, Twitter - Person * 0,008 €.
+                    Oder Du tauschst <strong>Dreams Guthaben</strong> gegen Reichweite in den sozialen Medien. <strong>Pro Dream erhältst Du 75 Facebook oder Twitter - Reichweite.</strong>
+                    Für jeden bestätigten Furnybeem erhält die Person, die per Klick bestätigt, <strong>zwei Dreams Guthaben</strong>
+                </span>
+
+                <div layout="row" layout-align="center">
+                    <md-button ng-click="resetFurnybeem($event);" class="md-button md-raised md-primary">
+                        Neu
+                    </md-button>
+                </div>
+
+                <div layout="row" layout-align="start" flex>
+                    <div class="spinner" ng-show="loading_furny">
+                        <div class="double-bounce1"></div>
+                        <div class="double-bounce2"></div>
+                    </div>
+                </div>
+
+                <form name="furnybeemForm" ng-submit="submitFurnybeem($event,fb_user_all_reach,tw_user_all_reach,furnybeemlink,
+                    furnybeemtext,fb_user_chose_all,furnybeem_fb_price,tw_user_chose_all,
+                    reach_all,furnybeem_tw_price,furnybeem_all_price,dreamsOn,walletDreams)" novalidate>
+                    <div layout="row" class="p" layout-align="start" ng-hide="!walletDreamsBool" flex>
+                        <md-input-container flex="25" flex-md="25" sm-flex="25" flex-xs="100">
+                            <md-checkbox ng-click="dreamsStakes(dreamsOn);" ng-model="dreamsOn" name="dreamsOn" id="dreamsOn" class="md-primary" aria-label="">
+                                Dreams Einsatz freischalten
+                            </md-checkbox>
+                        </md-input-container>
+                        <md-input-container flex="50" flex-md="50" sm-flex="50" flex-xs="100">
+                            <label>Dreams Einsatz</label>
+                            <input type="text" id="dreamsWallet" name="walletDreams" ng-model="walletDreams" value="{{walletDreams}}" ng-disabled="dreamsInputDisabled">
+                        </md-input-container>
+                        <md-input-container flex="25" flex-md="25" sm-flex="25" flex-xs="100">
+                            <md-button ng-click="calculateDreams(walletDreams,dreamsOn,fb_user_all_reach,tw_user_all_reach);" class="md-button md-raised md-warn" ng-disabled="dreamsInputDisabled">
+                                Dreams
+                            </md-button>
+                        </md-input-container>
+                    </div>
+                    <div layout="row" class="p" layout-align="start" flex>
+                        <md-input-container flex="50" flex-md="50" flex-sm="50" flex-xs="50">
+                            <img src="images/Fb_reach.png">
+                            <div>
+                                <md-icon md-svg-src="allReach24" class="material-icons md-48"></md-icon>
+                                <span>Reichweite: <strong>{{fb_user_all_reach}}</strong></span>
+                            </div>
+                            <div>
+                                <md-icon md-svg-src="allReach24" class="material-icons md-48"></md-icon>
+                                <span>Rechweite übrig: <strong md-colors="{color:'warn'}">{{fb_user_all_left}}</strong></span>
+                            </div>
+                        </md-input-container>
+                        <md-input-container flex="50" flex-md="50" flex-sm="50" flex-xs="50">
+                            <img src="images/twitter.jpg">
+                            <div>
+                                <md-icon md-svg-src="allReach24" class="material-icons md-48"></md-icon>
+                                <span>Reichweite: <strong>{{tw_user_all_reach}}</strong></span>
+                            </div>
+                            <div>
+                                <md-icon md-svg-src="allReach24" class="material-icons md-48"></md-icon>
+                                <span>Rechweite übrig: <strong md-colors="{color:'warn'}">{{tw_user_all_left}}</strong></span>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <div layout="row" class="p" layout-align="start" flex>
+                        <span>Zuerst Reichweite in sozialem Netzwerk wählen, danach Link und Text eingeben.</span>
+                    </div>
+                    <div layout="row" class="p-t" layout-align="start" flex>
+                        <md-input-container flex="75" flex-md="75" flex-sm="75" flex-xs="100">
+                            <label>Facebook - Reichweite</label>
+                            <input type="text" id="fb_user_all" name="fb_user_all" ng-model="fb_user_all" required>
+                            <div ng-messages="furnybeemForm.fb_user_all.$error">
+                                <div ng-message="required">Benötigt</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container flex="25" flex-md="25" flex-sm="25" flex-xs="100">
+                            <md-button ng-click="calculateFacebookReach(fb_user_all,fb_user_all_left);" class="md-button md-raised md-warn">
+                                Preis
+                            </md-button>
+                        </md-input-container>
+                    </div>
+                    <div layout="row" class="p-t" layout-align="start" flex>
+                        <md-input-container flex="75" flex-md="75" flex-sm="75" flex-xs="100">
+                            <label>Twitter - Reichweite</label>
+                            <input type="text" id="tw_user_all" name="tw_user_all" ng-model="tw_user_all" required>
+                            <div ng-messages="furnybeemForm.tw_user_all.$error">
+                                <div ng-message="required">Benötigt</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container flex="25" flex-md="25" flex-sm="25" flex-xs="100">
+                            <md-button ng-click="calculateTwitterReach(tw_user_all,tw_user_all_left);" class="md-button md-raised md-warn">
+                                Preis
+                            </md-button>
+                        </md-input-container>
+                    </div>
+                    <div layout="row" layout-wrap layout-align="start">
+                        <div flex="100" flex-md="100" flex-sm="100" flex-xs="100">
+                            <div class="pull-left">
+                                <md-button ng-click="openDreamnews(event,'furnybeemlink');" class="md-button md-raised md-warn">
+                                    Dreamnews - Links
+                                </md-button>
+                            </div>
+                            <div class="pull-left">
+                                <md-button ng-click="openDreamproducts(event,'furnybeemlink');" class="md-button md-raised md-warn">
+                                    Dreamproducts - Links
+                                </md-button>
+                            </div>
+                        </div>
+                    </div>
+                    <div layout="row" class="p-t" layout-align="start" flex>
+                        <md-input-container flex="100" flex-md="100" flex-sm="100" flex-xs="100">
+                            <label>Dream - Link (https://www.dreambeem.com)</label>
+                            <input type="text" id="furnybeemlink" name="furnybeemlink" ng-model="furnybeemlink">
+                        </md-input-container>
+                    </div>
+                    <div layout="row" layout-align="start" class="p-t" flex>
+                        <md-input-container flex="100" flex-md="100" flex-sm="100" flex-xs="100">
+                            <label>Dream - Text</label>
+                            <input ng-change="limitInput(furnybeemtext, '#f_kCount', '#furnybeemtext');" type="text" id="furnybeemtext" name="furnybeemtext" ng-model="furnybeemtext">
+                            <span><strong id="f_kCount"></strong> Zeichen maximal <strong>80 Zeichen</strong></span>
+                        </md-input-container>
+                    </div>
+                    <div layout="row" layout-align="start">
+                        <div>
+                            <md-icon md-svg-src="allReach24" class="material-icons md-48"></md-icon> Gesamte Reichweite für Facebook <strong>{{fb_user_chose_all}}</strong><br>
+                            <md-icon md-svg-src="furnybeemAmount24" class="material-icons md-48"></md-icon>Preis für Facebook - Reichweite <strong>{{furnybeem_fb_price}}</strong><br>
+                            <md-icon md-svg-src="allReach24" class="material-icons md-48"></md-icon>Gesamte Reichweite für Twitter <strong>{{tw_user_chose_all}}</strong><br>
+                            <md-icon md-svg-src="furnybeemAmount24" class="material-icons md-48"></md-icon>Preis für Twitter - Reichweite <strong>{{furnybeem_tw_price}}</strong><br>
+                            <md-icon md-svg-src="allReach24" class="material-icons md-48"></md-icon>Gesamte Reichweite für Dreamshare <strong>{{reach_all}}</strong><br>
+                            <md-icon md-svg-src="amount24" class="material-icons md-48"></md-icon>Gesamtpreis für Dreamshare <strong>{{furnybeem_all_price}}</strong><br></span>
+                        </div>
+                    </div>
+
+                    <div layout="row" layout-align="end" flex>
+                        <md-button type="submit" class="md-button md-raised md-warn">
+                            Beemen
+                        </md-button>
+                    </div>
+                </form>
+            </div>
+
+            <md-button ng-click="toggleFurnybeemLeft()" class="md-raised">
+                Dreamshare schließen
+            </md-button>
+        </div>
+    </md-content>
+
+</md-sidenav>

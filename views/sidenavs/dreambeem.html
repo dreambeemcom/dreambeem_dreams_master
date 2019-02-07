@@ -1,0 +1,94 @@
+<md-sidenav id="dreambeem" class="md-sidenav-left dreambeem-nav-height dreambeem-nav-width overlay" style="overflow: auto;" md-component-id="DreambeemLeft"
+            md-whiteframe="4" md-disable-backdrop ng-cloak>
+
+
+<md-toolbar class="md-theme-indigo">
+    <md-icon style="margin-top: 20px; margin-left: 10px;" class="material-icons" md-svg-src="dreambeem24"></md-icon>
+    <h1 class="md-toolbar-tools">Dreambeem</h1>
+</md-toolbar>
+
+<md-content style="padding: 16px;">
+    <div layout="row" layout-wrap layout-align="start" flex>
+        <div class="m-t" flex="100" flex-md="100" flex-sm="100" flex-xs="100">
+            <span>Wovon träumst Du? Auf <strong>Neu</strong> klicken, einen Link und den dazugehörigen Text eingeben und losbeemen.
+                Wenn jemand im Beem - Network auf den <strong>Dreambeem - Link</strong> klickt,
+                erhälst Du <strong>3 Dreams Guthaben</strong>.
+            </span>
+
+            <div layout="row" layout-align="center" flex>
+                <md-button ng-click="resetDreambeem($event);" class="md-button md-raised md-primary">
+                    Neu
+                </md-button>
+            </div>
+            <div layout="row" layout-wrap layout-align="start">
+                <div flex="100" flex-md="100" flex-sm="100" flex-xs="100">
+                    <div class="pull-left">
+                        <md-button ng-click="openDreamnews(event,'dreambeemlink');" class="md-button md-raised md-warn">
+                            Dreamnews - Links
+                        </md-button>
+                    </div>
+                    <div class="pull-left">
+                        <md-button ng-click="openDreamproducts(event,'dreambeemlink');" class="md-button md-raised md-warn">
+                            Dreamproducts - Links
+                        </md-button>
+                    </div>
+                </div>
+            </div>
+
+            <form name="dreambeemForm" ng-submit="submitDreambeem($event,dreambeemlink,dreambeemtext);" novalidate>
+
+                <div layout="row" class="p-t" layout-align="start" flex>
+                    <md-input-container flex="100">
+                        <label>Dream - Link (https://www.dreambeem.com)</label>
+                        <input type="text" id="dreambeemlink" name="dreambeemlink" ng-model="dreambeemlink" ng-pattern="regexUrl">
+                    </md-input-container>
+                </div>
+                <div layout="row" layout-align="start" class="p-t" flex>
+                    <md-input-container flex="100">
+                        <label>Dream - Text</label>
+                        <input type="text" id="dreambeemtext" name="dreambeemtext" ng-model="dreambeemtext" ng-change="limitInput(dreambeemtext, '#d_kCount', '#dreambeemtext');">
+                        <span><strong id="d_kCount"></strong> Zeichen maximal <strong>80 Zeichen</strong></span>
+                    </md-input-container>
+                </div>
+
+                <!-- <div layout="row" layout-align="start" flex>
+                    <md-input-container flex="100">
+                        <no-captcha
+                                expired-callback="expiredCallback"
+                                g-recaptcha-response="d_gRecaptchaResponse"
+                                theme='light'
+                                control="noCaptchaControl"
+                                site-key="6LctYBcUAAAAAOvrNz-6Xi_coZsWU8oGgQFfsnoq">
+                        </no-captcha>
+                        <input type="hidden" name="dcaptcha" id="dcaptcha" ng-model="dcaptcha" ng-if="!d_gRecaptchaResponse" required>
+                    </md-input-container>
+                </div> -->
+
+                <div class="spinner" ng-show="loading">
+                    <div class="double-bounce1"></div>
+                    <div class="double-bounce2"></div>
+                </div>
+
+                <div layout="row" layout-align="end" flex>
+                    <md-button type="submit" ng-disabled="dreambeemForm.$invalid" class="md-button md-raised md-warn">
+                        Beemen
+                    </md-button>
+                </div>
+
+            </form>
+
+            <div layout="row" layout-align="start" flex>
+                <div class="spinner" ng-show="loading_dream">
+                    <div class="double-bounce1"></div>
+                    <div class="double-bounce2"></div>
+                </div>
+            </div>
+        </div>
+
+        <md-button ng-click="toggleDreambeemLeft()" class="md-raised">
+            Dreambeem schließen
+        </md-button>
+    </div>
+</md-content>
+
+</md-sidenav>
