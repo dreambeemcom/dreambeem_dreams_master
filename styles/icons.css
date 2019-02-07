@@ -1,0 +1,186 @@
+.facebook, .twitter, .googleplus, .visa, .mastercard, .paypal, .sofort, .address, .man, .woman, .payment, .delivery, .basket, .order, .responsive,
+.delete, .wishlist, .summary { }
+
+.facebook:before {
+    content: "";
+    width: 70px;
+    height: 70px;
+
+    background-image: url('https://www.dreambeem.com/assets/images/icons_final1.png');
+    background-repeat: no-repeat;
+    background-position: -153px -414px;
+    float:left; }
+
+.twitter:before {
+    content: "";
+    width: 70px;
+    height: 70px;
+
+    background-image: url('https://www.dreambeem.com/assets/images/icons_final1.png');
+    background-repeat: no-repeat;
+    background-position: -302px -412px;
+    float:left;  }
+
+.googleplus:before {
+    content: "";
+    width: 70px;
+    height: 70px;
+
+    background-image: url('https://www.dreambeem.com/assets/images/icons_final1.png');
+    background-repeat: no-repeat;
+    background-position: -227px -414px;
+    float:left;  }
+
+.visa:before {
+    content: "";
+    width: 140px;
+    height: 55px;
+    background-image: url('https://www.dreambeem.com/assets/images/icons_final1.png');
+    background-repeat: no-repeat;
+    background-position: -270px -266px;
+    float: left;  }
+
+.mastercard:before {
+    content: "";
+    width: 140px;
+    height: 79px;
+    background-image: url('https://www.dreambeem.com/assets/images/icons_final1.png');
+    background-repeat: no-repeat;
+    background-position: -417px 0px;
+    float: left;  }
+
+.paypal:before {
+    content: "";
+    width: 140px;
+    height: 39px;
+    background-image: url('https://www.dreambeem.com/assets/images/icons_final1.png');
+    background-repeat: no-repeat;
+    background-position: -417px -78px;
+    float: left;  }
+
+.sofort:before {
+    content: "";
+    width: 173px;
+    height: 63px;
+    background-image: url('https://www.dreambeem.com/assets/images/icons_final1.png');
+    background-repeat: no-repeat;
+    background-position: -274px -326px;
+    float: left;  }
+
+.address:before {
+    content: "";
+    width: 112px;
+    height: 133px;
+    background-image: url('https://www.dreambeem.com/assets/images/icons_final1.png');
+    background-repeat: no-repeat;
+    background-position: -4px -132px;
+    float: left;  }
+
+.man:before {
+    content: "";
+    width: 131px;
+    height: 131px;
+    background-image: url('https://www.dreambeem.com/assets/images/icons_final1.png');
+    background-repeat: no-repeat;
+    background-position: 2px 3px;
+    float: left;  }
+
+.woman:before {
+    content: "";
+    width: 131px;
+    height: 131px;
+    background-image: url('https://www.dreambeem.com/assets/images/icons_final1.png');
+    background-repeat: no-repeat;
+    background-position: -131px 3px;
+    float: left;  }
+
+.payment:before {
+    content: "";
+    width: 110px;
+    height: 131px;
+    background-image: url('https://www.dreambeem.com/assets/images/icons_final1.png');
+    background-repeat: no-repeat;
+    background-position: -381px -127px;
+    float: left;  }
+
+.delivery:before {
+    content: "";
+    width: 132px;
+    height: 131px;
+    background-image: url('https://www.dreambeem.com/assets/images/icons_final1.png');
+    background-repeat: no-repeat;
+    background-position: -274px 4px;
+    float: left;  }
+
+.basket:before {
+    content: "";
+    width: 93px;
+    height: 88px;
+    background-image: url('https://www.dreambeem.com/assets/images/icons_final1.png');
+    background-repeat: no-repeat;
+    background-position: -257px -136px;
+    float: left;  }
+
+.order:before {
+    content: "";
+    width: 103px;
+    height: 140px;
+    background-image: url('https://www.dreambeem.com/assets/images/icons_final1.png');
+    background-repeat: no-repeat;
+    background-position: -142px -126px;
+    float: left;  }
+
+.responsive:before {
+    content: "";
+    width: 156px;
+    height: 140px;
+    background-image: url('https://www.dreambeem.com/assets/images/icons_final1.png');
+    background-repeat: no-repeat;
+    background-position: 0px -269px;
+    float: left;  }
+
+.delete:before {
+    content: "";
+    width: 56px;
+    height: 70px;
+    background-image: url('https://www.dreambeem.com/assets/images/icons_final1.png');
+    background-repeat: no-repeat;
+    background-position: -21px -403px;
+    float: left;  }
+
+.wishlist:before {
+    content: "";
+    width: 68px;
+    height: 70px;
+    background-image: url('https://www.dreambeem.com/assets/images/icons_final1.png');
+    background-repeat: no-repeat;
+    background-position: -22px -539px;
+    float: left;  }
+
+.heart:before {
+    content: "";
+    width: 56px;
+    height: 57px;
+    background-image: url('https://www.dreambeem.com/assets/images/icons_final1.png');
+    background-repeat: no-repeat;
+    background-position: -21px -482px;
+    float: left;  }
+
+.summary:before {
+    content: "";
+    width: 93px;
+    height: 140px;
+    background-image: url('https://www.dreambeem.com/assets/images/icons_final1.png');
+    background-repeat: no-repeat;
+    background-position: -165px -269px;
+    float: left;  }
+
+.basket-small:before {
+    content: "";
+    width: 56px;
+    height: 57px;
+    background-image: url('https://www.dreambeem.com/assets/images/icons_final1.png');
+    background-repeat: no-repeat;
+    background-position: -91px -482px;
+    float: left;  }
+

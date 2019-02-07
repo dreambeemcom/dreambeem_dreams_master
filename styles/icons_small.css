@@ -1,0 +1,305 @@
+.small-star, .small-star-yellow, .small-smartphone, .small-oneway, .small-oneway-red,
+.small-fullheart, .small-fullheart-red, .small-heart, .small-heart-red, .small-caution, .small-caution-red,
+.small-arrow-right, .small-computer, .small-stats, .small-watch, .small-refresh, .small-home, .small-check-allright,
+.small-ok1, .small-tasks, .small-plus, .small-refreshwatch, .small-plus-green, .small-ok2, .small-config,
+.small-info, .small-photo-placeholder, .small-facebook, .small-googleplus, .small-twitter { }
+
+.small-star:before {
+    content: "";
+    width: 70px;
+    height: 70px;
+
+    background-image: url('https://www.workengo.com/assets/images/iconset_small.png');
+    background-repeat: no-repeat;
+    background-position: 0px 3px;
+    float:left; }
+
+.small-star-yellow:before {
+    content: "";
+    width: 70px;
+    height: 70px;
+
+    background-image: url('https://www.workengo.com/assets/images/iconset_small.png');
+    background-repeat: no-repeat;
+    background-position: -70px 3px;
+    float:left;  }
+
+.small-smartphone:before {
+    content: "";
+    width: 89px;
+    height: 146px;
+
+    background-image: url('https://www.workengo.com/assets/images/iconset_small.png');
+    background-repeat: no-repeat;
+    background-position: -145px 3px;
+    float:left;  }
+
+.small-oneway:before {
+    content: "";
+    width: 77px;
+    height: 90px;
+
+    background-image: url('https://www.workengo.com/assets/images/iconset_small.png');
+    background-repeat: no-repeat;
+    background-position: -230px 3px;
+    float:left;  }
+
+.small-oneway-red:before {
+    content: "";
+    width: 77px;
+    height: 90px;
+
+    background-image: url('https://www.workengo.com/assets/images/iconset_small.png');
+    background-repeat: no-repeat;
+    background-position: -307px 3px;
+    float:left;  }
+
+.small-fullheart:before {
+    content: "";
+    width: 77px;
+    height: 90px;
+
+    background-image: url('https://www.workengo.com/assets/images/iconset_small.png');
+    background-repeat: no-repeat;
+    background-position: -387px 3px;
+    float:left;  }
+
+.small-fullheart-red:before {
+    content: "";
+    width: 77px;
+    height: 90px;
+
+    background-image: url('https://www.workengo.com/assets/images/iconset_small.png');
+    background-repeat: no-repeat;
+    background-position: -462px 3px;
+    float:left;  }
+
+.small-heart:before {
+    content: "";
+    width: 77px;
+    height: 90px;
+
+    background-image: url('https://www.workengo.com/assets/images/iconset_small.png');
+    background-repeat: no-repeat;
+    background-position: -539px 3px;
+    float:left;  }
+
+.small-heart-red:before {
+    content: "";
+    width: 77px;
+    height: 90px;
+
+    background-image: url('https://www.workengo.com/assets/images/iconset_small.png');
+    background-repeat: no-repeat;
+    background-position: -616px 3px;
+    float:left;  }
+
+.small-caution:before {
+    content: "";
+    width: 75px;
+    height: 64px;
+
+    background-image: url('https://www.workengo.com/assets/images/iconset_small.png');
+    background-repeat: no-repeat;
+    background-position: 4px -67px;
+    float:left;  }
+
+.small-caution-red:before {
+    content: "";
+    width: 77px;
+    height: 68px;
+
+    background-image: url('https://www.workengo.com/assets/images/iconset_small.png');
+    background-repeat: no-repeat;
+    background-position: -71px -67px;
+    float:left;  }
+
+.small-arrow-right:before {
+    content: "";
+    width: 84px;
+    height: 75px;
+
+    background-image: url('https://www.workengo.com/assets/images/iconset_small.png');
+    background-repeat: no-repeat;
+    background-position: -229px -93px;
+    float:left;  }
+
+.small-computer:before {
+    content: "";
+    width: 84px;
+    height: 75px;
+
+    background-image: url('https://www.workengo.com/assets/images/iconset_small.png');
+    background-repeat: no-repeat;
+    background-position: -311px -93px;
+    float:left;  }
+
+.small-stats:before {
+    content: "";
+    width: 84px;
+    height: 70px;
+
+    background-image: url('https://www.workengo.com/assets/images/iconset_small.png');
+    background-repeat: no-repeat;
+    background-position: -7px -128px;
+    float:left;  }
+
+.small-watch:before {
+    content: "";
+    width: 79px;
+    height: 70px;
+
+    background-image: url('https://www.workengo.com/assets/images/iconset_small.png');
+    background-repeat: no-repeat;
+    background-position: -81px -129px;
+    float:left;  }
+
+.small-refresh:before {
+    content: "";
+    width: 79px;
+    height: 82px;
+
+    background-image: url('https://www.workengo.com/assets/images/iconset_small.png');
+    background-repeat: no-repeat;
+    background-position: -157px -156px;
+    float:left;  }
+
+.small-home:before {
+    content: "";
+    width: 79px;
+    height: 72px;
+
+    background-image: url('https://www.workengo.com/assets/images/iconset_small.png');
+    background-repeat: no-repeat;
+    background-position: -237px -169px;
+    float:left;  }
+
+.small-check-allright:before {
+    content: "";
+    width: 83px;
+    height: 90px;
+
+    background-image: url('https://www.workengo.com/assets/images/iconset_small.png');
+    background-repeat: no-repeat;
+    background-position: 1px -197px;
+    float:left;  }
+
+.small-ok1:before {
+    content: "";
+    width: 76px;
+    height: 72px;
+
+    background-image: url('https://www.workengo.com/assets/images/iconset_small.png');
+    background-repeat: no-repeat;
+    background-position: -83px -205px;
+    float:left;  }
+
+.small-tasks:before {
+    content: "";
+    width: 90px;
+    height: 86px;
+
+    background-image: url('https://www.workengo.com/assets/images/iconset_small.png');
+    background-repeat: no-repeat;
+    background-position: 5px -287px;
+    float:left;  }
+
+.small-plus:before {
+    content: "";
+    width: 73px;
+    height: 73px;
+
+    background-image: url('https://www.workengo.com/assets/images/iconset_small.png');
+    background-repeat: no-repeat;
+    background-position: -165px -246px;
+    float:left;  }
+
+.small-refreshwatch:before {
+    content: "";
+    width: 73px;
+    height: 73px;
+
+    background-image: url('https://www.workengo.com/assets/images/iconset_small.png');
+    background-repeat: no-repeat;
+    background-position: -246px -245px;
+    float:left;  }
+
+.small-plus-green:before {
+    content: "";
+    width: 73px;
+    height: 73px;
+
+    background-image: url('https://www.workengo.com/assets/images/iconset_small.png');
+    background-repeat: no-repeat;
+    background-position: -164px -320px;
+    float:left;  }
+
+.small-ok2:before {
+    content: "";
+    width: 73px;
+    height: 73px;
+
+    background-image: url('https://www.workengo.com/assets/images/iconset_small.png');
+    background-repeat: no-repeat;
+    background-position: -245px -320px;
+    float:left;  }
+
+.small-config:before {
+    content: "";
+    width: 73px;
+    height: 73px;
+
+    background-image: url('https://www.workengo.com/assets/images/iconset_small.png');
+    background-repeat: no-repeat;
+    background-position: -89px -371px;
+    float:left;  }
+
+.small-info:before {
+    content: "";
+    width: 73px;
+    height: 73px;
+
+    background-image: url('https://www.workengo.com/assets/images/iconset_small.png');
+    background-repeat: no-repeat;
+    background-position: -171px -402px;
+    float:left;  }
+
+.small-photo-placeholder:before {
+    content: "";
+    width: 73px;
+    height: 73px;
+
+    background-image: url('https://www.workengo.com/assets/images/iconset_small.png');
+    background-repeat: no-repeat;
+    background-position: -242px -400px;
+    float:left;  }
+
+.small-facebook:before {
+    content: "";
+    width: 73px;
+    height: 73px;
+
+    background-image: url('https://www.workengo.com/assets/images/iconset_small.png');
+    background-repeat: no-repeat;
+    background-position: -12px -872px;
+    float:left;  }
+
+.small-twitter:before {
+    content: "";
+    width: 73px;
+    height: 73px;
+
+    background-image: url('https://www.workengo.com/assets/images/iconset_small.png');
+    background-repeat: no-repeat;
+    background-position: -10px -950px;
+    float:left;  }
+
+.small-googleplus:before {
+    content: "";
+    width: 73px;
+    height: 73px;
+
+    background-image: url('https://www.workengo.com/assets/images/iconset_small.png');
+    background-repeat: no-repeat;
+    background-position: -5px -697px;
+    float:left;  }
