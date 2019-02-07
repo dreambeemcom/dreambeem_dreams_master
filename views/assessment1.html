@@ -1,0 +1,103 @@
+<div ng-controller="MainCtrl">
+    <div ng-init="checkLogin();"></div>
+
+    <div ng-include="'views/document/customerheader.html'"></div>
+
+    <div ng-include="'views/sidenavs/customermenu.html'"></div>
+
+    <div ng-include="'views/sidenavs/dreambeem.html'"></div>
+
+    <div ng-include="'views/sidenavs/furnybeem.html'"></div>
+
+    <div class="spinner" ng-show="loading">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+    </div>
+</div>
+
+<div ng-controller="Assessment1Ctrl" ng-init="getAcceptedBookings();" class="beemline" ng-cloak>
+<md-content class="md-padding">
+    <h1><strong>Bewertungen</strong></h1>
+    <p>Hier kannst Du Deine Treffen bewerten, damit Deine gebuchten Personen belohnt werden.</p>
+    <div layout="row" layout-wrap layout-align="start" flex>
+        <div id="assessmentBooking" flex="100" flex-md="100" flex-sm="100" flex-xs="100">
+            <div layout="row" layout-wrap flex>
+                <div class="text-warning text-center" style="font-size: 16px;" flex-xs="100" flex="20" flex-sm="33" flex-md="33"><strong>Buchung</strong></div>
+                <div class="text-warning text-center" style="font-size: 16px;" flex-xs="100" flex="20" flex-sm="33" flex-md="33"><strong>Personen</strong></div>
+                <div class="text-warning text-center" style="font-size: 16px;" flex-xs="100" flex="20" flex-sm="33" flex-md="33"><strong>Ort</strong></div>
+                <div class="text-warning text-center" style="font-size: 16px;" flex-xs="100" flex="20" flex-sm="33" flex-md="33"><strong>Buchungsdetails</strong></div>
+                <div class="text-warning text-center" style="font-size: 16px;" flex-xs="100" flex="20" flex-sm="33" flex-md="33"><strong>Status + Aktion</strong></div>
+            </div>
+            <md-divider style="text-decoration: bolder"></md-divider>
+        </div>
+    </div>
+    <div layout="row" layout-wrap layout-align="start" flex>
+        <span class="text-danger" ng-if="assessmentBookingMessage"><strong>{{assessmentBookingMessage}}</strong></span>
+        <div ng-repeat="bookings in assessmentBookings" flex-xs="100" flex="100" flex-sm="100" flex-md="100" layout="row" layout-wrap flex>
+            <div class="text-center" flex-xs="100" flex="20" flex-sm="33" flex-md="33">
+                {{bookings.bId}}
+            </div>
+            <div class="text-center" flex-xs="100" flex="20" flex-sm="33" flex-md="33">
+                <strong>{{bookings.bookerPerson}}</strong> bucht <strong>{{bookings.bookedPerson}}</strong>
+            </div>
+            <div class="text-center" flex-xs="100" flex="20" flex-sm="33" flex-md="33">
+                <strong>Start:</strong><strong class="text-danger"> {{bookings.start}}</strong><br>
+                <strong>Ziel:</strong><strong class="text-danger"> {{bookings.destination}}</strong>
+            </div>
+            <div class="text-center" flex-xs="100" flex="20" flex-sm="33" flex-md="33">
+                {{bookings.ecb}}<br>
+                {{bookings.eb}}<br>
+                {{bookings.dateBooking}}<br>
+                {{bookings.time}} Uhr<br>
+                <strong class="text-success">{{bookings.bookingPrice}}</strong>
+            </div>
+            <div class="text-center" flex-xs="100" flex="20" flex-sm="33" flex-md="33">
+                <strong class="text-danger">{{bookings.status}}</strong><br>
+                <md-button ng-click="doAssessment($event,bookings.bookingId);" class="m-l-lg md-button md-raised md-warn">
+                    Bewerten
+                </md-button>
+            </div>
+        </div>
+    </div>
+    <div layout="row" layout-wrap layout-align="start" class="m-t-lg" flex>
+        <div id="valuedBooking" flex="100" flex-md="100" flex-sm="100" flex-xs="100">
+            <div layout="row" layout-wrap flex>
+                <div class="text-warning text-center" style="font-size: 16px;" flex-xs="100" flex="20" flex-sm="33" flex-md="33"><strong>Buchung</strong></div>
+                <div class="text-warning text-center" style="font-size: 16px;" flex-xs="100" flex="20" flex-sm="33" flex-md="33"><strong>Personen</strong></div>
+                <div class="text-warning text-center" style="font-size: 16px;" flex-xs="100" flex="20" flex-sm="33" flex-md="33"><strong>Ort</strong></div>
+                <div class="text-warning text-center" style="font-size: 16px;" flex-xs="100" flex="20" flex-sm="33" flex-md="33"><strong>Buchungsdetails</strong></div>
+                <div class="text-warning text-center" style="font-size: 16px;" flex-xs="100" flex="20" flex-sm="33" flex-md="33"><strong>Bewertung</strong></div>
+            </div>
+            <md-divider style="text-decoration: bolder"></md-divider>
+        </div>
+    </div>
+    <div layout="row" layout-wrap layout-align="start" ng-init="getValuedBookings();" flex>
+        <span class="text-danger" ng-if="valuedBookingMessage"><strong>{{valuedBookingMessage}}</strong></span>
+        <div ng-repeat="bookings in valuedBookings" flex-xs="100" flex="100" flex-sm="100" flex-md="100" layout="row" layout-wrap flex>
+            <div class="text-center" flex-xs="100" flex="20" flex-sm="33" flex-md="33">
+                {{bookings.bId}}
+            </div>
+            <div class="text-center" flex-xs="100" flex="20" flex-sm="33" flex-md="33">
+                <strong>{{bookings.bookerPerson}}</strong> bucht <strong>{{bookings.bookedPerson}}</strong>
+            </div>
+            <div class="text-center" flex-xs="100" flex="20" flex-sm="33" flex-md="33">
+                <strong>Start:</strong><strong class="text-danger"> {{bookings.start}}</strong><br>
+                <strong>Ziel:</strong><strong class="text-danger"> {{bookings.destination}}</strong>
+            </div>
+            <div class="text-center" flex-xs="100" flex="20" flex-sm="33" flex-md="33">
+                {{bookings.ecb}}<br>
+                {{bookings.eb}}<br>
+                {{bookings.dateBooking}}<br>
+                {{bookings.time}} Uhr<br>
+                <strong class="text-success">{{bookings.bookingPrice}}</strong>
+            </div>
+            <div class="text-center" flex-xs="100" flex="20" flex-sm="33" flex-md="33">
+                <span class="text-warning">{{bookings.assessmentText}}</span> - <span class="text-danger"><strong>{{bookings.assessment}}</strong></span>
+                <md-button class="m-l-lg md-button md-raised md-primary">
+                    Bewertet
+                </md-button>
+            </div>
+        </div>
+    </div>
+</md-content>
+    </div>

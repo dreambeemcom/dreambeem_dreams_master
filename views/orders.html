@@ -1,0 +1,88 @@
+<div ng-controller="MainCtrl">
+    <div ng-init="checkLogin();"></div>
+
+    <div ng-include="'views/document/customerheader.html'"></div>
+
+    <div ng-include="'views/sidenavs/customermenu.html'"></div>
+
+    <div ng-include="'views/sidenavs/dreambeem.html'"></div>
+
+    <div ng-include="'views/sidenavs/furnybeem.html'"></div>
+
+    <div class="spinner" ng-show="loading">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+    </div>
+</div>
+
+
+<div ng-cloak ng-controller="OrdersCtrl">
+
+    <md-content flex layout-padding>
+        <h2>Bestellungen</h2>
+
+        <div layout="row" layout-wrap layout-align="start" flex>
+            <div class="md-icon-float" flex="100" flex-md="100" flex-sm="100" flex-xs="100" flex>
+                <h3>Filter</h3>
+            </div>
+            <div class="md-icon-float" flex="33" flex-md="33" flex-sm="33" flex-xs="100">
+                <form name="filterDate" ng-submit="submitFilterDate(fromDate);" novalidate>
+                    <md-input-container>
+                        <md-datepicker ng-model="fromDate" name="fromDate" id="fromDate" md-placeholder="Datum von *" required>
+
+                        </md-datepicker>
+                        <div ng-messages="filterDate.fromDate.$error">
+                            <div ng-message="required">Benötigt</div>
+                        </div>
+                        <md-button class="md-grid-item-content" ng-click="submitFilterDate(fromDate);" ng-disabled="filterDate.$invalid">
+                            <md-icon md-svg-src="time24"></md-icon>
+                            <div class="md-grid-text">Datum</div>
+                        </md-button>
+                    </md-input-container>
+                </form>
+            </div>
+            <div class="md-icon-float" flex="33" flex-md="33" flex-sm="33" flex-xs="100">
+                <form name="filterStatus" ng-submit="submitFilterStatus(status);" novalidate>
+                    <md-input-container>
+                        <md-checkbox ng-model="status" ng-checked="exists(item, selected)" ng-click="toggle(item, selected)">
+                            {{ item }} <span ng-if="exists(item, selected)">online</span>
+                            <span ng-if="!exists(item, selected)">offline</span>
+                        </md-checkbox><br>
+                        <md-button class="md-grid-item-content" ng-click="submitFilterStatus(status);" ng-disabled="filterStatus.$invalid">
+                            <md-icon md-svg-src="status24"></md-icon>
+                            <div class="md-grid-text">Status</div>
+                        </md-button>
+                    </md-input-container>
+                </form>
+            </div>
+            <div class="md-icon-float" flex="33" flex-md="33" flex-sm="33" flex-xs="100">
+                <form name="filterPerson" ng-submit="submitFilterPerson(person);" novalidate>
+                    <md-input-container>
+                        <input type="text" id="person" name="person" placeholder="Käufer *" ng-model="person" required md-no-asterisk>
+                        <div ng-messages="filterDate.person.$error">
+                            <div ng-message="required">Benötigt</div>
+                        </div>
+                        <md-button class="md-grid-item-content" ng-click="submitFilterPerson(person);" ng-disabled="filterPerson.$invalid">
+                            <md-icon md-svg-src="name24"></md-icon>
+                            <div class="md-grid-text">Käufer</div>
+                        </md-button>
+                    </md-input-container>
+                </form>
+            </div>
+        </div>
+        <div layout="row" layout-wrap layout-align="start" flex>
+            <md-grid-list md-cols-sm="7" md-row-height="4:3" md-cols-md="7" md-cols-lg="7" md-cols-xs="3" md-cols-gt-lg="7" md-gutter="1em" flex>
+                <md-grid-tile ng-repeat="tile in columnNames">
+                    <md-grid-tile-header>
+                        <md-icon md-svg-src="{{tile.icon}}" class="pull-left"></md-icon>
+                        <h4 class="pull-left md-title">{{ tile.name }}</h4>
+                    </md-grid-tile-header>
+                </md-grid-tile>
+            </md-grid-list>
+        </div>
+    </md-content>
+
+
+
+</div>
+

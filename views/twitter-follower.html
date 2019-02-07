@@ -1,0 +1,109 @@
+<div ng-controller="MainCtrl">
+    <div ng-init="checkLogin();"></div>
+
+    <div style="height: 150px; top: 0%; z-index: 9999; bottom: 0%; padding-left: 0px !important; padding-right: 0px !important" ng-include="'views/document/customerheader.html'"></div>
+
+    <div ng-include="'views/sidenavs/customermenu.html'"></div>
+
+    <div ng-include="'views/sidenavs/dreambeem.html'"></div>
+
+    <div ng-include="'views/sidenavs/furnybeem.html'"></div>
+
+    <div class="spinner" ng-show="loading">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+    </div>
+</div>
+<md-content id="beemlineConfig" class="m-t md-padding" ng-controller="TwitterFollowerCtrl">
+            <h1>Twitter Follower</h1>
+    <h2>{{h1}}</h2>
+    <p>Hier kannst Du Twitter - Usern aus verschiedenen Ländern folgen und Ihnen Nachrichten senden.</p>
+    <div layout="row" class="p-t" layout-wrap flex>
+        <div flex="100" flex-sm="100" flex-md="100" flex-xs="100">
+            <md-input-container>
+                <md-icon md-svg-src="lang24" class="material-icons"></md-icon>
+                <md-select id="langChose" name="langChose" ng-model="langChose">
+                    <md-option value="x" selected>Sprache wählen</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('de');" value="de">Deutsch</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('en');" value="en">English</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('zh');" value="zh">漢語</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('ar');" value="ar">العربية</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('hr');" value="hr">hrvatski jezik</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('ja');" value="ja">日本語</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('fr');" value="fr">français</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('pt');" value="pt">Português</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('es');" value="es">Español</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('ru');" value="ru">Русский</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('tr');" value="tr">Türkçe</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('it');" value="it">lietuvių kalba</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('bg');" value="bg">български език</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('nl');" value="nl">Nederlands</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('th');" value="th">ไทย</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('pl');" value="pl">Język Polski</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('ko');" value="ko">한국어</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('sr');" value="sr">српски језик</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('vi');" value="vi">Tiếng Việt</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('el');" value="el">ελληνικά</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('da');" value="da">dansk</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('id');" value="id">Bahasa Indonesia</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('ro');" value="ro">Română</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('uk');" value="uk">Українська</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('sv');" value="sv">Svenska</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('cs');" value="cs">čeština</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('sk');" value="sk">Slovenčina</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('hu');" value="hu">magyar</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('fi');" value="fi">suomi</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('ca');" value="ca">català</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('no');" value="no">Norsk</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('fa');" value="fa">فارسی</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('mr');" value="mr">मराठी</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('he');" value="he">עברית</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('lv');" value="lv">Latviešu Valoda</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('hi');" value="hi">हिन्दी, हिंदी</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('ur');" value="ur">اردو</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('bn');" value="bn">বাংলা</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('ga');" value="ga">Gaeilge</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('ms');" value="ms">Bahasa Melayu</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('ta');" value="ta">தமிழ்</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('gu');" value="gu">ગુજરાતી</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('eu');" value="eu">euskara</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('nb');" value="nb">Norsk Bokmål</md-option>
+                    <md-option ng-click="loadTWUsersLanguage('af');" value="af">Afrikaans</md-option>
+
+                </md-select>
+            </md-input-container>
+        </div>
+    </div>
+            <div layout="row" layout-wrap layout-align="start" infinite-scroll="loadTwitterUsers(lang,quantity);" infinite-scroll-disabled="busy" infinite-scroll-use-document-bottom="false" class="md-padding" flex>
+                <div id="twitterUsers" flex="100" flex-md="100" flex-sm="100" flex-xs="100">
+                    <div layout="row" layout-wrap flex>
+                        <div class="text-center" flex-xs="100" flex="25" flex-sm="25" flex-md="25"><strong>Bild + Name</strong></div>
+                        <div class="text-center" flex-xs="100" flex="25" flex-sm="25" flex-md="25"><strong>Location + Website</strong></div>
+                        <div class="text-center" flex-xs="100" flex="25" flex-sm="25" flex-md="25"><strong>Beschreibung</strong></div>
+                        <div class="text-center" flex-xs="100" flex="25" flex-sm="25" flex-md="25"><strong>Aktion</strong></div>
+                    </div>
+                    <div layout="row" class="p-t-lg" layout-wrap ng-repeat="users in TWUsers track by $index" flex>
+                            <div class="text-center" flex-xs="100" flex="25" flex-sm="25" flex-md="25">
+                                <img  on-error-src="http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png" src="{{users.profilePic}}" alt="{{users.name}}" title="{{users.name}}"><br>
+                                <strong>{{users.name}}</strong>
+                            </div>
+                            <div class="text-center" flex-xs="100" flex="25" flex-sm="25" flex-md="25">
+                                <span>{{users.location}}</span>
+                                <a ng-if="users.url.length > 0" href="{{users.url}}" target="_blank">
+                                    <md-icon md-svg-src="bower_components/material-design-icons/action/svg/production/ic_exit_to_app_24px.svg" class="material-icons md-24"></md-icon>
+                                </a>
+                            </div>
+                            <div class="text-center" flex-xs="100" flex="25" flex-sm="25" flex-md="25">
+                                <span>{{users.description}}</span>
+                            </div>
+                            <div flex="25" class="text-center" flex-md="25" flex-sm="25" flex-xs="100">
+                                <md-button class="md-button md-raised md-warn" ng-click="followUser(users.followerid);">
+                                    Folgen
+                                </md-button>
+                            </div>
+                    </div>
+                </div>
+            </div>
+    </md-content>
+
+

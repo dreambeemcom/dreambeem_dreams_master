@@ -1,0 +1,48 @@
+<div ng-controller="MainCtrl">
+    <div ng-init="checkLogin();"></div>
+
+    <div ng-include="'views/document/customerheader.html'"></div>
+
+    <div ng-include="'views/sidenavs/customermenu.html'"></div>
+
+    <div ng-include="'views/sidenavs/dreambeem.html'"></div>
+
+    <div ng-include="'views/sidenavs/furnybeem.html'"></div>
+
+    <div class="spinner" ng-show="loading">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+    </div>
+</div>
+
+
+
+<div ng-cloak ng-controller="DreamEventsCtrl">
+
+    <md-content flex layout-padding class="md-padding" layout="column">
+        <h2 class="md-title">Dream - Events</h2>
+
+        <md-tabs md-selected="0" md-border-bottom md-autoselect md-dynamic-height>
+            <md-tab label="Dream - Events anbieten">
+                <md-content class="m-t">
+
+                </md-content>
+            </md-tab>
+            <md-tab label="Buchungen">
+                <md-content class="m-t-md">
+
+                </md-content>
+            </md-tab>
+            <md-tab label="Fahrten">
+                <md-content class="m-t">
+
+                </md-content>
+            </md-tab>
+            <md-tab label="Abrechnung">
+                <md-content class="m-t">
+
+                </md-content>
+            </md-tab>
+        </md-tabs>
+    </md-content>
+</div>

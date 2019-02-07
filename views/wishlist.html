@@ -1,0 +1,74 @@
+<div ng-controller="MainCtrl">
+    <div ng-init="checkLogin();"></div>
+
+    <div ng-include="'views/document/customerheader.html'"></div>
+
+    <div ng-include="'views/sidenavs/customermenu.html'"></div>
+
+    <div ng-include="'views/sidenavs/dreambeem.html'"></div>
+
+    <div ng-include="'views/sidenavs/furnybeem.html'"></div>
+
+    <div class="spinner" ng-show="loading">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+    </div>
+</div>
+
+
+<div ng-cloak ng-controller="WishlistCtrl">
+
+    <md-content flex layout-padding>
+        <h2>Merkliste</h2>
+
+        <div layout="row" layout-wrap layout-align="start" flex>
+            <div class="md-icon-float" flex="100" flex-md="100" flex-sm="100" flex-xs="100" flex>
+                <h3>Filter</h3>
+            </div>
+            <div class="md-icon-float" flex="50" flex-md="50" flex-sm="50" flex-xs="100">
+                <form name="filterDate" ng-submit="submitFilterDate(fromDate);" novalidate>
+                    <md-input-container>
+                        <md-datepicker ng-model="fromDate" name="fromDate" id="fromDate" placeholder="Datum von *" required md-no-asterisk>
+
+                        </md-datepicker>
+                        <div ng-messages="filterDate.fromDate.$error">
+                            <div ng-message="required">Benötigt</div>
+                        </div>
+                        <md-button class="md-grid-item-content" ng-click="submitFilterDate(fromDate);" ng-disabled="filterDate.$invalid">
+                            <md-icon md-svg-src="time24"></md-icon>
+                            <div class="md-grid-text">Datum</div>
+                        </md-button>
+                    </md-input-container>
+                </form>
+            </div>
+            <div class="md-icon-float" flex="50" flex-md="50" flex-sm="50" flex-xs="100">
+                <form name="filterProduct" ng-submit="submitFilterPerson(product);" novalidate>
+                    <md-input-container>
+                        <input type="text" id="product" name="product" placeholder="Produkt *" ng-model="product" required md-no-asterisk>
+                        <div ng-messages="filterProduct.product.$error">
+                            <div ng-message="required">Benötigt</div>
+                        </div>
+                        <md-button class="md-grid-item-content" ng-click="submitFilterProduct(product);" ng-disabled="filterProduct.$invalid">
+                            <md-icon md-svg-src="shoppingbasket24"></md-icon>
+                            <div class="md-grid-text">Produkt</div>
+                        </md-button>
+                    </md-input-container>
+                </form>
+            </div>
+        </div>
+        <div layout="row" layout-wrap layout-align="start" flex>
+            <md-grid-list md-cols-sm="3" md-row-height="4:3" md-cols-md="3" md-cols-lg="5" md-cols-xs="3" md-cols-gt-lg="5" md-gutter="1em" flex>
+                <md-grid-tile ng-repeat="tile in columnNames">
+                    <md-grid-tile-header>
+                        <md-icon md-svg-src="{{tile.icon}}" class="pull-left"></md-icon>
+                        <h4 class="pull-left md-title">{{ tile.name }}</h4>
+                    </md-grid-tile-header>
+                </md-grid-tile>
+            </md-grid-list>
+        </div>
+    </md-content>
+
+
+
+</div>
+

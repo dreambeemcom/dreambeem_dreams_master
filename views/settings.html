@@ -1,0 +1,265 @@
+<div ng-controller="MainCtrl">
+    <div ng-init="checkLogin();"></div>
+
+    <div ng-include="'views/document/customerheader.html'"></div>
+
+    <div ng-include="'views/sidenavs/customermenu.html'"></div>
+
+    <div ng-include="'views/sidenavs/dreambeem.html'"></div>
+
+    <div ng-include="'views/sidenavs/furnybeem.html'"></div>
+
+    <div class="spinner" ng-show="loading">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+    </div>
+</div>
+
+
+
+<div ng-cloak ng-controller="SettingsCtrl" ng-init="getUserdata();">
+
+    <md-content flex layout-padding class="md-padding" layout="column">
+        <h2 class="md-title">Einstellungen</h2>
+
+        <md-tabs md-selected="0" md-border-bottom md-autoselect md-dynamic-height>
+            <md-tab label="Allgemein">
+                <md-content class="m-t" ng-init="initGeneralSettings();">
+                    <form name="generalSettingsForm" novalidate ng-submit="submitGeneralSettings($event,generalSetting2,gSetting2,generalSetting3,generalSetting4,
+                    generalSetting5,gSetting5,generalSetting6);">
+                        <div layout="row" layout-align="start" flex>
+                            <md-input-container>
+                                <md-checkbox ng-model="generalSetting2" name="generalSetting2" class="md-primary" aria-label="">
+                                    Benachrichtigen, wenn Dreams Guthaben erreicht bei:
+                                </md-checkbox>
+                            </md-input-container>
+                            <md-input-container>
+                                <input type="text" value="20" class="small-number" placeholder="Anzahl Dreams" name="gSetting2" ng-model="gSetting2" id="gSetting2">
+                            </md-input-container>
+                        </div>
+                        <div layout="row" layout-align="start" flex>
+                            <md-input-container>
+                                <md-checkbox ng-model="generalSetting3" name="generalSetting3" class="md-primary" aria-label="">
+                                    Benachrichtigen, wenn Einzahlung verbucht wurde.
+                                </md-checkbox>
+                            </md-input-container>
+                        </div>
+                        <div layout="row" layout-align="start" flex>
+                            <md-input-container>
+                                <md-checkbox ng-model="generalSetting4" name="generalSetting4" class="md-primary" aria-label="">
+                                    Bei doppelter Anmeldung (Facebook & Twitter) höchste Reichweite wählen.
+                                </md-checkbox>
+                            </md-input-container>
+                        </div>
+                        <div layout="row" layout-align="end" flex>
+                            <md-button type="submit" class="md-button md-raised md-warn">
+                                Speichern
+                            </md-button>
+                        </div>
+                    </form>
+                </md-content>
+            </md-tab>
+            <md-tab label="Email - Limits">
+                <md-content class="m-t-md" ng-init="initEmaillimitsSettings();">
+                    <form name="emaillimitsSettingsForm" novalidate ng-submit="submitEmailLimitsSettings($event,emaillimitsSetting1,eSetting1,emaillimitsSetting2,eSetting2,
+                    emaillimitsSetting3,eSetting3,emaillimitsSetting4,eSetting4);">
+                        <div layout="row" layout-align="start" flex>
+                            <md-input-container>
+                                <md-checkbox ng-model="emaillimitsSetting1" name="emaillimitsSetting1" class="md-primary" aria-label="">
+                                    Email - Limit insgesamt (max. 250 pro Tag):
+                                </md-checkbox>
+                            </md-input-container>
+                            <md-input-container>
+                                <input type="text" value="20" class="small-number" placeholder="Emails insg." name="eSetting1" ng-model="eSetting1" id="eSetting1">
+                            </md-input-container>
+                        </div>
+                        <div layout="row" layout-align="start" flex>
+                            <md-input-container>
+                                <md-checkbox ng-model="emaillimitsSetting2" name="emaillimitsSetting2" class="md-primary" aria-label="">
+                                    Email - Limit Dreambeems (max. 75 pro Tag):
+                                </md-checkbox>
+                            </md-input-container>
+                            <md-input-container>
+                                <input type="text" value="20" class="small-number" placeholder="Emails Dreambeems" name="eSetting2" ng-model="eSetting2" id="eSetting2">
+                            </md-input-container>
+                        </div>
+                        <div layout="row" layout-align="start" flex>
+                            <md-input-container>
+                                <md-checkbox ng-model="emaillimitsSetting3" name="emaillimitsSetting3" class="md-primary" aria-label="">
+                                    Email - Limit Furnybeems (max. 75 pro Tag):
+                                </md-checkbox>
+                            </md-input-container>
+                            <md-input-container>
+                                <input type="text" value="20" class="small-number" placeholder="Emails Furnybeems" name="eSetting3" ng-model="eSetting3" id="eSetting3">
+                            </md-input-container>
+                        </div>
+                        <div layout="row" layout-align="end" flex>
+                            <md-button type="submit" class="md-button md-raised md-warn">
+                                Speichern
+                            </md-button>
+                        </div>
+                    </form>
+                </md-content>
+            </md-tab>
+            <md-tab ng-if="kind === 'twitter'" label="Twitter">
+                <md-content class="m-t-md" ng-init="initTwitterSettings();">
+                    <form name="twitterSettingsForm" novalidate ng-submit="submitTwitterSettings($event,twitterSetting1,twSetting1);">
+                        <div layout="row" layout-align="start" flex>
+                            <md-input-container flex="25" flex-md="25" flex-sm="25" flex-xs="100">
+                                <md-checkbox ng-model="twitterSetting1" name="twitterSetting1" class="md-primary" aria-label="">
+                                    Beim Folgen eines Twitter - Users, Welcome Message senden
+                                </md-checkbox>
+                            </md-input-container>
+                            <md-input-container flex="75" flex-md="75" flex-sm="75" flex-xs="100">
+                                <textarea placeholder="Nachricht" name="twSetting1" ng-model="twSetting1" id="twSetting1"></textarea>
+                            </md-input-container>
+                        </div>
+                        <div layout="row" layout-align="end" flex>
+                            <md-button type="submit" class="md-button md-raised md-warn">
+                                Speichern
+                            </md-button>
+                        </div>
+                    </form>
+                </md-content>
+            </md-tab>
+            <!--
+            <md-tab label="Dream - Products">
+                <md-content class="m-t" ng-init="initOrdersSettings();">
+                    <h1>In Work</h1>
+                    <form name="ordersSettingsForm" novalidate ng-submit="submitOrdersSettings($event,ordersSetting1,ordersSetting2,ordersSetting3);">
+                        <div layout="row" layout-align="start" flex>
+                            <md-input-container>
+                                <md-checkbox ng-model="ordersSetting1" name="ordersSetting1" class="md-primary" aria-label="">
+                                    Benachrichtigen, wenn eine Bestellung durchgeführt wurde.
+                                </md-checkbox>
+                            </md-input-container>
+                        </div>
+                        <div layout="row" layout-align="start" flex>
+                            <md-input-container>
+                                <md-checkbox ng-model="ordersSetting2" name="ordersSetting2" class="md-primary" aria-label="">
+                                    Benachrichtigen, wenn Bestellung verschickt wurde.
+                                </md-checkbox>
+                            </md-input-container>
+                        </div>
+                        <div layout="row" layout-align="start" flex>
+                            <md-input-container>
+                                <md-checkbox ng-model="ordersSetting3" name="ordersSetting3" class="md-primary" aria-label="">
+                                    Benachrichtigen, wenn Bestellung von Verkäufer storniert wurde.
+                                </md-checkbox>
+                            </md-input-container>
+                        </div>
+                        <div layout="row" layout-align="end" flex>
+                            <md-button type="submit" class="md-button md-raised md-warn">
+                                Speichern
+                            </md-button>
+                        </div>
+                    </form>
+                </md-content>
+            </md-tab>
+            <md-tab label="Dream - Events">
+                <md-content class="m-t" ng-init="initDPSettings();">
+                    <h1>In Work</h1>
+                </md-content>
+            </md-tab>
+            <md-tab label="Dream - Papers">
+                <h1>In Work</h1>
+                <md-content class="m-t" ng-init="initFinanceSettings();">
+                    <form name="financeSettingsForm" novalidate ng-submit="submitFinanceSettings($event);">
+
+                        <div layout="row" layout-align="end" flex>
+                            <md-button type="submit" class="md-button md-raised md-warn">
+                                Speichern
+                            </md-button>
+                        </div>
+                    </form>
+                </md-content>
+            </md-tab>
+            <md-tab label="Messaging">
+                <h1>In Work</h1>
+                <md-content class="m-t" ng-init="initMessagesSettings();">
+                    <form name="messagesSettingsForm" novalidate ng-submit="submitMessagesSettings($event,messagesSetting1,messagesSetting2,messagesSetting3,mSetting3);">
+                        <div layout="row" layout-align="start" flex>
+                            <md-input-container>
+                                <md-checkbox ng-model="messagesSetting1" name="messagesSetting1" class="md-primary" aria-label="">
+                                    Benachrichtigen, wenn Nachricht empfangen wurde.
+                                </md-checkbox>
+                            </md-input-container>
+                        </div>
+                        <div layout="row" layout-align="start" flex>
+                            <md-input-container>
+                                <md-checkbox ng-model="messagesSetting2" name="messagesSetting2" class="md-primary" aria-label="">
+                                    Benachrichtigen, wenn Nachrichten gelöscht wurden.
+                                </md-checkbox>
+                            </md-input-container>
+                        </div>
+                        <div layout="row" layout-align="start" flex>
+                            <md-input-container>
+                                <md-checkbox ng-model="messagesSetting3" name="messagesSetting3" class="md-primary" aria-label="">
+                                    Nachrichten unwiderruflich löschen:
+                                </md-checkbox>
+                            </md-input-container>
+                            <md-input-container>
+                                <input type="text" value="7" class="small-number" placeholder="Tagen" name="mSetting3" ng-model="mSetting3" id="mSetting3">
+                            </md-input-container>
+                        </div>
+                        <div layout="row" layout-align="end" flex>
+                            <md-button type="submit" class="md-button md-raised md-warn">
+                                Speichern
+                            </md-button>
+                        </div>
+                    </form>
+                </md-content>
+            </md-tab>
+            <!-- <md-tab label="Rechnungen">
+                <md-content class="m-t" ng-init="initBillsSettings();">
+                    <form name="billsSettingsForm" novalidate ng-submit="submitBillsSettings($event,billsSetting1,billsSetting2,bSetting2,
+                    billsSetting3,billsSetting4,billsSetting5);">
+                        <div layout="row" layout-align="start" flex>
+                            <md-input-container>
+                                <md-checkbox ng-model="billsSetting1" name="billsSetting1" class="md-primary" aria-label="">
+                                    Benachrichtigen, wenn Rechnung eingegangen ist.
+                                </md-checkbox>
+                            </md-input-container>
+                        </div>
+                        <div layout="row" layout-align="start" flex>
+                            <md-input-container>
+                                <md-checkbox ng-model="billsSetting2" name="billsSetting2" class="md-primary" aria-label="">
+                                    Benachrichtigen, wenn Rechnungslimit erreicht.
+                                </md-checkbox>
+                            </md-input-container>
+                            <md-input-container>
+                                <input type="text" value="15" class="small-number" placeholder="in € (z.B. 50)" name="bSetting2" ng-model="bSetting2" id="bSetting2">
+                            </md-input-container>
+                        </div>
+                        <div layout="row" layout-align="start" flex>
+                            <md-input-container>
+                                <md-checkbox ng-model="billsSetting3" name="billsSetting3" class="md-primary" aria-label="">
+                                    Benachrichtigen, wenn Rechnung bezahlt.
+                                </md-checkbox>
+                            </md-input-container>
+                        </div>
+                        <div layout="row" layout-align="start" flex>
+                            <md-input-container>
+                                <md-checkbox ng-model="billsSetting4" name="billsSetting4" class="md-primary" aria-label="">
+                                    Benachrichtigen, wenn aus Rechnung Mahnung wird.
+                                </md-checkbox>
+                            </md-input-container>
+                        </div>
+                        <div layout="row" layout-align="start" flex>
+                            <md-input-container>
+                                <md-checkbox ng-model="billsSetting5" name="billsSetting5" class="md-primary" aria-label="">
+                                    Benachrichtigen, wenn unbezahlte Rechnung Inkasso übergeben wird.
+                                </md-checkbox>
+                            </md-input-container>
+                        </div>
+                        <div layout="row" layout-align="end" flex>
+                            <md-button type="submit" class="md-button md-raised md-warn">
+                                Speichern
+                            </md-button>
+                        </div>
+                    </form>
+                </md-content>
+            </md-tab> -->
+        </md-tabs>
+</md-content>
+    </div>

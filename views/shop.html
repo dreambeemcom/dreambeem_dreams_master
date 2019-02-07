@@ -1,0 +1,227 @@
+<div ng-controller="MainCtrl">
+    <div ng-init="checkLogin();"></div>
+
+    <div ng-include="'views/document/customerheader.html'"></div>
+
+    <div ng-include="'views/sidenavs/customermenu.html'"></div>
+
+    <div ng-include="'views/sidenavs/dreambeem.html'"></div>
+
+    <div ng-include="'views/sidenavs/furnybeem.html'"></div>
+
+    <div class="spinner" ng-show="loading">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+    </div>
+</div>
+
+<div layout="column" ng-controller="ShopCtrl" ng-cloak ng-init="initShop()">
+
+    <md-content flex layout-padding class=" m-tmd-padding" layout="column">
+        <h1><strong>Shop</strong></h1>
+        <p>Hier kannst Du Deine Shopdaten eintragen und online stellen.</p>
+
+        <form name="shopForm" novalidate ng-submit="submitShop($event)">
+            <div layout="row" layout-wrap layout-align="start" flex>
+                <md-input-container class="md-icon-float md-block" flex="50" flex-md="50" flex-sm="50" flex-xs="100">
+                    <label>Shop - Name</label>
+                    <md-icon md-svg-src="home24" class="material-icons md-24"></md-icon>
+                    <input type="text" id="shopName" name="shopName" ng-model="shopName" required>
+
+                    <div class="errors" ng-messages="shopForm.shopName.$error">
+                        <div ng-message="required">Benötigt</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-icon-float" flex="50" flex-md="50" flex-sm="50" flex-xs="100">
+                    <label>Shop - Link</label>
+                    <md-icon md-svg-src="star24" class="material-icons md-24"></md-icon>
+                    <input type="text" id="shopLink" name="shopLink" ng-model="shopLink" ng-pattern="regexUrl" required>
+                    Url ok? <code ng-controller="MainCtrl" ng-model="url" ng-if="shopForm.shopLink.$valid">{{url}}</code>
+                    <a href="{{shopLink}}" target="_blank">
+                        <md-icon md-svg-src="bower_components/material-design-icons/action/svg/production/ic_exit_to_app_24px.svg" class="material-icons md-24"></md-icon>
+                    </a>
+
+                    <div class="errors" ng-messages="shopForm.shopLink.$error">
+                        <div ng-message="required">Benötigt</div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div layout="row" layout-wrap layout-align="start" flex>
+                <md-input-container class="md-icon-float md-block" flex="75" flex-md="75" flex-sm="75" flex-xs="100">
+                    <label>Straße + Hausnummer</label>
+                    <md-icon md-svg-src="label24" class="material-icons md-24"></md-icon>
+                    <input type="text" id="shopStreet" name="shopStreet" ng-model="shopStreet" required>
+
+                    <div class="errors" ng-messages="shopForm.shopStreet.$error">
+                        <div ng-message="required">Benötigt</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-icon-float" flex="25" flex-md="25" flex-sm="25" flex-xs="100">
+                    <label>Postleitzahl</label>
+                    <md-icon md-svg-src="plz24" class="material-icons md-24"></md-icon>
+                    <input type="text" id="shopPlz" name="shopPlz" ng-model="shopPlz" required>
+
+                    <div class="errors" ng-messages="shopForm.shopPlz.$error">
+                        <div ng-message="required">Benötigt</div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div layout="row" layout-wrap layout-align="start" flex>
+                <md-input-container class="md-icon-float md-block" flex="75" flex-md="75" flex-sm="75" flex-xs="100">
+                    <label>Stadt</label>
+                    <md-icon md-svg-src="town24" class="material-icons md-24"></md-icon>
+                    <input type="text" id="shopTown" name="shopTown" ng-model="shopTown" required>
+
+                    <div class="errors" ng-messages="shopForm.shopTown.$error">
+                        <div ng-message="required">Benötigt</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-icon-float" flex="25" flex-md="25" flex-sm="25" flex-xs="100">
+                    <label>Land</label>
+                    <md-icon md-svg-src="country24" class="material-icons md-24"></md-icon>
+                    <md-select name="shopCountry" ng-model="shopCountry" required>
+                        <md-option value="de">Deutschland</md-option>
+                        <md-option value="sui">Schweiz</md-option>
+                        <md-option value="aut">Österreich</md-option>
+                    </md-select>
+
+                    <div class="errors" ng-messages="shopForm.shopCountry.$error">
+                        <div ng-message="required">Benötigt</div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div layout="row" layout-wrap layout-align="start" flex>
+                <md-input-container class="md-icon-float md-block" flex="50" flex-md="50" flex-sm="50" flex-xs="100">
+                    <label>Telefon</label>
+                    <md-icon md-svg-src="phone24" class="material-icons md-24"></md-icon>
+                    <input type="text" id="shopPhone" name="shopPhone" ng-model="shopPhone" md-no-asterisk>
+                </md-input-container>
+                <md-input-container class="md-icon-float" flex="50" flex-md="50" flex-sm="50" flex-xs="100">
+                    <label>Email</label>
+                    <md-icon md-svg-src="email24" class="material-icons md-24"></md-icon>
+                    <input type="text" id="shopEmail" name="shopEmail" ng-model="shopEmail" required>
+
+                    <div class="errors" ng-messages="shopForm.shopEmail.$error">
+                        <div ng-message="required">Benötigt</div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div layout="row" layout-wrap layout-align="start" flex>
+                <md-input-container class="md-icon-float md-block" flex="100" flex-md="100" flex-sm="100" flex-xs="100">
+                    <label>Beschreibung</label>
+                    <md-icon md-svg-src="description24" class="material-icons md-24"></md-icon>
+                    <textarea id="shopDescription" name="shopDescription" ng-model="shopDescription" required></textarea>
+
+                    <div class="errors" ng-messages="shopForm.shopDescription.$error">
+                        <div ng-message="required">Benötigt</div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div layout="row" layout-align="end" flex>
+                <md-button type="submit" ng-disabled="shopForm.$invalid" class="md-button md-raised md-warn">
+                    Speichern
+                </md-button>
+            </div>
+        </form>
+
+        <h2 class="md-title">Ansprechpartner</h2>
+        <form name="shopPartnerForm" novalidate ng-submit="submitPartnerShop()">
+            <div layout="row" layout-wrap layout-align="start" flex>
+                <md-input-container class="md-icon-float md-block" flex="100" flex-md="100" flex-sm="100" flex-xs="100">
+                    <label>Voller Name</label>
+                    <md-icon md-svg-src="fullname24" class="material-icons md-24"></md-icon>
+                    <input type="text" id="shopFullName" name="shopFullName" ng-model="shopFullName" required>
+
+                    <div class="errors" ng-messages="shopForm.shopFullName.$error">
+                        <div ng-message="required">Benötigt</div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div layout="row" layout-wrap layout-align="start" flex>
+                <md-input-container class="md-icon-float md-block" flex="50" flex-md="50" flex-sm="50" flex-xs="100">
+                    <label>Straße + Hausnummer</label>
+                    <md-icon md-svg-src="street24" class="material-icons md-24"></md-icon>
+                    <input type="text" id="shopPartnerStreet" name="shopPartnerStreet" ng-model="shopPartnerStreet" required>
+
+                    <div class="errors" ng-messages="shopForm.shopPartnerStreet.$error">
+                        <div ng-message="required">Benötigt</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-icon-float" flex="25" flex-md="25" flex-sm="25" flex-xs="100">
+                    <label>Postleitzahl</label>
+                    <md-icon md-svg-src="plz24" class="material-icons md-24"></md-icon>
+                    <input type="text" id="shopPartnerPlz" name="shopPartnerPlz" ng-model="shopPartnerPlz" required>
+
+                    <div class="errors" ng-messages="shopForm.shopPartnerPlz.$error">
+                        <div ng-message="required">Benötigt</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-icon-float" flex="25" flex-md="25" flex-sm="25" flex-xs="100">
+                    <label>Stadt</label>
+                    <md-icon md-svg-src="town24" class="material-icons md-24"></md-icon>
+                    <input type="text" id="shopPartnerTown" name="shopPartnerTown" ng-model="shopPartnerTown" required>
+
+                    <div class="errors" ng-messages="shopForm.shopPartnerTown.$error">
+                        <div ng-message="required">Benötigt</div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div layout="row" layout-wrap layout-align="start" flex>
+                <md-input-container class="md-icon-float md-block" flex="25" flex-md="25" flex-sm="25" flex-xs="100">
+                    <label>Land</label>
+                    <md-icon md-svg-src="country24" class="material-icons md-24"></md-icon>
+                    <md-select name="shopPartnerCountry" ng-model="shopPartnerCountry" required>
+                        <md-option value="de">Deutschland</md-option>
+                        <md-option value="sui">Schweiz</md-option>
+                        <md-option value="aut">Österreich</md-option>
+                    </md-select>
+
+                    <div class="errors" ng-messages="shopForm.shopPartnerCountry.$error">
+                        <div ng-message="required">Benötigt</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-icon-float md-block" flex="25" flex-md="25" flex-sm="25" flex-xs="100">
+                    <label>Telefon</label>
+                    <md-icon md-svg-src="phone24" class="material-icons md-24"></md-icon>
+                    <input type="text" id="shopPartnerPhone" name="shopPartnerPhone" ng-model="shopPartnerPhone" md-no-asterisk>
+                </md-input-container>
+                <md-input-container class="md-icon-float" flex="50" flex-md="50" flex-sm="50" flex-xs="100">
+                    <label>Email</label>
+                    <md-icon md-svg-src="email24" class="material-icons md-24"></md-icon>
+                    <input type="text" id="shopPartnerEmail" name="shopPartnerEmail" ng-model="shopPartnerEmail" required>
+
+                    <div class="errors" ng-messages="shopForm.shopPartnerEmail.$error">
+                        <div ng-message="required">Benötigt</div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div layout="row" layout-align="end" flex>
+                <md-button type="submit" ng-disabled="shopPartnerForm.$invalid" class="md-button md-raised md-warn">
+                    Speichern
+                </md-button>
+            </div>
+        </form>
+        <h2 class="md-title">Shop - Status</h2>
+        <form name="shopEnableForm" novalidate ng-submit="submitEnableShop(shopId)">
+            <div layout="row" layout-wrap layout-align="start" flex>
+                <md-input-container class="md-icon-float" flex="100" flex-md="100" flex-sm="100" flex-xs="100">
+                    <md-switch name="shopEnable" class="md-warn" ng-model="shopEnable" required>
+                        <md-icon md-svg-src="shop24" class="material-icons md-24"></md-icon>
+                        <strong>Shop online</strong>
+                    </md-switch>
+                    <div ng-messages="shopEnableForm.shopEnable.$error" multiple>
+                        <div ng-message="required">
+                            Es sollte ein Status "Online" festgelegt werden
+                        </div>
+                    </div>
+                </md-input-container>
+            </div>
+
+            <div layout="row" layout-align="end" flex>
+                <md-button type="submit" ng-disabled="shopEnableForm.$invalid" class="md-button md-raised md-warn">
+                    Speichern
+                </md-button>
+            </div>
+        </form>
+    </md-content>
+</div>

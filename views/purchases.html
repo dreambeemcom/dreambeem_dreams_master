@@ -1,0 +1,68 @@
+<div ng-controller="MainCtrl">
+    <div ng-init="checkLogin();"></div>
+
+    <div ng-include="'views/document/customerheader.html'"></div>
+
+    <div ng-include="'views/sidenavs/customermenu.html'"></div>
+
+    <div ng-include="'views/sidenavs/dreambeem.html'"></div>
+
+    <div ng-include="'views/sidenavs/furnybeem.html'"></div>
+
+    <div class="spinner" ng-show="loading">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+    </div>
+</div>
+
+<md-content class="m-t md-padding" ng-controller="PurchasesCtrl" ng-init="initPurchases();">
+    <h1><strong>Käufe</strong></h1>
+    <p>Hier kannst Du Deine Käufe einsehen.</p>
+    <div layout="row" layout-wrap layout-align="start" flex>
+        <div id="purchases" flex="100" flex-md="100" flex-sm="100" flex-xs="100">
+            <div layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="15" flex-sm="33" flex-md="33"><strong>Bestellung</strong></div>
+                <div class="text-center" flex-xs="100" flex="15" flex-sm="33" flex-md="33"><strong>Menge</strong></div>
+                <div class="text-center" flex-xs="100" flex="15" flex-sm="33" flex-md="33"><strong>Bild</strong></div>
+                <div class="text-center" flex-xs="100" flex="15" flex-sm="33" flex-md="33"><strong>Name</strong></div>
+                <div class="text-center" flex-xs="100" flex="15" flex-sm="33" flex-md="33"><strong>Produktpreis</strong></div>
+                <div class="text-center" flex-xs="100" flex="15" flex-sm="33" flex-md="33"><strong>Gesamtpreis</strong></div>
+            </div>
+            <md-divider style="text-decoration: bolder"></md-divider>
+        </div>
+    </div>
+    <div layout="row" layout-wrap layout-align="start" flex>
+        <span class="text-danger" ng-if="purchasesMessage"><strong>{{purchasesMessage}}</strong></span>
+        <div ng-repeat="purchase in purchases" flex-xs="100" flex="100" flex-sm="100" flex-md="100" layout="row" layout-wrap flex>
+            <div flex-xs="100" flex="100" flex-sm="100" flex-md="100" layout="row" ng-repeat="p in purchase">
+                <div class="text-center" flex-xs="100" flex="15" flex-sm="33" flex-md="33" layout-wrap flex>
+                    <div class="text-center" ng-if="$index === 0" id="o_id">
+                        {{purchase['pio'].id}}
+                    </div>
+                </div>
+                <div class="text-center" flex-xs="100" flex="15" flex-sm="33" flex-md="33">
+                    {{p.quantiti}}
+                </div>
+                <div class="text-center" flex-xs="100" flex="15" flex-sm="33" flex-md="33">
+                    <img src="{{p[0].main_image}}" width="120">
+                </div>
+                <div class="text-center" flex-xs="100" flex="15" flex-sm="33" flex-md="33">
+                    {{p[0].title}}
+                </div>
+                <div class="text-center" flex-xs="100" flex="15" flex-sm="33" flex-md="33">
+                    <strong>{{p.productPrice}}</strong>
+                </div>
+                <div class="text-center" flex-xs="100" flex="15" flex-sm="33" flex-md="33">
+                    <strong class="text-warning" ng-if="$index === 0">
+                        {{purchase['pio'].sumAll}}
+                    </strong><br>
+                    <span ng-if="$index === 0">inkl. Versand {{purchase['pio'].sumShipping}}</span>
+                </div>
+            </div>
+            <md-divider></md-divider>
+        </div>
+    </div>
+    <div layout="row" layout-align="start" flex>
+        <span ng-click="exportCSV();"><strong>Als CSV exportieren</strong></span>
+    </div>
+</md-content>

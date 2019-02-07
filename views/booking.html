@@ -1,0 +1,365 @@
+<div ng-controller="MainCtrl">
+    <div ng-init="checkLogin();"></div>
+    <div ng-init="initCheckout();"></div>
+    <div ng-init="checkAddresses();"></div>
+
+    <div style="height: 160px; top: 0%; z-index: 9999; bottom: 0%; padding-left: 0px !important; padding-right: 0px !important" ng-include="'views/document/customerheader.html'"></div>
+
+    <div ng-include="'views/sidenavs/customermenu.html'"></div>
+
+    <div ng-include="'views/sidenavs/dreambeem.html'"></div>
+
+    <div ng-include="'views/sidenavs/furnybeem.html'"></div>
+
+    <div class="spinner" ng-show="loading">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+    </div>
+</div>
+
+<style>
+
+    #right-panel select, #right-panel input {
+        font-size: 15px;
+    }
+
+    #right-panel select {
+        width: 100%;
+    }
+
+    #right-panel i {
+        font-size: 12px;
+    }
+
+    @media print {
+        #map {
+            height: 500px;
+            margin: 0;
+        }
+        #right-panel {
+            float: none;
+            width: auto;
+        }
+    }
+
+    .controls {
+        margin-top: 10px;
+        border: 1px solid transparent;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        height: 32px;
+        outline: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    #type-selector label {
+        font-family: Roboto;
+        font-size: 13px;
+        font-weight: 300;
+    }
+
+    #type-selector1 label {
+        font-family: Roboto;
+        font-size: 13px;
+        font-weight: 300;
+    }
+</style>
+
+<style>
+    #map {
+        height: 500px;
+        width: 97% !important;
+        z-index: 9999999 !important;
+        margin-left: 16px;
+        margin-right: 16px;
+        position: relative !important;
+        display: block;
+    }
+
+    .controls {
+        margin-top: 10px;
+        border: 1px solid transparent;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        height: 32px;
+        outline: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        position: relative !important;
+        left: 0px !important;
+    }
+
+    #origin-input,
+    #destination-input {
+        background-color: #fff;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        margin-left: 12px;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        position: relative !important;
+        left: 0px !important;
+        width: 200px;
+    }
+
+    #origin-input:focus,
+    #destination-input:focus {
+        border-color: #4d90fe;
+    }
+
+    #mode-selector {
+        color: #fff;
+        background-color: #4d90fe;
+        margin-left: 12px;
+    }
+
+    #mode-selector label {
+        font-family: Roboto;
+        font-size: 13px;
+        font-weight: 300;
+    }
+
+</style>
+
+<div ng-controller="BookingCtrl" class="beemline" ng-cloak>
+    <md-content class="md-padding" layout-padding id="beemlineConfig" layout="column">
+        <h1><strong>Buchen</strong></h1>
+        <p>Hier kannst Du Deine Lieblingsdreams finden und buchen.</p>
+        <h2 id="routeHeading">Route</h2>
+<div layout="row" id="dreamRoute" layout-wrap flex>
+        <div flex="100" flex-md="100" flex-sm="100" flex-xs="100" flex>
+
+                <input id="origin-input" placeIdStart="" class="controls" type="text"
+                       placeholder="Start"><br>
+
+                <input id="destination-input" placeIdAim="" class="controls" type="text"
+                       placeholder="Ziel">
+
+
+            <div id="mode-selector" class="controls">
+                <input type="radio" name="type" id="changemode-walking" checked="checked">
+                <label for="changemode-walking">Zu Fuß</label>
+
+                <input type="radio" name="type" id="changemode-transit">
+                <label for="changemode-transit">Öffentliche Verkehrsmittel</label>
+
+                <input type="radio" name="type" id="changemode-driving">
+                <label for="changemode-driving">Fahrt</label>
+            </div>
+
+            <div id="map"></div>
+        </div>
+
+
+
+</div>
+        <div layout="row" layout-wrap flex>
+            <div flex="100" flex-md="100" flex-sm="100" flex-xs="100">
+                <div id="routeplanner-panel"></div>
+            </div>
+        </div>
+
+        <div layout="row" layout-wrap flex>
+            <h2>Buchung</h2>
+        </div>
+        <div layout="row" id="dreamBooking" layout-wrap flex>
+
+        </div>
+
+        <script>
+
+            function initMap() {
+
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    mapTypeControl: false,
+                    center: {lat: -33.8688, lng: 151.2195},
+                    zoom: 13
+                });
+
+                new AutocompleteDirectionsHandler(map);
+            }
+
+            function calculateAndDisplayRoute(directionsService, directionsDisplay, travelMode) {
+                $('#routeplanner-panel').children().remove();
+                directionsService.route({
+                    origin: document.getElementById('origin-input').value,
+                    destination: document.getElementById('destination-input').value,
+                    travelMode: travelMode
+                }, function(response, status) {
+                    if (status === 'OK') {
+                        directionsDisplay.setDirections(response);
+                    } else {
+                        window.alert('Keine Route vorhanden - ' + status);
+                    }
+                });
+            }
+
+            function AutocompleteDirectionsHandler(map) {
+                this.map = map;
+                this.originPlaceId = null;
+                this.destinationPlaceId = null;
+                this.travelMode = 'WALKING';
+                var originInput = document.getElementById('origin-input');
+                var destinationInput = document.getElementById('destination-input');
+                var modeSelector = document.getElementById('mode-selector');
+                this.directionsService = new google.maps.DirectionsService;
+                this.directionsDisplay = new google.maps.DirectionsRenderer;
+                this.directionsDisplay.setMap(map);
+
+                var originAutocomplete = new google.maps.places.Autocomplete(
+                        originInput, {placeIdOnly: true});
+                var destinationAutocomplete = new google.maps.places.Autocomplete(
+                        destinationInput, {placeIdOnly: true});
+
+                this.setupClickListener('changemode-walking', 'WALKING');
+                this.setupClickListener('changemode-transit', 'TRANSIT');
+                this.setupClickListener('changemode-driving', 'DRIVING');
+
+                this.setupPlaceChangedListener(originAutocomplete, 'ORIG');
+                this.setupPlaceChangedListener(destinationAutocomplete, 'DEST');
+
+                this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(originInput);
+                this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(destinationInput);
+                this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(modeSelector);
+            }
+
+            AutocompleteDirectionsHandler.prototype.setupClickListener = function(id, mode) {
+                var radioButton = document.getElementById(id);
+                var me = this;
+                radioButton.addEventListener('click', function() {
+                    me.travelMode = mode;
+                    me.route();
+                });
+            };
+
+            AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(autocomplete, mode) {
+                var me = this;
+                autocomplete.bindTo('bounds', this.map);
+                autocomplete.addListener('place_changed', function() {
+                    var place = autocomplete.getPlace();
+                    if (!place.place_id) {
+                        window.alert("Bitte Option wählen.");
+                        return;
+                    }
+                    if (mode === 'ORIG') {
+                        me.originPlaceId = place.place_id;
+                    } else {
+                        me.destinationPlaceId = place.place_id;
+                    }
+                    me.route();
+                });
+
+            };
+
+            AutocompleteDirectionsHandler.prototype.route = function() {
+                if (!this.originPlaceId || !this.destinationPlaceId) {
+                    return;
+                }
+                var me = this;
+                var travel = this.travelMode;
+                $('#bookingStart').attr('placeIdStart', this.originPlaceId);
+                $('#bookingAim').attr('placeIdAim', this.destinationPlaceId);
+
+                this.directionsService.route({
+                    origin: {'placeId': this.originPlaceId},
+                    destination: {'placeId': this.destinationPlaceId},
+                    travelMode: this.travelMode
+                }, function(response, status) {
+                    if (status === 'OK') {
+                        me.directionsDisplay.setDirections(response);
+                        var directionsDisplay = new google.maps.DirectionsRenderer;
+                        var directionsService = new google.maps.DirectionsService;
+                        directionsDisplay.setPanel(document.getElementById('routeplanner-panel'));
+                        calculateAndDisplayRoute(directionsService, directionsDisplay, travel);
+                        $('#bookingAim').val(document.getElementById('destination-input').value);
+                        $('#bookingStart').val(document.getElementById('origin-input').value);
+                        $('#bookingStart').focus();
+                        $('#bookingAim').focus();
+                    } else {
+                        window.alert('Keine Route vorhanden - ' + status);
+                    }
+                });
+            };
+
+        </script>
+
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoXWKgOPEKM7wAWyQU_2HbWqrHLuxM3_U&libraries=places&callback=initMap"
+                async defer></script>
+
+
+        <md-toolbar layout="row" class="md-hue-3">
+            <div class="md-toolbar-tools">
+                <h2 style="margin-bottom: 24px !important;"><strong class="text-danger">Dream klicken und weiter scrollen für mehr Dreams! </strong></h2>
+            </div>
+        </md-toolbar>
+        <div infinite-scroll="loadDreamsUsers($event,quantity,choseCategoryEventsBooking,
+        choseEventsBooking,choseAvailabilityTimeBooking,choseAvailabilityDayBooking,plz_place_booking,price_booking);" infinite-scroll-disabled="busy" infinite-scroll-distance="3">
+            <md-content style="overflow: auto !important; height: 300px !important;">
+                    <div class="spinner" ng-show="loading">
+                        <div class="double-bounce1"></div>
+                        <div class="double-bounce2"></div>
+                    </div>
+                <md-list flex>
+                    <md-subheader class="md-no-sticky">
+                        <div layout="row" layout-wrap layout-align="start" flex>
+                            <div flex="15" flex-md="33" flex-sm="33" class="m-l" flex-xs="100">
+                                <md-select id="choseCategoryEventsBooking" ng-model="choseCategoryEventsBooking">
+                                    <md-option ng-value="first">Kategorie wählen</md-option>
+                                    <md-option ng-click="loadEvents(1);" ng-value="1">Allgemeine Treffen</md-option>
+                                    <md-option ng-click="loadEvents(2);" ng-value="2">Sporttreffen</md-option>
+                                    <md-option ng-click="loadEvents(3);" ng-value="3">Bildungstreffen</md-option>
+                                    <md-option ng-click="loadEvents(4);" ng-value="4">Fototreffen</md-option>
+                                    <md-option ng-click="loadEvents(5);" ng-value="5">Tanztreffen</md-option>
+                                </md-select>
+                            </div>
+                            <div flex="15" flex-md="33" flex-sm="33" flex-xs="100" class="m-l" id="catEventsBooking">
+
+                            </div>
+                            <div flex="15" flex-md="33" flex-sm="33" flex-xs="100" class="m-l" id="availableTimeBooking">
+
+                            </div>
+                            <div flex="15" flex-md="33" flex-sm="33" flex-xs="100" class="m-l" id="availableDayBooking">
+
+                            </div>
+                            <div flex="15" flex-md="33" flex-sm="33" flex-xs="100" class="m-l" id="availableLocationBooking">
+                                <md-input-container>
+                                    <input type="text" placeholder="Postleitzahl" ng-model="plz_place_booking" ng-blur="loadAvailabilityPlz(plz_place_booking);">
+                                </md-input-container>
+                            </div>
+                            <div flex="15" flex-md="33" flex-sm="33" flex-xs="100" class="m-l" id="availablePriceBooking">
+                                <md-input-container>
+                                    <input type="text" placeholder="Preis kleiner als (in €)" ng-model="price_booking" ng-blur="loadAvailabilityPrice(price_booking);">
+                                </md-input-container>
+                            </div>
+                        </div>
+                        <div layout="row" layout-wrap layout-align="center" flex>
+                            <h2 class="text-center"><strong>oder</strong></h2>
+                        </div>
+                        <div layout="row" layout-wrap layout-align="start" flex>
+                            <div flex="40" flex-md="50" flex-sm="50" flex-xs="100">
+
+                            </div>
+                            <div flex="40" flex-md="50" flex-sm="50" flex-xs="100">
+                                <md-input-container>
+                                    <input type="text" placeholder="Namenssuche" ng-model="name_search">
+                                </md-input-container>
+                                <md-button class="md-button md-raised md-warn" ng-click="searchNames(name_search);">Suchen</md-button>
+                            </div>
+                        </div>
+                    </md-subheader>
+                    <div id="dreamsList">
+                        <md-list-item ng-click="bookDream($event,item.nickname,item.profilePic,item.customerid,item.kind,item.fbl,item.twl,item.inl);" class="md-3-line" id="dream_{{$index}}" ng-repeat="item in dreamsUsers track by $index">
+                            <img class="md-avatar" style="z-index: 999999;" src="{{item.profilePic}}" id="profilePic_{{$index}}" on-error-src="http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png">
+                            <div class="md-list-item-text" id="profileText" layout="column">
+                                <h3>{{ item.nickname }}</h3>
+                                <p>{{ item.nicknameDescription }}</p>
+                            </div>
+                        </md-list-item>
+                    </div>
+                </md-list>
+            </md-content>
+        </div>
+    </md-content>
+</div>

@@ -1,0 +1,129 @@
+<div ng-controller="MainCtrl">
+    <div ng-init="checkLogin();"></div>
+
+    <div ng-include="'views/document/customerheader.html'"></div>
+
+    <div ng-include="'views/sidenavs/customermenu.html'"></div>
+
+    <div ng-include="'views/sidenavs/dreambeem.html'"></div>
+
+    <div ng-include="'views/sidenavs/furnybeem.html'"></div>
+
+    <div class="spinner" ng-show="loading">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+    </div>
+</div>
+
+<md-content class="m-t md-padding" ng-controller="LagerCtrl" ng-init="initProducts(0);">
+    <h1><strong>Lager</strong></h1>
+    <p>Hier kannst Du Deine Produkte durchsuchen und einen Preis geben. </p>
+    <div layout="row" layout-wrap layout-align="start" flex>
+        <div flex="33" flex-md="33" flex-sm="33" flex-xs="100">
+            <h3><strong>{{(pageNumberNum)}} von {{lagerProductsCount || lagerProductsSearchCount}} Produkte</strong></h3>
+            <span>Seite: <strong>{{pageNumber}}</strong></span>
+        </div>
+        <div flex="66" flex-md="66" flex-sm="66" flex-xs="100">
+            <form name="storeSearcher" novalidate ng-submit="submitStoreSearch($event,storeSearch,25);">
+                <md-input-container>
+                    <label>Suche</label>
+                    <input type="text" id="storeSearch" name="storeSearch" ng-model="storeSearch" required>
+
+                    <div class="errors" ng-messages="storeSearcher.storeSearch.$error">
+                        <div ng-message="required">Benötigt</div>
+                    </div>
+                </md-input-container>
+                <md-input-container>
+                    <md-button type="submit" ng-disabled="storeSearcher.$invalid" class="md-button md-raised md-warn">
+                        Suchen
+                    </md-button>
+                </md-input-container>
+                <md-button ng-click="resetSearch();" class="md-button md-raised md-primary">
+                    Neu
+                </md-button>
+            </form>
+        </div>
+    </div>
+    <div layout="row" layout-align="start" flex>
+
+        <div class="spinner noShow" id="lagerloader">
+            <div class="double-bounce1"></div>
+            <div class="double-bounce2"></div>
+        </div>
+    </div>
+    <div id="p_up">
+        <div layout="row" class="text-center" layout-wrap flex id="pager_up">
+            <div flex="20" flex-md="20" flex-sm="20" flex-xs="50" ng-repeat="pageN in pages">
+                <h3 ng-click="showLagerPage(pageN.pageN);">{{pageN.pageN}}</h3>
+            </div>
+        </div>
+    </div>
+    <md-divider></md-divider>
+    <div layout="row" layout-wrap layout-align="start" flex>
+        <div id="lager" flex="100" flex-md="100" flex-sm="100" flex-xs="100">
+            <div layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="20" flex-sm="33" flex-md="33"><strong>Produktbild</strong></div>
+                <div class="text-center" flex-xs="100" flex="20" flex-sm="33" flex-md="33"><strong>Name</strong></div>
+                <div class="text-center" flex-xs="100" flex="20" flex-sm="33" flex-md="33"><strong>Preis</strong></div>
+                <div class="text-center" flex-xs="100" flex="20" flex-sm="33" flex-md="33"><strong>Kategorie</strong></div>
+                <div class="text-center" flex-xs="100" flex="20" flex-sm="33" flex-md="33"><strong>Aktion</strong></div>
+            </div>
+            <md-divider></md-divider>
+            <span class="text-danger" ng-if="lagerMessage"><strong>{{lagerMessage}}</strong></span>
+            <div id="pros_0">
+                <div layout="row" class="p-t-lg" layout-wrap ng-repeat="product in products track by $index" flex id="product_{{$index}}">
+                    <div class="text-center" flex-xs="100" flex="20" flex-sm="33" flex-md="33"><img src="{{product.main_image}}" width="120"></div>
+                    <div class="text-center" flex-xs="100" flex="20" flex-sm="33" flex-md="33">{{product.title}}</div>
+                    <div class="text-center" flex-xs="100" flex="20" flex-sm="33" flex-md="33">
+                        <strong class="text-success" ng-if="product.oldPrice">
+                            <span id="pppriceo_{{$index}}">{{product.s_price}}</span><br>
+                            <span class="text-middle-small text-danger" id="oMessage_{{$index}}">{{priceMessage}}</span>
+                        </strong>
+
+                        <strong class="text-success" ng-if="product.newPrice">
+                            <span id="pppricen_{{$index}}">{{product.d_price}}</span><br>
+                            <span class="text-middle-small text-success" id="nMessage_{{$index}}">{{priceMessage}}</span>
+                        </strong>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="20" flex-sm="33" flex-md="33">
+                        <div id="categories_{{$index}}">
+                            <md-input-container style="margin-top: 0 !important;" id="p_{{$index}}">
+                                <label>1. Ebene</label>
+                                <md-select ng-init="index = $index;" name="productCategory_{{product.productId}}" ng-id="productCategory_{{product.productId}}" ng-model="_product.productId">
+                                    <md-option ng-click="add2CategoryLayer(category.categoryId1,index,2,product.productId);" ng-repeat="category in categories" ng-value="{{category.categoryId1}}">{{category.categoryLayer1Name}}</md-option>
+                                </md-select>
+                            </md-input-container>
+                            <md-input-container>
+                                <input type="hidden" name="categoryIds" ng-model="categoryIds" id="categoryIds" value="">
+                            </md-input-container><br>
+                            <span id="categoryLayers_{{$index}}">{{product.ccc}}</span>
+                        </div>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="20" flex-sm="33" flex-md="33">
+                        <div>
+                            <md-icon title="Preis erhöhen" ng-click="increasePrice(product.productId,product.shopId,product.ownerId,$index);" md-svg-src="priceIncrease24" class="material-icons"></md-icon>
+                            <md-icon title="Produktlink" ng-click="showProductLink(product.productId,product.shopId,product.ownerId,product.title);" md-svg-src="plink24" class="material-icons"></md-icon>
+                            <md-icon title="Aktualisieren" ng-click="refresh();" md-svg-src="actual24" class="material-icons"></md-icon>
+                            <md-icon title="Löschen" ng-click="deleteLaProduct(product.productId,product.ownerId,$index);" md-svg-src="delete24" class="material-icons"></md-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <md-divider></md-divider>
+    <div layout="row" start="start" layout-wrap flex>
+        <div flex="100" flex-md="100" flex-sm="100" flex-xs="100">
+            <h3><strong>{{(pageNumberNum)}} von {{lagerProductsCount || lagerProductsSearchCount}} Produkte</strong></h3>
+            <span>Seite: <strong>{{pageNumber}}</strong></span>
+        </div>
+    </div>
+    <div id="p_down">
+        <div layout="row" class="text-center" layout-wrap flex id="pager_down">
+            <div flex="20" flex-md="20" flex-sm="20" flex-xs="50" ng-repeat="pageN in pages">
+                <h3 ng-click="showLagerPage(pageN.pageN);">{{pageN.pageN}}</h3>
+            </div>
+        </div>
+    </div>
+
+</md-content>

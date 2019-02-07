@@ -1,0 +1,143 @@
+<div ng-controller="MainCtrl">
+    <div ng-init="checkLogin();"></div>
+
+    <div ng-include="'views/document/customerheader.html'"></div>
+
+    <div ng-include="'views/sidenavs/customermenu.html'"></div>
+
+    <div ng-include="'views/sidenavs/dreambeem.html'"></div>
+
+    <div ng-include="'views/sidenavs/furnybeem.html'"></div>
+
+    <div class="spinner" ng-show="loading">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+    </div>
+</div>
+
+<md-content class="m-t md-padding" ng-controller="PortfolioCtrl" ng-init="initPortfolioProducts();">
+    <h1><strong>Portfolio</strong></h1>
+    <p>Hier kannst Du Produkte zu Deinem Lager hinzufügen.</p>
+    <div layout="row" layout-wrap layout-align="start" flex>
+        <div flex="20" flex-md="20" flex-sm="20" flex-xs="100">
+            <h2><strong>{{categoryName}}</strong></h2>
+            <h3><strong>{{(pageNumberNum)}} von {{portfolioProductsCount || portfolioProductsSearchCount}} Produkte</strong></h3>
+            <span>Seite: <strong>{{pageNumber}}</strong></span>
+        </div>
+        <div flex="30" flex-md="30" flex-sm="30" flex-xs="100">
+            <md-select ng-id="categoryChose" ng-model="categoryChose">
+                <md-option ng-value="first" selected>Kategorie wählen</md-option>
+                <md-option ng-click="loadCategory(537,'Baby & Kleinkind');" ng-value="537">Baby & Kleinkind</md-option>
+                <md-option ng-click="loadCategory(166,'Bekleidung & Accessoires');" ng-value="166">Bekleidung & Accessoires</md-option>
+                <md-option ng-click="loadCategory(922,'Bürobedarf');" ng-value="922">Bürobedarf</md-option>
+                <md-option ng-click="loadCategory(222,'Elektronik');" ng-value="222">Elektronik</md-option>
+                <md-option ng-click="loadCategory(888,'Fahrzeuge & Teile');" ng-value="888">Fahrzeuge & Teile</md-option>
+                <md-option ng-click="loadCategory(772,'Für Erwachsene');" ng-value="772">Für Erwachsene</md-option>
+                <md-option ng-click="loadCategory(469,'Gesundheit & Schönheit');" ng-value="469">Gesundheit & Schönheit</md-option>
+                <md-option ng-click="loadCategory(536,'Heim & Garten');" ng-value="536">Heim & Garten</md-option>
+                <md-option ng-click="loadCategory(632,'Heimwerkerbedarf');" ng-value="632">Heimwerkerbedarf</md-option>
+                <md-option ng-click="loadCategory(141,'Kameras & Optik');" ng-value="141">Kameras & Optik</md-option>
+                <md-option ng-click="loadCategory(8,'Kunst & Unterhaltung');" ng-value="8">Kunst & Unterhaltung</md-option>
+                <md-option ng-click="loadCategory(783,'Medien');" ng-value="783">Medien</md-option>
+                <md-option ng-click="loadCategory(436,'Möbel');" ng-value="436">Möbel</md-option>
+                <md-option ng-click="loadCategory(412,'Nahrungsmittel, Getränke & Tabak');" ng-value="412">Nahrungsmittel, Getränke & Tabak</md-option>
+                <md-option ng-click="loadCategory(5605,'Religion & Feierlichkeiten');" ng-value="5605">Religion & Feierlichkeiten</md-option>
+                <md-option ng-click="loadCategory(2092,'Software');" ng-value="2092">Software</md-option>
+                <md-option ng-click="loadCategory(1239,'Spielzeuge & Spiele');" ng-value="1239">Spielzeuge & Spiele</md-option>
+                <md-option ng-click="loadCategory(988,'Sportartikel');" ng-value="988">Sportartikel</md-option>
+                <md-option ng-click="loadCategory(5181,'Taschen & Gepäck');" ng-value="5181">Taschen & Gepäck</md-option>
+                <md-option ng-click="loadCategory(1,'Tiere & Tierbedarf');" ng-value="1">Tiere & Tierbedarf</md-option>
+                <md-option ng-click="loadCategory(111,'Wirtschaft & Industrie');" ng-value="111">Wirtschaft & Industrie</md-option>
+            </md-select>
+        </div>
+        <div flex="50" flex-md="50" flex-sm="50" flex-xs="100">
+            <form name="portfolioSearcher" novalidate ng-submit="submitPortfolioSearch($event,portfolioSearch,25);">
+                <md-input-container>
+                    <label>Suche</label>
+                    <input type="text" name="portfolioSearch" ng-model="portfolioSearch" required>
+                    <div class="errors" ng-messages="portfolioSearcher.portfolioSearch.$error">
+                        <div ng-message="required">Benötigt</div>
+                    </div>
+                </md-input-container>
+                <md-input-container>
+                    <md-button type="submit" ng-disabled="portfolioSearcher.$invalid" class="md-button md-raised md-warn">
+                        Suchen
+                    </md-button>
+                </md-input-container>
+                <md-button ng-click="resetPortfolioSearch();" class="md-button md-raised md-primary">
+                    Neu
+                </md-button>
+            </form>
+        </div>
+    </div>
+    <div layout="row" layout-align="start" flex>
+        <div class="spinner noShow" id="portfolioloader">
+            <div class="double-bounce1"></div>
+            <div class="double-bounce2"></div>
+        </div>
+    </div>
+    <div id="po_up">
+        <div layout="row" class="text-center" layout-wrap flex id="pager_oup">
+            <div flex="20" flex-md="20" flex-sm="20" flex-xs="50" ng-repeat="pageN in pages">
+                <h3 ng-click="showPortfolioPage(pageN.pageN);">{{pageN.pageN}}</h3>
+            </div>
+        </div>
+    </div>
+    <md-divider></md-divider>
+    <div layout="row" layout-wrap layout-align="start" flex>
+        <div id="portfolio" flex="100" flex-md="100" flex-sm="100" flex-xs="100">
+            <div layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="50" flex="15" flex-sm="25" flex-md="25"><strong>Produktbild</strong></div>
+                <div class="text-center" flex-xs="50" flex="15" flex-sm="25" flex-md="25"><strong>Name</strong></div>
+                <div class="text-center" flex-xs="50" flex="15" flex-sm="25" flex-md="25"><strong>Preis</strong></div>
+                <div class="text-center" flex-xs="50" flex="15" flex-sm="25" flex-md="25"><strong>Kategorie</strong></div>
+                <div class="text-center" flex-xs="50" flex="15" flex-sm="25" flex-md="25"><strong>Verfügbarkeit</strong></div>
+                <div class="text-center" flex-xs="50" flex="15" flex-sm="25" flex-md="25"><strong>Aktion</strong></div>
+            </div>
+            <md-divider></md-divider>
+            <span id="portfolioMessage" class="text-danger" ng-if="portfolioMessage">{{portfolioMessage}}</span>
+            <div id="proso_0">
+                <div layout="row" class="p-t-lg" layout-wrap ng-repeat="product in portfolioProducts track by $index" flex>
+                    <div class="text-center" flex-xs="100" flex="15" flex-sm="25" flex-md="25"><img src="{{product.main_image}}" width="120"></div>
+                    <div class="text-center" flex-xs="100" flex="15" flex-sm="25" flex-md="25">{{product.title}}</div>
+                    <div class="text-center" flex-xs="100" flex="15" flex-sm="25" flex-md="25">
+                        <strong ng-class="available[$index] ? 'text-success' : 'text-danger'" id="pprice_{{$index}}" ng-if="product.s_price">
+                            {{product.s_price}}
+                        </strong><br>
+                        <span class="text-small">{{pprice}}</span></div>
+                    <div class="text-center" flex-xs="100" flex="15" flex-sm="25" flex-md="25">
+                        <div flex="100" flex-xs="100" flex-sm="25" flex-md="25" id="categories_po_{{$index}}">
+                            <span id="categoryLayers_po_{{$index}}">{{product.ccc}}</span>
+                        </div>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="15" flex-sm="25" flex-md="25"><span ng-class="available[$index] ? 'text-success' : 'text-danger'">{{availableText[$index]}}</div>
+                    <div class="text-center" flex-xs="100" flex="15" flex-sm="25" flex-md="25">
+                        <div class="spinner" style="display: none;" id="sspinner_{{$index}}">
+                            <div class="double-bounce1"></div>
+                            <div class="double-bounce2"></div>
+                        </div>
+                        <md-button ng-show="available[$index]" ng-click="addToLager(product.productId,product.shopId);" class="md-button md-raised md-warn">
+                            ins Lager übernehmen
+                        </md-button>
+                        <md-icon title="Aktualisieren" ng-click="refreshProduct(product.productId,product.shopId,$index);" md-svg-src="actual24" class="material-icons"></md-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <md-divider></md-divider>
+    <div layout="row" start="start" layout-wrap flex>
+        <div flex="100" flex-md="100" flex-sm="100" flex-xs="100">
+            <h3><strong>{{(pageNumberNum)}} von {{portfolioProductsCount || portfolioProductsSearchCount}} Produkte</strong></h3>
+            <span>Seite: <strong>{{pageNumber}}</strong></span>
+        </div>
+    </div>
+    <div id="po_down">
+        <div layout="row" class="text-center" layout-wrap flex id="pager_odown">
+            <div flex="20" flex-md="20" flex-sm="20" flex-xs="50" ng-repeat="pageN in pages">
+                <h3 ng-click="showPortfolioPage(pageN.pageN);">{{pageN.pageN}}</h3>
+            </div>
+        </div>
+    </div>
+
+</md-content>

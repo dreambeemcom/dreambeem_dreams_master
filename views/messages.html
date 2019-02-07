@@ -1,0 +1,261 @@
+<div ng-controller="MainCtrl">
+    <div ng-init="checkLogin();"></div>
+
+    <div ng-include="'views/document/customerheader.html'"></div>
+
+    <div ng-include="'views/sidenavs/customermenu.html'"></div>
+
+    <div ng-include="'views/sidenavs/dreambeem.html'"></div>
+
+    <div ng-include="'views/sidenavs/furnybeem.html'"></div>
+
+    <div class="spinner" ng-show="loading">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+    </div>
+</div>
+
+<div ng-controller="MessagesCtrl">
+
+    <md-content flex layout-padding>
+        <h2>Messaging</h2>
+
+        <div layout="row" layout-wrap layout-align="start">
+            <md-button class="md-primary md-raised" ng-click="showDialog($event, 'ns1')">
+                Message schreiben
+            </md-button>
+            <md-button class="md-primary md-raised" ng-click="showDialog($event, 'ad1')">
+                Kontakte
+            </md-button>
+            <md-button class="md-primary md-raised" ng-click="showDialog($event, 'bc1')">
+                Broadcast Message
+            </md-button>
+        </div>
+
+        <!--  -->
+
+        <div layout="row" layout-wrap layout-align="start">
+            <div class="md-icon-float" flex="100" flex-md="100" flex-sm="100" flex-xs="100">
+                <h3>Filter</h3>
+            </div>
+            <div class="md-icon-float" flex="20" flex-md="33" flex-sm="33" flex-xs="100">
+                <form name="filterFrom" ng-submit="submitFilterFrom(filterName);" novalidate>
+                    <md-input-container flex="80">
+                        <input type="text" id="filterFrom" name="filterFrom1" placeholder="Nachricht von *" ng-model="filterFrom1" required md-no-asterisk>
+                        <div ng-messages="filterFrom.filterFrom1.$error">
+                            <div ng-message="required">Benötigt</div>
+                        </div>
+                        <md-button class="md-grid-item-content" ng-click="submitFilterFrom(filterFrom1);" ng-disabled="filterFrom.$invalid">
+                            <md-icon md-svg-src="name24"></md-icon>
+                            <div class="md-grid-text">Von</div>
+                        </md-button>
+                    </md-input-container>
+                </form>
+            </div>
+            <div class="md-icon-float" flex="20" flex-md="33" flex-sm="33" flex-xs="100">
+                <form name="filterSubject" ng-submit="submitFilterSubject(subject);" novalidate>
+                    <md-input-container layout-align="start" flex="80">
+                        <input type="text" id="subject" name="subject" placeholder="Nachricht Betreff *" ng-model="subject" required md-no-asterisk>
+                        <div ng-messages="filterSubject.subject.$error">
+                            <div ng-message="required">Benötigt</div>
+                        </div>
+                        <md-button class="md-grid-item-content" ng-click="submitFilterSubject(subject);" ng-disabled="filterSubject.$invalid">
+                            <md-icon md-svg-src="subject24"></md-icon>
+                            <div class="md-grid-text">Betreff</div>
+                        </md-button>
+                    </md-input-container>
+                </form>
+            </div>
+            <div class="md-icon-float" flex="20" flex-md="33" flex-sm="33" flex-xs="100">
+                <form name="filterDate" ng-submit="submitFilterDate(date);" novalidate>
+                    <md-input-container>
+                        <md-datepicker ng-model="fromDate" id="fromDate" name="fromDate" md-placeholder="Datum von *" required>
+
+                        </md-datepicker>
+                        <div ng-messages="filterDate.fromDate.$error">
+                            <div ng-message="required">Benötigt</div>
+                        </div>
+                        <md-button class="md-grid-item-content" ng-click="submitFilterDate(fromDate);" ng-disabled="filterDate.$invalid">
+                            <md-icon md-svg-src="time24"></md-icon>
+                            <div class="md-grid-text">Datum</div>
+                        </md-button>
+                    </md-input-container>
+                </form>
+            </div>
+        </div>
+        <div layout="row" layout-wrap layout-align="start" flex>
+            <div style="visibility: hidden;">
+                <div class="md-dialog-container h w100i" id="m1333">
+                    <md-dialog aria-label="Produkt Test" class="w100i">
+                        <form ng-cloak>
+                            <md-toolbar>
+                                <div class="md-toolbar-tools">
+                                    <h2>Produkt Test</h2>
+                                    <span flex></span>
+                                </div>
+                            </md-toolbar>
+
+                            <md-dialog-content>
+                                <div class="md-dialog-content">
+                                    <md-grid-list md-cols-sm="6" md-row-height="4:3" md-cols-md="6" md-cols-lg="8" md-cols-xs="4" md-cols-gt-lg="8" md-gutter="1em" flex>
+                                        <md-grid-tile ng-repeat="tile in columnNamesAll">
+                                            <md-grid-tile-header>
+                                                <span class="pull-left">{{ tile.name }}</span>
+                                            </md-grid-tile-header>
+                                        </md-grid-tile>
+                                    </md-grid-list>
+                                </div>
+                            </md-dialog-content>
+
+                            <md-dialog-actions layout="row">
+                                <span flex></span>
+                                <md-button ng-click="hide()">
+                                    Not Useful
+                                </md-button>
+                                <md-button ng-click="cancel()">
+                                    Useful
+                                </md-button>
+                            </md-dialog-actions>
+                        </form>
+                    </md-dialog>
+                </div>
+            </div>
+            <div style="visibility: hidden;">
+                <div class="md-dialog-container h" id="bc1">
+                    <md-dialog aria-label="Broadcast Nachricht">
+                        <md-toolbar>
+                            <div class="md-toolbar-tools">
+                                <h2>Broadcast Nachricht</h2>
+                                <span flex></span>
+                            </div>
+                        </md-toolbar>
+
+                        <md-dialog-content>
+                            <div class="md-dialog-content">
+                                <md-content>
+
+                                </md-content>
+                            </div>
+                        </md-dialog-content>
+
+                        <md-dialog-actions layout="row">
+                            <span flex></span>
+                            <md-button ng-click="cancel()">
+                                Schließen
+                            </md-button>
+                        </md-dialog-actions>
+                    </md-dialog>
+                </div>
+            </div>
+            <div style="visibility: hidden;">
+                <div class="md-dialog-container h" id="ad1">
+                    <md-dialog aria-label="Kontakte">
+                        <md-toolbar>
+                            <div class="md-toolbar-tools">
+                                <h2>Kontakte</h2>
+                                <span flex></span>
+                            </div>
+                        </md-toolbar>
+
+                        <md-dialog-content>
+                            <div class="md-dialog-content">
+                                <md-content>
+                                    <md-list flex>
+                                        <md-subheader class="md-no-sticky">3 line item (with hover)</md-subheader>
+                                        <md-list-item class="md-3-line" ng-repeat="item in todos" ng-click="null">
+                                            <img ng-src="{{item.face}}?{{$index}}" class="md-avatar" alt="{{item.who}}" />
+                                            <div class="md-list-item-text" layout="column">
+                                                <h3>{{ item.who }}</h3>
+                                                <h4>{{ item.what }}</h4>
+                                                <p>{{ item.notes }}</p>
+                                            </div>
+                                        </md-list-item>
+                                    </md-list>
+                                </md-content>
+                            </div>
+                        </md-dialog-content>
+
+                        <md-dialog-actions layout="row">
+                            <span flex></span>
+                            <md-button ng-click="cancel()">
+                                Schließen
+                            </md-button>
+                        </md-dialog-actions>
+                    </md-dialog>
+                </div>
+            </div>
+            <div style="visibility: hidden;">
+                <div class="md-dialog-container h" id="ns1">
+                    <md-dialog aria-label="Message schreiben">
+                        <md-toolbar>
+                            <div class="md-toolbar-tools">
+                                <h2>Message schreiben</h2>
+                                <span flex></span>
+                            </div>
+                        </md-toolbar>
+
+                        <div ng-controller="MainCtrl">
+                            <md-dialog-content>
+                                <div class="md-dialog-content">
+                                    <form name="sendMessage" ng-submit="submitSendMessage(from,to,nsubject,message);" novalidate ng-cloak>
+                                        <div layout="row" layout-wrap layout-align="start" flex>
+                                            <md-input-container flex="100" flex-md="100" flex-sm="100" flex-xs="100">
+                                                <input type="text" id="from" name="from" placeholder="Von *" ng-model="from" required md-no-asterisk>
+                                                <div ng-messages="sendMessage.from.$error">
+                                                    <div ng-message="required">Benötigt</div>
+                                                </div>
+                                            </md-input-container>
+                                        </div>
+                                        <div layout="row" layout-wrap layout-align="start" flex>
+                                            <md-input-container flex="100" flex-md="100" flex-sm="100" flex-xs="100">
+                                                <input type="text" id="to" name="to" placeholder="Empfänger *" ng-model="to" required md-no-asterisk>
+                                                <div ng-messages="sendMessage.to.$error">
+                                                    <div ng-message="required">Benötigt</div>
+                                                </div>
+                                            </md-input-container>
+                                        </div>
+                                        <div layout="row" layout-wrap layout-align="start" flex>
+                                            <md-input-container flex="100" flex-md="100" flex-sm="100" flex-xs="100">
+                                                <input type="text" id="nsubject" name="nsubject" placeholder="Betreff *" ng-model="nsubject" required md-no-asterisk>
+                                                <div ng-messages="filterSubject.nsubject.$error">
+                                                    <div ng-message="required">Benötigt</div>
+                                                </div>
+                                            </md-input-container>
+                                        </div>
+                                        <div layout="row" layout-wrap layout-align="start" flex>
+                                            <md-input-container flex="100" flex-md="100" flex-sm="100" flex-xs="100">
+                                                <input type="text" id="message" name="message" ng-model="messagetext" ng-change="limitInput(messagetext, '#m_kCount', '#message');" ng-maxlength="80" placeholder="Nachricht *" required md-no-asterisk>
+                                                <span><strong id="m_kCount"></strong> Zeichen</span><br>
+                                                <span>Maximal <strong>80 Zeichen</strong></span>
+                                                <div class="errors" ng-messages="sendMessage.message.$error">
+                                                    <div ng-message="required">Benötigt</div>
+                                                </div>
+                                            </md-input-container>
+                                        </div>
+                                        <div layout="row" layout-wrap layout-align="start" flex>
+                                            <md-input-container flex="100" flex-md="100" flex-sm="100" flex-xs="100">
+                                                <md-button class="md-button md-raised md-warn" ng-click="submitSendMessage(from,to,nsubject,message);" ng-disabled="sendMessage.$invalid">
+                                                    Nachricht senden
+                                                </md-button>
+                                            </md-input-container>
+                                        </div>
+                                    </form>
+                                </div>
+                            </md-dialog-content>
+                        </div>
+
+                        <md-dialog-actions layout="row">
+                            <span flex></span>
+                            <md-button ng-click="cancel()">
+                                Schließen
+                            </md-button>
+                        </md-dialog-actions>
+                    </md-dialog>
+                </div>
+            </div>
+        </div>
+    </md-content>
+
+
+
+</div>

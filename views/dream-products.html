@@ -1,0 +1,514 @@
+<div ng-controller="MainCtrl">
+    <div ng-init="checkLogin();"></div>
+
+    <div ng-include="'views/document/customerheader.html'"></div>
+
+    <div ng-include="'views/sidenavs/customermenu.html'"></div>
+
+    <div ng-include="'views/sidenavs/dreambeem.html'"></div>
+
+    <div ng-include="'views/sidenavs/furnybeem.html'"></div>
+
+    <div class="spinner" ng-show="loading">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+    </div>
+</div>
+
+
+
+<div ng-cloak ng-controller="DreamProductsCtrl">
+
+<md-content flex layout-padding class="md-padding" layout="column">
+<h2 class="md-title"><strong>Dream - Products</strong></h2>
+
+<md-tabs md-selected="0" md-border-bottom md-autoselect md-dynamic-height>
+    <md-tab label="Shop">
+    <div layout="column" ng-cloak ng-init="initShop()">
+
+    <md-content flex layout-padding class="md-padding" layout="column">
+
+        <img src="{{shopLogo}}" ng-model="shopLogo" width="140">
+
+        <form name="shopForm" novalidate ng-submit="submitShop($event)">
+            <div layout="row" layout-wrap layout-align="start" flex>
+                <md-input-container class="md-icon-float md-block" flex="50" flex-md="50" flex-sm="50" flex-xs="100">
+                    <label>Shop - Name</label>
+                    <md-icon md-svg-src="home24" class="material-icons md-24"></md-icon>
+                    <input type="text" id="shopName" name="shopName" ng-model="shopName" required>
+
+                    <div class="errors" ng-messages="shopForm.shopName.$error">
+                        <div ng-message="required">Benötigt</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-icon-float" flex="50" flex-md="50" flex-sm="50" flex-xs="100">
+                    <label>Shop - Link</label>
+                    <md-icon md-svg-src="star24" class="material-icons md-24"></md-icon>
+                    <input type="text" id="shopLink" name="shopLink" ng-model="shopLink" ng-pattern="regexUrl" ng-controller="MainCtrl" required>
+                    Url ok? <code ng-controller="MainCtrl" ng-model="url" ng-if="shopForm.shopLink.$valid">{{url}}</code>
+                    <a href="{{shopLink}}" target="_blank">
+                        <md-icon md-svg-src="bower_components/material-design-icons/action/svg/production/ic_exit_to_app_24px.svg" class="material-icons md-24"></md-icon>
+                    </a>
+
+                    <div class="errors" ng-messages="shopForm.shopLink.$error">
+                        <div ng-message="required">Benötigt</div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div layout="row" layout-wrap layout-align="start" flex>
+                <md-input-container class="md-icon-float md-block" flex="75" flex-md="75" flex-sm="75" flex-xs="100">
+                    <label>Straße + Hausnummer</label>
+                    <md-icon md-svg-src="label24" class="material-icons md-24"></md-icon>
+                    <input type="text" id="shopStreet" name="shopStreet" ng-model="shopStreet" required>
+
+                    <div class="errors" ng-messages="shopForm.shopStreet.$error">
+                        <div ng-message="required">Benötigt</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-icon-float" flex="25" flex-md="25" flex-sm="25" flex-xs="100">
+                    <label>Postleitzahl</label>
+                    <md-icon md-svg-src="plz24" class="material-icons md-24"></md-icon>
+                    <input type="text" id="shopPlz" name="shopPlz" ng-model="shopPlz" required>
+
+                    <div class="errors" ng-messages="shopForm.shopPlz.$error">
+                        <div ng-message="required">Benötigt</div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div layout="row" layout-wrap layout-align="start" flex>
+                <md-input-container class="md-icon-float md-block" flex="75" flex-md="75" flex-sm="75" flex-xs="100">
+                    <label>Stadt</label>
+                    <md-icon md-svg-src="town24" class="material-icons md-24"></md-icon>
+                    <input type="text" id="shopTown" name="shopTown" ng-model="shopTown" required>
+
+                    <div class="errors" ng-messages="shopForm.shopTown.$error">
+                        <div ng-message="required">Benötigt</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-icon-float" flex="25" flex-md="25" flex-sm="25" flex-xs="100">
+                    <label>Land</label>
+                    <md-icon md-svg-src="country24" class="material-icons md-24"></md-icon>
+                    <md-select name="shopCountry" ng-model="shopCountry" required>
+                        <md-option value="de">Deutschland</md-option>
+                        <md-option value="sui">Schweiz</md-option>
+                        <md-option value="aut">Österreich</md-option>
+                    </md-select>
+
+                    <div class="errors" ng-messages="shopForm.shopCountry.$error">
+                        <div ng-message="required">Benötigt</div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div layout="row" layout-wrap layout-align="start" flex>
+                <md-input-container class="md-icon-float md-block" flex="50" flex-md="50" flex-sm="50" flex-xs="100">
+                    <label>Telefon</label>
+                    <md-icon md-svg-src="phone24" class="material-icons md-24"></md-icon>
+                    <input type="text" id="shopPhone" name="shopPhone" ng-model="shopPhone" md-no-asterisk>
+                </md-input-container>
+                <md-input-container class="md-icon-float" flex="50" flex-md="50" flex-sm="50" flex-xs="100">
+                    <label>Email</label>
+                    <md-icon md-svg-src="email24" class="material-icons md-24"></md-icon>
+                    <input type="text" id="shopEmail" name="shopEmail" ng-model="shopEmail" required>
+
+                    <div class="errors" ng-messages="shopForm.shopEmail.$error">
+                        <div ng-message="required">Benötigt</div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div layout="row" layout-wrap layout-align="start" flex>
+                <md-input-container class="md-icon-float md-block" flex="100" flex-md="100" flex-sm="100" flex-xs="100">
+                    <label>Beschreibung</label>
+                    <md-icon md-svg-src="description24" class="material-icons md-24"></md-icon>
+                    <textarea id="shopDescription" name="shopDescription" ng-model="shopDescription" required></textarea>
+
+                    <div class="errors" ng-messages="shopForm.shopDescription.$error">
+                        <div ng-message="required">Benötigt</div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div layout="row" layout-align="end" flex>
+                <md-button type="submit" ng-disabled="shopForm.$invalid" class="md-button md-raised md-warn">
+                    Speichern
+                </md-button>
+            </div>
+        </form>
+
+        <h2 class="md-title">Ansprechpartner</h2>
+        <form name="shopPartnerForm" novalidate ng-submit="submitPartnerShop()">
+            <div layout="row" layout-wrap layout-align="start" flex>
+                <md-input-container class="md-icon-float md-block" flex="100" flex-md="100" flex-sm="100" flex-xs="100">
+                    <label>Voller Name</label>
+                    <md-icon md-svg-src="fullname24" class="material-icons md-24"></md-icon>
+                    <input type="text" id="shopFullName" name="shopFullName" ng-model="shopFullName" required>
+
+                    <div class="errors" ng-messages="shopForm.shopFullName.$error">
+                        <div ng-message="required">Benötigt</div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div layout="row" layout-wrap layout-align="start" flex>
+                <md-input-container class="md-icon-float md-block" flex="75" flex-md="75" flex-sm="75" flex-xs="100">
+                    <label>Straße + Hausnummer</label>
+                    <md-icon md-svg-src="street24" class="material-icons md-24"></md-icon>
+                    <input type="text" id="shopPartnerStreet" name="shopPartnerStreet" ng-model="shopPartnerStreet" required>
+
+                    <div class="errors" ng-messages="shopForm.shopPartnerStreet.$error">
+                        <div ng-message="required">Benötigt</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-icon-float" flex="25" flex-md="25" flex-sm="25" flex-xs="100">
+                    <label>Postleitzahl</label>
+                    <md-icon md-svg-src="plz24" class="material-icons md-24"></md-icon>
+                    <input type="text" id="shopPartnerPlz" name="shopPartnerPlz" ng-model="shopPartnerPlz" required>
+
+                    <div class="errors" ng-messages="shopForm.shopPartnerPlz.$error">
+                        <div ng-message="required">Benötigt</div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div layout="row" layout-wrap layout-align="start" flex>
+                <md-input-container class="md-icon-float md-block" flex="25" flex-md="25" flex-sm="25" flex-xs="100">
+                    <label>Land</label>
+                    <md-icon md-svg-src="country24" class="material-icons md-24"></md-icon>
+                    <md-select name="shopPartnerCountry" ng-model="shopPartnerCountry" required>
+                        <md-option value="de">Deutschland</md-option>
+                        <md-option value="sui">Schweiz</md-option>
+                        <md-option value="aut">Österreich</md-option>
+                    </md-select>
+
+                    <div class="errors" ng-messages="shopForm.shopPartnerCountry.$error">
+                        <div ng-message="required">Benötigt</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-icon-float md-block" flex="25" flex-md="25" flex-sm="25" flex-xs="100">
+                    <label>Telefon</label>
+                    <md-icon md-svg-src="phone24" class="material-icons md-24"></md-icon>
+                    <input type="text" id="shopPartnerPhone" name="shopPartnerPhone" ng-model="shopPartnerPhone" md-no-asterisk>
+                </md-input-container>
+                <md-input-container class="md-icon-float" flex="50" flex-md="50" flex-sm="50" flex-xs="100">
+                    <label>Email</label>
+                    <md-icon md-svg-src="email24" class="material-icons md-24"></md-icon>
+                    <input type="text" id="shopPartnerEmail" name="shopPartnerEmail" ng-model="shopPartnerEmail" required>
+
+                    <div class="errors" ng-messages="shopForm.shopPartnerEmail.$error">
+                        <div ng-message="required">Benötigt</div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div layout="row" layout-align="end" flex>
+                <md-button type="submit" ng-disabled="shopPartnerForm.$invalid" class="md-button md-raised md-warn">
+                    Speichern
+                </md-button>
+            </div>
+        </form>
+        <h2 class="md-title">Shop - Status</h2>
+        <form name="shopEnableForm" novalidate ng-submit="submitEnableShop(shopId)">
+            <div layout="row" layout-wrap layout-align="start" flex>
+                <md-input-container class="md-icon-float" flex="100" flex-md="100" flex-sm="100" flex-xs="100">
+                    <md-switch name="shopEnable" class="md-warn" ng-model="shopEnable" required>
+                        <md-icon md-svg-src="shop24" class="material-icons md-24"></md-icon>
+                        <strong>Shop online</strong>
+                    </md-switch>
+                    <div ng-messages="shopEnableForm.shopEnable.$error" multiple>
+                        <div ng-message="required">
+                            Es sollte ein Status "Online" festgelegt werden
+                        </div>
+                    </div>
+                </md-input-container>
+            </div>
+
+            <div layout="row" layout-align="end" flex>
+                <md-button type="submit" ng-disabled="shopEnableForm.$invalid" class="md-button md-raised md-warn">
+                    Speichern
+                </md-button>
+            </div>
+        </form>
+    </md-content>
+    </div>
+    </md-tab>
+<md-tab label="Lager" ng-cloak>
+    <md-content class="m-t" ng-init="initProducts(0);">
+        <div layout="row" layout-wrap layout-align="start" flex>
+            <div flex="33" flex-md="33" flex-sm="33" flex-xs="100">
+                <h3><strong>{{(pageNumber * 10)}} von {{lagerProductsCount || lagerProductsSearchCount}} Produkte</strong></h3>
+                <span>Seite: <strong>{{pageNumber}}</strong></span>
+            </div>
+            <div flex="66" flex-md="66" flex-sm="66" flex-xs="100">
+                <form name="storeSearcher" novalidate ng-submit="submitStoreSearch($event,storeSearch,25);">
+                    <md-input-container>
+                        <label>Suche</label>
+                        <input type="text" id="storeSearch" name="storeSearch" ng-model="storeSearch" required>
+
+                        <div class="errors" ng-messages="storeSearcher.storeSearch.$error">
+                            <div ng-message="required">Benötigt</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container>
+                        <md-button type="submit" ng-disabled="storeSearcher.$invalid" class="md-button md-raised md-warn">
+                            Suchen
+                        </md-button>
+                    </md-input-container>
+                    <md-button ng-click="resetSearch();" class="md-button md-raised md-primary">
+                        Neu
+                    </md-button>
+                </form>
+            </div>
+        </div>
+        <div layout="row" layout-align="start" flex>
+
+            <div class="spinner noShow" id="lagerloader">
+                <div class="double-bounce1"></div>
+                <div class="double-bounce2"></div>
+            </div>
+        </div>
+        <div id="p_up">
+            <div layout="row" class="text-center" layout-wrap flex id="pager_up">
+                <div flex="20" flex-md="20" flex-sm="20" flex-xs="50" ng-repeat="pageN in pages">
+                    <h3 ng-click="showLagerPage(pageN.pageN);">{{pageN.pageN}}</h3>
+                </div>
+            </div>
+        </div>
+        <md-divider></md-divider>
+        <div layout="row" layout-wrap layout-align="start" flex>
+            <div id="lager" flex="100" flex-md="100" flex-sm="100" flex-xs="100">
+                <div layout="row" layout-wrap flex>
+                    <div class="text-center" flex-xs="100" flex="20" flex-sm="33" flex-md="33"><strong>Produktbild</strong></div>
+                    <div class="text-center" flex-xs="100" flex="20" flex-sm="33" flex-md="33"><strong>Name</strong></div>
+                    <div class="text-center" flex-xs="100" flex="20" flex-sm="33" flex-md="33"><strong>Preis</strong></div>
+                    <div class="text-center" flex-xs="100" flex="20" flex-sm="33" flex-md="33"><strong>Kategorie</strong></div>
+                    <div class="text-center" flex-xs="100" flex="20" flex-sm="33" flex-md="33"><strong>Aktion</strong></div>
+                </div>
+                <md-divider></md-divider>
+                <div id="pros_0">
+                    <div layout="row" class="p-t-lg" layout-wrap ng-repeat="product in products track by $index" flex id="product_{{$index}}">
+                        <div class="text-center" flex-xs="100" flex="20" flex-sm="33" flex-md="33"><img src="{{product.main_image}}" width="120"></div>
+                        <div class="text-center" flex-xs="100" flex="20" flex-sm="33" flex-md="33">{{product.title}}</div>
+                        <div class="text-center" flex-xs="100" flex="20" flex-sm="33" flex-md="33">
+                            <strong class="text-success" ng-if="product.oldPrice">
+                                <span id="ppprice_{{$index}}">{{product.s_price}}</span><br>
+                                <span class="text-middle-small text-danger" id="pppriceText_{{$index}}">{{priceMessage}}</span>
+                            </strong><br>
+
+                            <strong class="text-success" ng-if="product.newPrice">
+                                <span id="ppprice_{{$index}}">{{product.d_price}}</span><br>
+                                <span class="text-middle-small text-success" id="pppriceText_{{$index}}">DreamPreis wurde gesetzt</span>
+                            </strong>
+                        </div>
+                        <div class="text-center" flex-xs="100" flex="20" flex-sm="33" flex-md="33">
+                            <div id="categories_{{$index}}">
+                                <md-input-container style="margin-top: 0 !important;" id="p_{{$index}}">
+                                    <label>1. Ebene</label>
+                                    <md-select ng-init="index = $index;" name="productCategory_{{product.productId}}" ng-id="productCategory_{{product.productId}}" ng-model="_product.productId">
+                                        <md-option ng-click="add2CategoryLayer(category.categoryId1,index,2,product.productId);" ng-repeat="category in categories" ng-value="{{category.categoryId1}}">{{category.categoryLayer1Name}}</md-option>
+                                    </md-select>
+                                </md-input-container>
+                                <md-input-container>
+                                    <input type="hidden" name="categoryIds" ng-model="categoryIds" id="categoryIds" value="">
+                                </md-input-container><br>
+                                <span id="categoryLayers_{{$index}}">{{product.ccc}}</span>
+                            </div>
+                        </div>
+                        <div class="text-center" flex-xs="100" flex="20" flex-sm="33" flex-md="33">
+                            <div>
+                                <md-icon title="Preis erhöhen" ng-click="increasePrice(product.productId,product.shopId,product.ownerId,$index);" md-svg-src="priceIncrease24" class="material-icons"></md-icon>
+                                <md-icon title="Produktlink" ng-click="showProductLink(product.productId,product.shopId,product.ownerId,product.title);" md-svg-src="plink24" class="material-icons"></md-icon>
+                                <md-icon title="Aktualisieren" ng-click="refresh();" md-svg-src="actual24" class="material-icons"></md-icon>
+                                <md-icon title="Löschen" ng-click="deleteLaProduct(product.productId,product.ownerId,$index);" md-svg-src="delete24" class="material-icons"></md-icon>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <md-divider></md-divider>
+        <div layout="row" start="start" layout-wrap flex>
+            <div flex="100" flex-md="100" flex-sm="100" flex-xs="100">
+                <h3><strong>{{(pageNumber * 10)}} von {{lagerProductsCount || lagerProductsSearchCount}} Produkte</strong></h3>
+                <span>Seite: <strong>{{pageNumber}}</strong></span>
+            </div>
+        </div>
+        <div id="p_down">
+            <div layout="row" class="text-center" layout-wrap flex id="pager_down">
+                <div flex="20" flex-md="20" flex-sm="20" flex-xs="50" ng-repeat="pageN in pages">
+                    <h3 ng-click="showLagerPage(pageN.pageN);">{{pageN.pageN}}</h3>
+                </div>
+            </div>
+        </div>
+
+    </md-content>
+</md-tab>
+<md-tab label="Portfolio">
+<md-content class="m-t" ng-init="initPortfolioProducts();">
+<div layout="row" layout-wrap layout-align="start" flex>
+    <div flex="20" flex-md="20" flex-sm="20" flex-xs="100">
+        <h2><strong>{{categoryName}}</strong></h2>
+        <h3><strong>{{(pageNumber * 10)}} von {{portfolioProductsCount || portfolioProductsSearchCount}} Produkte</strong></h3>
+        <span>Seite: <strong>{{pageNumber}}</strong></span>
+    </div>
+    <div flex="30" flex-md="30" flex-sm="30" flex-xs="100">
+        <md-select ng-id="categoryChose" ng-model="categoryChose">
+            <md-option ng-value="first" selected>Kategorie wählen</md-option>
+            <md-option ng-click="loadCategory(537,'Baby & Kleinkind');" ng-value="537">Baby & Kleinkind</md-option>
+            <md-option ng-click="loadCategory(166,'Bekleidung & Accessoires');" ng-value="166">Bekleidung & Accessoires</md-option>
+            <md-option ng-click="loadCategory(922,'Bürobedarf');" ng-value="922">Bürobedarf</md-option>
+            <md-option ng-click="loadCategory(222,'Elektronik');" ng-value="222">Elektronik</md-option>
+            <md-option ng-click="loadCategory(888,'Fahrzeuge & Teile');" ng-value="888">Fahrzeuge & Teile</md-option>
+            <md-option ng-click="loadCategory(772,'Für Erwachsene');" ng-value="772">Für Erwachsene</md-option>
+            <md-option ng-click="loadCategory(469,'Gesundheit & Schönheit');" ng-value="469">Gesundheit & Schönheit</md-option>
+            <md-option ng-click="loadCategory(536,'Heim & Garten');" ng-value="536">Heim & Garten</md-option>
+            <md-option ng-click="loadCategory(632,'Heimwerkerbedarf');" ng-value="632">Heimwerkerbedarf</md-option>
+            <md-option ng-click="loadCategory(141,'Kameras & Optik');" ng-value="141">Kameras & Optik</md-option>
+            <md-option ng-click="loadCategory(8,'Kunst & Unterhaltung');" ng-value="8">Kunst & Unterhaltung</md-option>
+            <md-option ng-click="loadCategory(783,'Medien');" ng-value="783">Medien</md-option>
+            <md-option ng-click="loadCategory(436,'Möbel');" ng-value="436">Möbel</md-option>
+            <md-option ng-click="loadCategory(412,'Nahrungsmittel, Getränke & Tabak');" ng-value="412">Nahrungsmittel, Getränke & Tabak</md-option>
+            <md-option ng-click="loadCategory(5605,'Religion & Feierlichkeiten');" ng-value="5605">Religion & Feierlichkeiten</md-option>
+            <md-option ng-click="loadCategory(2092,'Software');" ng-value="2092">Software</md-option>
+            <md-option ng-click="loadCategory(1239,'Spielzeuge & Spiele');" ng-value="1239">Spielzeuge & Spiele</md-option>
+            <md-option ng-click="loadCategory(988,'Sportartikel');" ng-value="988">Sportartikel</md-option>
+            <md-option ng-click="loadCategory(5181,'Taschen & Gepäck');" ng-value="5181">Taschen & Gepäck</md-option>
+            <md-option ng-click="loadCategory(1,'Tiere & Tierbedarf');" ng-value="1">Tiere & Tierbedarf</md-option>
+            <md-option ng-click="loadCategory(111,'Wirtschaft & Industrie');" ng-value="111">Wirtschaft & Industrie</md-option>
+        </md-select>
+    </div>
+    <div flex="50" flex-md="50" flex-sm="50" flex-xs="100">
+        <form name="portfolioSearcher" novalidate ng-submit="submitPortfolioSearch($event,portfolioSearch,25);">
+            <md-input-container>
+                <label>Suche</label>
+                <input type="text" name="portfolioSearch" ng-model="portfolioSearch" required>
+                <div class="errors" ng-messages="portfolioSearcher.portfolioSearch.$error">
+                    <div ng-message="required">Benötigt</div>
+                </div>
+            </md-input-container>
+            <md-input-container>
+                <md-button type="submit" ng-disabled="portfolioSearcher.$invalid" class="md-button md-raised md-warn">
+                    Suchen
+                </md-button>
+            </md-input-container>
+            <md-button ng-click="resetPortfolioSearch();" class="md-button md-raised md-primary">
+                Neu
+            </md-button>
+        </form>
+    </div>
+</div>
+<div layout="row" layout-align="start" flex>
+    <div class="spinner noShow" id="portfolioloader">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+    </div>
+</div>
+<div id="po_up">
+    <div layout="row" class="text-center" layout-wrap flex id="pager_oup">
+        <div flex="20" flex-md="20" flex-sm="20" flex-xs="50" ng-repeat="pageN in pages">
+            <h3 ng-click="showPortfolioPage(pageN.pageN);">{{pageN.pageN}}</h3>
+        </div>
+    </div>
+</div>
+<md-divider></md-divider>
+<div layout="row" layout-wrap layout-align="start" flex>
+<div id="portfolio" flex="100" flex-md="100" flex-sm="100" flex-xs="100">
+    <div layout="row" layout-wrap flex>
+        <div class="text-center" flex-xs="50" flex="15" flex-sm="25" flex-md="25"><strong>Produktbild</strong></div>
+        <div class="text-center" flex-xs="50" flex="15" flex-sm="25" flex-md="25"><strong>Name</strong></div>
+        <div class="text-center" flex-xs="50" flex="15" flex-sm="25" flex-md="25"><strong>Preis</strong></div>
+        <div class="text-center" flex-xs="50" flex="15" flex-sm="25" flex-md="25"><strong>Kategorie</strong></div>
+        <div class="text-center" flex-xs="50" flex="15" flex-sm="25" flex-md="25"><strong>Verfügbarkeit</strong></div>
+        <div class="text-center" flex-xs="50" flex="15" flex-sm="25" flex-md="25"><strong>Aktion</strong></div>
+    </div>
+    <md-divider></md-divider>
+    <span id="portfolioMessage" ng-if="portfolioMessage">{{portfolioMessage}}</span>
+    <div id="proso_0">
+        <div layout="row" class="p-t-lg" layout-wrap ng-repeat="product in portfolioProducts track by $index" flex>
+            <div class="text-center" flex-xs="100" flex="15" flex-sm="25" flex-md="25"><img src="{{product.main_image}}" width="120"></div>
+            <div class="text-center" flex-xs="100" flex="15" flex-sm="25" flex-md="25">{{product.title}}</div>
+            <div class="text-center" flex-xs="100" flex="15" flex-sm="25" flex-md="25"><strong ng-class="available[$index] ? 'text-success' : 'text-danger'" id="pprice_{{$index}}" ng-if="product.s_price">{{product.s_price}}</strong><br>
+            <span class="text-small">{{pprice}}</span></div>
+            <div class="text-center" flex-xs="100" flex="15" flex-sm="25" flex-md="25">
+                <div flex="100" flex-xs="100" flex-sm="25" flex-md="25" id="categories_po_{{$index}}">
+                    <span id="categoryLayers_po_{{$index}}">{{product.ccc}}</span>
+                </div>
+            </div>
+            <div class="text-center" flex-xs="100" flex="15" flex-sm="25" flex-md="25"><span ng-class="available[$index] ? 'text-success' : 'text-danger'">{{availableText[$index]}}</div>
+            <div class="text-center" flex-xs="100" flex="15" flex-sm="25" flex-md="25">
+                <md-button ng-show="available[$index]" ng-click="addToLager(product.productId,product.shopId);" class="md-button md-raised md-warn">
+                    ins Lager übernehmen
+                </md-button>
+                <md-icon title="Aktualisieren" ng-click="refreshProduct(product.productId,product.shopId,$index);" md-svg-src="actual24" class="material-icons"></md-icon>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<md-divider></md-divider>
+<div layout="row" start="start" layout-wrap flex>
+    <div flex="100" flex-md="100" flex-sm="100" flex-xs="100">
+        <h3><strong>{{(pageNumber * 10)}} von {{portfolioProductsCount || portfolioProductsSearchCount}} Produkte</strong></h3>
+        <span>Seite: <strong>{{pageNumber}}</strong></span>
+    </div>
+</div>
+<div id="po_down">
+    <div layout="row" class="text-center" layout-wrap flex id="pager_odown">
+        <div flex="20" flex-md="20" flex-sm="20" flex-xs="50" ng-repeat="pageN in pages">
+            <h3 ng-click="showPortfolioPage(pageN.pageN);">{{pageN.pageN}}</h3>
+        </div>
+    </div>
+</div>
+
+</md-content>
+
+</md-tab>
+<md-tab label="Verkäufe">
+    <md-content class="m-t">
+
+    </md-content>
+</md-tab>
+<md-tab label="Käufe">
+    <md-content class="m-t" ng-init="initPurchases();">
+        <div layout="row" layout-wrap layout-align="start" flex>
+            <div id="purchases" flex="100" flex-md="100" flex-sm="100" flex-xs="100">
+                <div layout="row" layout-wrap flex>
+                    <div class="text-center" flex-xs="100" flex="15" flex-sm="33" flex-md="33"><strong>Bestellung</strong></div>
+                    <div class="text-center" flex-xs="100" flex="15" flex-sm="33" flex-md="33"><strong>Menge</strong></div>
+                    <div class="text-center" flex-xs="100" flex="15" flex-sm="33" flex-md="33"><strong>Bild</strong></div>
+                    <div class="text-center" flex-xs="100" flex="15" flex-sm="33" flex-md="33"><strong>Name</strong></div>
+                    <div class="text-center" flex-xs="100" flex="15" flex-sm="33" flex-md="33"><strong>Produktpreis</strong></div>
+                    <div class="text-center" flex-xs="100" flex="15" flex-sm="33" flex-md="33"><strong>Gesamtpreis</strong></div>
+                </div>
+                <md-divider style="text-decoration: bolder"></md-divider>
+            </div>
+        </div>
+        <div layout="row" layout-wrap layout-align="start" flex>
+            <div ng-repeat="purchase in purchases" flex-xs="100" flex="100" flex-sm="100" flex-md="100" layout="row" layout-wrap flex>
+                <div flex-xs="100" flex="100" flex-sm="100" flex-md="100" layout="row" ng-repeat="p in purchase">
+                    <div class="text-center" flex-xs="100" flex="15" flex-sm="33" flex-md="33" layout-wrap flex>
+                        <div class="text-center" ng-if="$index === 0" id="o_id">
+                            {{purchase['pio'].id}}
+                        </div>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="15" flex-sm="33" flex-md="33">
+                        {{p.quantiti}}
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="15" flex-sm="33" flex-md="33">
+                        <img src="{{p[0].main_image}}" width="120">
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="15" flex-sm="33" flex-md="33">
+                        {{p[0].title}}
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="15" flex-sm="33" flex-md="33">
+                        <strong>{{p.productPrice}}</strong>
+                    </div>
+                    <div class="text-center" flex-xs="100" flex="15" flex-sm="33" flex-md="33"><strong ng-if="$index === 0">{{purchase['pio'].sumAll}}</strong><br>
+                        <span ng-if="$index === 0">inkl. Versand {{purchase['pio'].sumShipping}}</span>
+                    </div>
+                </div>
+                <md-divider></md-divider>
+            </div>
+        </div>
+        <div layout="row" layout-align="start" flex>
+            <span ng-click="exportCSV();"><strong>Als CSV exportieren</strong></span>
+        </div>
+    </md-content>
+</md-tab>
+</md-tabs>
+</md-content>
+</div>

@@ -1,0 +1,30 @@
+<div ng-controller="MainCtrl">
+    <div ng-init="checkLogin();"></div>
+
+    <div ng-include="'views/document/customerheader.html'"></div>
+
+    <div ng-include="'views/sidenavs/customermenu.html'"></div>
+
+    <div ng-include="'views/sidenavs/dreambeem.html'"></div>
+
+    <div ng-include="'views/sidenavs/furnybeem.html'"></div>
+
+    <div class="spinner" ng-show="loading">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+    </div>
+</div>
+
+
+<div class="spinner" ng-show="loading">
+    <div class="double-bounce1"></div>
+    <div class="double-bounce2"></div>
+</div>
+<md-content class="md-padding">
+    <h2>
+        <strong>
+            Dream - Products verkaufen
+        </strong>
+    </h2>
+    <h3><strong>In Work</strong></h3>
+</md-content>

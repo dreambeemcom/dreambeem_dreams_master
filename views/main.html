@@ -1,0 +1,65 @@
+<div ng-controller="MainCtrl">
+    <div ng-init="checkLogin();"></div>
+    <div ng-init="initCheckout();"></div>
+    <div ng-init="checkAddresses();"></div>
+
+    <div style="height: 160px; top: 0%; z-index: 9999; bottom: 0%; padding-left: 0px !important; padding-right: 0px !important" ng-include="'views/document/customerheader.html'"></div>
+
+    <div ng-include="'views/sidenavs/customermenu.html'"></div>
+
+    <div ng-include="'views/sidenavs/dreambeem.html'"></div>
+
+    <div ng-include="'views/sidenavs/furnybeem.html'"></div>
+
+    <div class="spinner" style="z-index: 999999999;" ng-show="loading">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+    </div>
+</div>
+
+<div ng-controller="BeemlineCtrl" ng-init="initBeemlineConfig();" class="beemline" ng-cloak>
+    <md-content class="md-padding" id="beemlineConfig" layout="column">
+
+        <div flex="100" flex-sm="100" flex-md="100" flex-xs="100" class="">
+                <h2 class="md-title">Chips für Deine Beemline</h2>
+
+            <div layout="row" layout-align="start" class="m-t" flex>
+                    <div flex="80" flex-sm="80" flex-md="80" flex-xs="100">
+                        <md-chips ng-model="keywordName" id="keywordNames" md-enable-chip-edit="true"
+                                  name="keywordNames" readonly="readonly" placeholder="Chips für Beemline...">
+                            <md-chip-template>
+                                <strong>{{$chip}}</strong>
+                            </md-chip-template>
+                        </md-chips>
+                    </div>
+                    <div flex="20" flex-sm="20" flex-md="20" flex-xs="100">
+                        <div class="spinner1" style="z-index: 999999999 !important;" ng-show="loading1">
+                            <div class="double-bounce1"></div>
+                            <div class="double-bounce2"></div>
+                        </div>
+                            <md-button ng-click="submitBeemlineConfig($event,keywordName,ebay,dreams);" class="m-l-lg md-button md-raised md-warn">
+                                Beem it!
+                            </md-button>
+                    </div>
+            </div>
+            <div layout="row" layout-wrap layout-align="start" class="m-t" flex>
+                <div flex="20" flex-sm="20" flex-md="25" flex-xs="100">
+                    <md-checkbox ng-model="dreams" aria-label="Dreams">
+                        Dreams
+                    </md-checkbox>
+                </div>
+                <div flex="20" flex-sm="20" flex-md="25" flex-xs="100">
+                    <md-checkbox ng-model="ebay" aria-label="Ebay">
+                        Ebay
+                    </md-checkbox>
+                </div>
+            </div>
+
+                <div id="beemline" class="beemline-area beemline-show" ng-init="getBeems();">
+                    {{dreambeems}}
+                </div>
+        </div>
+    </md-content>
+</div>
+
+

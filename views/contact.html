@@ -1,0 +1,57 @@
+<div ng-controller="MainCtrl">
+    <div ng-init="checkLogin();"></div>
+
+    <div ng-include="'views/document/customerheader.html'"></div>
+
+    <div ng-include="'views/sidenavs/customermenu.html'"></div>
+
+    <div ng-include="'views/sidenavs/dreambeem.html'"></div>
+
+    <div ng-include="'views/sidenavs/furnybeem.html'"></div>
+
+    <div class="spinner" ng-show="loading">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+    </div>
+</div>
+
+<md-content class="md-padding">
+<h2><strong>Kontakt</strong></h2>
+        <p>Hier kannst Du mit uns Kontakt aufnehmen. Schreibe uns und Du erhälst innerhalb von 24 Stunden eine Antwort.</p>
+<form name="contactForm" ng-submit="sendMessage($event,name,email,nmessage)" novalidate>
+    <div layout="row" class="m-t-lg" layout-align="start" flex>
+        <md-input-container flex="100" flex-md="100" flex-sm="100" flex-xs="100">
+            <label>Name</label>
+            <input type="text" id="name" name="name" ng-model="name" required>
+            <div ng-messages="contactForm.name.$error">
+                <div ng-message="required">Benötigt</div>
+            </div>
+        </md-input-container>
+    </div>
+    <div layout="row" class="m-t-lg" layout-align="start" flex>
+        <md-input-container flex="100" flex-md="100" flex-sm="100" flex-xs="100">
+            <label>Email</label>
+            <input type="text" id="email" name="email" ng-model="email" required>
+            <div ng-messages="contactForm.email.$error">
+                <div ng-message="required">Benötigt</div>
+                <div ng-message="email">Falsche Emailadresse</div>
+            </div>
+        </md-input-container>
+    </div>
+    <div layout="row" class="m-t-lg" layout-align="start" flex>
+        <md-input-container flex="100" flex-md="100" flex-sm="100" flex-xs="100">
+            <label>Nachricht</label>
+            <input type="text" id="nmessage" name="nmessage" ng-model="nmessage" required>
+            <div ng-messages="contactForm.nmessage.$error">
+                <div ng-message="required">Benötigt</div>
+            </div>
+        </md-input-container>
+    </div>
+
+    <div layout="row" layout-align="end" flex>
+        <md-button type="submit" ng-disabled="contactForm.$invalid" class="md-button md-raised md-warn">
+            Senden
+        </md-button>
+    </div>
+</form>
+</md-content>

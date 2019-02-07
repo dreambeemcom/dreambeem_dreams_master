@@ -1,0 +1,116 @@
+<div ng-controller="MainCtrl">
+    <div ng-init="checkLogin();"></div>
+    <div ng-init="initCheckout();"></div>
+    <div ng-init="checkAddresses();"></div>
+
+    <div style="height: 160px; top: 0%; z-index: 9999; bottom: 0%; padding-left: 0px !important; padding-right: 0px !important" ng-include="'views/document/customerheader.html'"></div>
+
+    <div ng-include="'views/sidenavs/customermenu.html'"></div>
+
+    <div ng-include="'views/sidenavs/dreambeem.html'"></div>
+
+    <div ng-include="'views/sidenavs/furnybeem.html'"></div>
+
+    <div class="spinner" ng-show="loading">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+    </div>
+</div>
+
+<div ng-controller="BookingsCtrl" ng-init="getBookings();" class="beemline" ng-cloak>
+    <md-content class="md-padding" layout-padding id="beemlineConfig" layout="column">
+        <h1><strong>Buchungen</strong></h1>
+        <p>Hier kannst Du Deine offenen und getätigten Buchungen einsehen.</p>
+
+        <h2><strong>Offene Buchungen</strong></h2>
+        <div layout="row" layout-wrap layout-align="start" flex>
+            <div id="openBookings" flex="100" flex-md="100" flex-sm="100" flex-xs="100">
+                <div layout="row" layout-wrap flex>
+                    <div class="text-warning text-center" style="font-size: 16px;" flex-xs="100" flex="15" flex-sm="33" flex-md="33"><strong>Buchung</strong></div>
+                    <div class="text-warning text-center" style="font-size: 16px;" flex-xs="100" flex="15" flex-sm="33" flex-md="33"><strong>Personen</strong></div>
+                    <div class="text-warning text-center" style="font-size: 16px;" flex-xs="100" flex="15" flex-sm="33" flex-md="33"><strong>Ort</strong></div>
+                    <div class="text-warning text-center" style="font-size: 16px;" flex-xs="100" flex="15" flex-sm="33" flex-md="33"><strong>Buchungsdetails</strong></div>
+                    <div class="text-warning text-center" style="font-size: 16px;" flex-xs="100" flex="15" flex-sm="33" flex-md="33"><strong>Status</strong></div>
+                    <div class="text-warning text-center" style="font-size: 16px;" flex-xs="100" flex="15" flex-sm="33" flex-md="33"><strong>Aktion</strong></div>
+                </div>
+                <md-divider style="text-decoration: bolder"></md-divider>
+            </div>
+        </div>
+        <div layout="row" layout-wrap layout-align="start" flex>
+            <span class="text-danger" ng-if="openBookingMessage"><strong>{{openBookingMessage}}</strong></span>
+            <div ng-repeat="openBooking in openBookings" flex-xs="100" flex="100" flex-sm="100" flex-md="100" layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="15" flex-sm="33" flex-md="33">
+                    {{openBooking.bookingId}}
+                </div>
+                <div class="text-center" flex-xs="100" flex="15" flex-sm="33" flex-md="33">
+                    <strong>{{openBooking.bookerPerson}}</strong> bucht <strong>{{openBooking.bookedPerson}}</strong>
+                </div>
+                <div class="text-center" flex-xs="100" flex="15" flex-sm="33" flex-md="33">
+                    <strong>Start:</strong><strong class="text-danger"> {{openBooking.start}}</strong><br>
+                    <strong>Ziel:</strong><strong class="text-danger"> {{openBooking.destination}}</strong>
+                </div>
+                <div class="text-center" flex-xs="100" flex="15" flex-sm="33" flex-md="33">
+                    {{openBooking.ecb}}<br>
+                    {{openBooking.eb}}<br>
+                    {{openBooking.dateBooking}}<br>
+                    {{openBooking.time}} Uhr<br>
+                    <strong class="text-success">{{openBooking.bookingPrice}}</strong>
+                </div>
+                <div class="text-center" flex-xs="100" flex="15" flex-sm="33" flex-md="33">
+                    <strong class="text-danger">{{openBooking.status}}</strong>
+                </div>
+                <div class="text-center" flex-xs="100" flex="15" flex-sm="33" flex-md="33">
+                    <a href="https://www.dreambeem.com/acceptBooking?bid={{openBookingBookingId[$index]}}">
+                        <md-button class="m-l-lg md-button md-raised md-warn">
+                            Annehmen
+                        </md-button>
+                    </a>
+                    <a href="https://www.dreambeem.com/disacceptBooking?bid={{openBookingBookingId[$index]}}">
+                        <md-button class="m-l-lg md-button md-primary md-warn">
+                            Ablehnen
+                        </md-button>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <h2><strong>Getätigte Buchungen</strong></h2>
+        <div layout="row" layout-wrap layout-align="start" flex>
+            <div id="doneBooking" flex="100" flex-md="100" flex-sm="100" flex-xs="100">
+                <div layout="row" layout-wrap flex>
+                    <div class="text-warning text-center" style="font-size: 16px;" flex-xs="100" flex="20" flex-sm="33" flex-md="33"><strong>Buchung</strong></div>
+                    <div class="text-warning text-center" style="font-size: 16px;" flex-xs="100" flex="20" flex-sm="33" flex-md="33"><strong>Personen</strong></div>
+                    <div class="text-warning text-center" style="font-size: 16px;" flex-xs="100" flex="20" flex-sm="33" flex-md="33"><strong>Ort</strong></div>
+                    <div class="text-warning text-center" style="font-size: 16px;" flex-xs="100" flex="20" flex-sm="33" flex-md="33"><strong>Buchungsdetails</strong></div>
+                    <div class="text-warning text-center" style="font-size: 16px;" flex-xs="100" flex="20" flex-sm="33" flex-md="33"><strong>Status</strong></div>
+                </div>
+                <md-divider style="text-decoration: bolder"></md-divider>
+            </div>
+        </div>
+        <div layout="row" layout-wrap layout-align="start" flex>
+            <span class="text-danger" ng-if="doneBookingMessage"><strong>{{doneBookingMessage}}</strong></span>
+            <div ng-repeat="doneBooking in doneBookings" flex-xs="100" flex="100" flex-sm="100" flex-md="100" layout="row" layout-wrap flex>
+                <div class="text-center" flex-xs="100" flex="20" flex-sm="33" flex-md="33">
+                    {{doneBooking.bookingId}}
+                </div>
+                <div class="text-center" flex-xs="100" flex="20" flex-sm="33" flex-md="33">
+                    <strong>{{doneBooking.bookerPerson}}</strong> bucht <strong>{{doneBooking.bookedPerson}}</strong>
+                </div>
+                <div class="text-center" flex-xs="100" flex="20" flex-sm="33" flex-md="33">
+                    <strong>Start:</strong><strong class="text-danger"> {{doneBooking.start}}</strong><br>
+                    <strong>Ziel:</strong><strong class="text-danger"> {{doneBooking.destination}}</strong>
+                </div>
+                <div class="text-center" flex-xs="100" flex="20" flex-sm="33" flex-md="33">
+                    {{doneBooking.ecb}}<br>
+                    {{doneBooking.eb}}<br>
+                    {{doneBooking.dateBooking}}<br>
+                    {{doneBooking.time}} Uhr<br>
+                    <strong class="text-success">{{doneBooking.bookingPrice}}</strong>
+                </div>
+                <div class="text-center" flex-xs="100" flex="20" flex-sm="33" flex-md="33">
+                    <strong class="text-danger">{{doneBooking.status}}</strong>
+                </div>
+            </div>
+        </div>
+    </md-content>
+</div>

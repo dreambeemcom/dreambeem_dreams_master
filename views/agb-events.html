@@ -1,0 +1,628 @@
+<div ng-controller="MainCtrl">
+    <div ng-init="checkLogin();"></div>
+
+    <div ng-include="'views/document/customerheader.html'"></div>
+
+    <div ng-include="'views/sidenavs/customermenu.html'"></div>
+
+    <div ng-include="'views/sidenavs/dreambeem.html'"></div>
+
+    <div ng-include="'views/sidenavs/furnybeem.html'"></div>
+
+    <div class="spinner" ng-show="loading">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+    </div>
+</div>
+
+<md-content class="md-padding" ng-controller="AgbEventsCtrl" ng-init="setMeta();">
+<h2><strong>Allgemeine Geschäftsbedingungen Dienstleistungen</strong></h2>
+
+<p>
+    Die Dreambeem.com ist eine Möglichkeit für Erwachsene,<br>
+    sich online entgeltlich vermitteln zu lassen. Der Dienst wird von Dreambeem.com angeboten. Die Nutzung sämtlicher Onlineangebote des Services steht unter der Bedingung,<br>
+    dass Sie den folgenden Bestimmungen zustimmen.<br><br>
+
+
+    <strong>1.Geltung</strong><br>
+    Die nachstehenden Geschäftsbedingungen gelten für alle Vertragsbeziehungen und vorvertraglichen Verhandlungen mit den Kunden der Dreambeem.com GmbH.<br><br>
+
+    <strong>2. Ausschließlichkeit</strong><br>
+    Diese Geschäftsbedingungen gelten ausschließlich: Entgegenstehende Geschäftsbedingungen der Kunden und/oder Handelspartner („Dreambeem“) der Dreambeem.com oder Dritter sind nur gültig,<br>
+    wenn die Dreambeem.com ausdrücklich und schriftlich ihrer Geltung zustimmt. Wenn der Nutzer hiermit nicht einverstanden sein sollte, weist er die Dreambeem.com sofort schriftlich darauf hin.<br>
+    Für diesen Fall behält die Dreambeem.com sich vor, seine Angebote zurückzuziehen, ohne dass ihm gegenüber Ansprüche irgendwelcher Art erhoben werden können.<br><br>
+
+    <strong>3.Vertragsschluss & Vertragsform</strong><br>
+    Zunächst gilt, dass Mitglieder der Dreambeem.com mindestens 16 Jahre alt sein müssen.<br>
+    Durch die Eintragung erklärt und versichert das Mitglied, dass er oder sie mindestens 16 Jahre alt ist. Durch die Eintragung bei der Dreambeem.com wird der Interessent sodann Mitglied<br>
+    der Dreambeem.com und erklärt sein Einverständnis mit der Bindung an die Geschäftsbedingungen dieser Vereinbarung (die "Geschäftsbedingungen"). <br>
+    Zwei Wochen besteht die Gültigkeitsfrist und verlängert sich bei Zuwiderhandlung um drei Monate. Ein Vertragsschluss setzt voraus, dass der Kunde diesen Vertragsbedingungen nach Durchlesen<br>
+    mit einem Klick zustimmt.<br><br>
+
+    <strong>4.Dienstleistungsangebot</strong><br>
+
+
+    <strong>Shopping öffentlich</strong><br>
+    60 Min<br><br>
+    <strong>Spaziergang öffentlich</strong><br>
+    60 Min<br><br>
+    <strong>Diskothek öffentlich</strong><br>
+    60 Min<br><br>
+    <strong>Dinner öffentlich</strong><br>
+    60 Min<br><br>
+    <strong>Dinner privat</strong><br>
+    90 Min<br><br>
+    <strong>Kochen privat</strong><br>
+    120 Min<br><br>
+    <strong>Gesellschaftsspiele privat</strong><br>
+    120 Min<br><br>
+    <strong>Kaffee trinken öffentlich</strong><br>
+    60 Min<br><br>
+    <strong>Party / Feier privat</strong><br>
+    60 Min<br><br>
+    <strong>Party / Feier öffentlich</strong><br>
+    60 Min<br><br>
+
+    <strong>Fahrrad fahren</strong><br>
+    60 Min<br><br>
+    <strong>Jogging</strong><br>
+    60 Min<br><br>
+    <strong>Bodybuilding</strong><br>
+    60 Min<br><br>
+    <strong>Blading</strong><br>
+    60 Min<br><br>
+    <strong>Wandern</strong><br>
+    120 Min<br><br>
+    <strong>Schwimmen</strong><br>
+    60 Min<br><br>
+
+    <strong>Politik</strong><br>
+    60 Min<br><br>
+    <strong>Geschichte</strong><br>
+    60 Min<br><br>
+    <strong>Kunst</strong><br>
+    60 Min<br><br>
+    <strong>Biologie</strong><br>
+    60 Min<br><br>
+    <strong>Musik Theorie</strong><br>
+    60 Min<br><br>
+    <strong>Musik Praxis</strong><br>
+    60 Min<br><br>
+    <strong>Geografie</strong><br>
+    60 Min<br><br>
+    <strong>Alltag</strong><br>
+    60 Min<br><br>
+    <strong>Wirtschaft Theorie</strong><br>
+    60 Min<br><br>
+    <strong>Wirtschaft Möglichkeiten</strong><br>
+    60 Min<br><br>
+    <strong>Wirtschaft Ideen</strong><br>
+    60 Min<br><br>
+    <strong>Wirtschaft Börse</strong><br>
+    60 Min<br><br>
+    <strong>Sport Sportart</strong><br>
+    60 Min<br><br>
+    <strong>Psychologie Männer</strong><br>
+    60 Min<br><br>
+    <strong>Psychologie Frauen</strong><br>
+    60 Min<br><br>
+    <strong>Literatur Autoren</strong><br>
+    60 Min<br><br>
+    <strong>Literatur Bücher</strong><br>
+    60 Min<br><br>
+    <strong>Technik Theorie</strong><br>
+    60 Min<br><br>
+    <strong>Technik Ethik</strong><br>
+    60 Min<br><br>
+    <strong>Technik alte Medien</strong><br>
+    60 Min<br><br>
+    <strong>Technik neue Medien</strong><br>
+    60 Min<br><br>
+    <strong>Technik praktisch alte Medien</strong><br>
+    60 Min<br><br>
+    <strong>Technik praktisch neue Medien</strong><br>
+    60 Min<br><br>
+    <strong>Sprachen Sprachwahl Theorie</strong><br>
+    60 Min<br><br>
+    <strong>Sprachen Sprachwahl Praxis</strong><br>
+    60 Min<br><br>
+    <strong>Handwerk Baugewerbe</strong><br>
+    60 Min<br><br>
+    <strong>Handwerk Feinarbeit</strong><br>
+    60 Min<br><br>
+
+    <strong>Landschaftsfotos</strong><br>
+    60 Min<br><br>
+    <strong>Industriefotos</strong><br>
+    60 Min<br><br>
+    <strong>Personenfotos</strong><br>
+    60 Min<br><br>
+    <strong>Gruppenfotos</strong><br>
+    60 Min<br><br>
+
+    <strong>klassischer Tanz öffentlich</strong><br>
+    60 Min<br><br>
+    <strong>Bauchtanz öffentlich</strong><br>
+    2 x 15 Min<br><br>
+    <strong>Bauchtanz privat</strong><br>
+    2 x 15 Min<br><br>
+    <strong>Animationstanz privat</strong><br>
+    3 x 10 Min<br><br>
+    <strong>Animationstanz öffentlich</strong><br>
+    3 x 10 Min<br><br>
+    <strong>Massage privat</strong><br>
+    30 Min<br><br>
+    <strong>Erotischer Tanz (Strip) privat</strong><br>
+    20 Min<br><br>
+    <strong>Erotischer Tanz (Strip) öffentlich</strong><br>
+    20 Min <br><br>
+
+
+
+
+
+
+<h3><strong>Allgemeine Treffen</strong></h3><br>
+
+
+<strong>Shopping öffentlich</strong><br>
+Eine abzurechnende Einheit beträgt 1 Stunde.<br>
+Die Leistung "Shopping öffentlich" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. <br>
+Die gebuchte Person hat die Verpflichtung den Kunden zu begleiten, Gespräche über Artikel zu führen und Meinungen über Produkte wahrheitsgetreu wiederzugeben. <br>
+Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Spaziergang öffentlich</strong><br>
+Eine abzurechnende Einheit beträgt 1 Stunde.<br>
+Die Leistung "Spaziergang öffentlich" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. <br>
+Die gebuchte Person hat die Verpflichtung den Kunden zu begleiten, Gespräche über allgemeine Themen zu führen und Meinungen wahrheitsgetreu wiederzugeben.<br>
+Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Diskothek öffentlich</strong><br>
+Eine abzurechnende Einheit beträgt 1 Stunde.<br>
+Die Leistung "Diskothek öffentlich" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird.<br>
+Die gebuchte Person hat die Verpflichtung den Kunden zu begleiten, gute Laune zu verbreiten, Gespräche zu führen und Meinungen wahrheitsgetreu wiederzugeben.<br>
+Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Dinner öffentlich</strong><br>
+Eine abzurechnende Einheit beträgt 1 Stunde.<br>
+Die Leistung "Dinner öffentlich" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. <br>
+Die gebuchte Person hat die Verpflichtung den Kunden in ein Lokal zu begleiten, Gespräche zu führen und Meinungen wahrheitsgetreu wiederzugeben. <br>
+Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Dinner privat</strong><br>
+Eine abzurechnende Einheit beträgt 1,5 Stunde.<br>
+Die Leistung "Dinner privat" beinhaltet ein Treffen zweier Personen an einem privaten Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. <br>
+Die gebuchte Person hat die Verpflichtung den Kunden privat aufzusuchen, Gespräche zu führen und Meinungen wahrheitsgetreu wiederzugeben. Der Kunde trägt sämtliche Anreise-, <br>
+Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Kochen privat</strong><br>
+Eine abzurechnende Einheit beträgt 2 Stunden.<br>
+Die Leistung "Kochen privat" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird.<br>
+Die gebuchte Person hat die Verpflichtung den Kunden privat aufzusuchen, gemeinsam zu kochen, Gespräche zu führen und Meinungen wahrheitsgetreu wiederzugeben. <br>
+Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Kaffee trinken öffentlich</strong><br>
+Eine abzurechnende Einheit beträgt 1 Stunde.<br>
+Die Leistung "Kaffee trinken öffentlich" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird.<br>
+Die gebuchte Person hat die Verpflichtung den Kunden in ein Lokal zu begleiten, Gespräche über eventspezifische Themen zu führen und Meinungen wahrheitsgetreu wiederzugeben.<br>
+Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Party / Feier privat</strong><br>
+Eine abzurechnende Einheit beträgt 1 Stunde.<br>
+Die Leistung "Party / Feier privat" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. <br>
+Die gebuchte Person hat die Verpflichtung den Kunden auf eine private Feier zu begleiten, gute Laune zu verbreiten, Gespräche über eventspezifische Themen zu führen und Meinungen wahrheitsgetreu <br>
+wiederzugeben. Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Party / Feier öffentlich</strong><br>
+Eine abzurechnende Einheit beträgt 1 Stunde.<br>
+Die Leistung "Party / Feier öffentlich" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. <br>
+Die gebuchte Person hat die Verpflichtung den Kunden auf eine öffentliche Feier zu begleiten, gute Laune zu verbreiten, Gespräche über allgemeine Themen zu führen und Meinungen wahrheitsgetreu <br>
+wiederzugeben. Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Fahrradfahren</strong><br>
+Eine abzurechnende Einheit beträgt 1 Stunde.<br>
+Die Leistung "Fahrradfahren" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. <br>
+Die gebuchte Person hat die Verpflichtung den Kunden auf eine Fahrradfahrt zu begleiten, Gespräche über eventspezifische Themen zu führen und Meinungen wahrheitsgetreu wiederzugeben. <br>
+Die gebuchte Person hat ein Fahrrad mitzubringen. Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Jogging</strong><br>
+Eine abzurechnende Einheit beträgt 1 Stunde.<br>
+Die Leistung "Jogging" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. Die gebuchte Person hat die Verpflichtung den Kunden <br>
+zum Joggen zu begleiten, Gespräche über eventspezifische Themen zu führen und Meinungen wahrheitsgetreu wiederzugeben. Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Bodybuilding</strong><br>
+Eine abzurechnende Einheit beträgt 1 Stunden.<br>
+Die Leistung "Bodybuilding" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. <br>
+Die gebuchte Person hat die Verpflichtung den Kunden zum Bodybuilding zu begleiten, Gewichte stemmen, Gespräche über eventspezifische Themen zu führen und Meinungen wahrheitsgetreu wiederzugeben. <br>
+Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Blading</strong><br>
+Eine abzurechnende Einheit beträgt 1 Stunde.<br>
+Die Leistung "Blading" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird.<br>
+Die gebuchte Person hat die Verpflichtung den Kunden auf eine Bladingfahrt zu begleiten, Gespräche über eventspezifische Themen zu führen und Meinungen wahrheitsgetreu wiederzugeben. <br>
+Die gebuchte Person hat Blader bzw. Rollschuhe mitzubringen. Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Wandern</strong><br>
+Eine abzurechnende Einheit beträgt 2 Stunden.<br>
+Die Leistung "Wandern" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. Die gebuchte Person hat die Verpflichtung den Kunden<br>
+zum Wandern zu begleiten, Gespräche über allgemeine Themen zu führen und Meinungen wahrheitsgetreu wiederzugeben. Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Schwimmen</strong><br>
+Eine abzurechnende Einheit beträgt 1 Stunde.<br>
+Die Leistung "Schwimmen" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. Die gebuchte Person hat die Verpflichtung den Kunden <br>
+zum Schwimmen zu begleiten, Bahnen gemeinsam zu schwimmen, Gespräche über eventspezifische Themen zu führen und Meinungen wahrheitsgetreu wiederzugeben. Die gebuchte Person hat Schwimmsachen mitzubringen.<br>
+Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Politik</strong><br>
+Eine abzurechnende Einheit beträgt 1 Stunde.<br>
+Die Leistung "Politik" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. <br>
+Die gebuchte Person hat die Verpflichtung sich mit dem Kunden über Politik zu unterhalten, Fragen wahrheitsgetreu zu beantworten, <br>
+Gespräche über eventspezifische Themen zu führen und Meinungen wahrheitsgetreu wiederzugeben. Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Geschichte</strong><br>
+Eine abzurechnende Einheit beträgt 1 Stunde.<br>
+Die Leistung "Geschichte" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. Die gebuchte Person hat die Verpflichtung <br>
+sich mit dem Kunden über Geschichte zu unterhalten, Fragen wahrheitsgetreu zu beantworten, Gespräche über eventspezifische Themen zu führen und Meinungen wahrheitsgetreu wiederzugeben. <br>
+Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Kunst</strong><br>
+Eine abzurechnende Einheit beträgt 1 Stunde.<br>
+Die Leistung "Kunst" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. Die gebuchte Person hat die Verpflichtung sich mit <br>
+dem Kunden über Kunst zu unterhalten, Fragen wahrheitsgetreu zu beantworten, Gespräche über eventspezifische Themen zu führen und Meinungen wahrheitsgetreu wiederzugeben. <br>
+Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Biologie</strong><br>
+Eine abzurechnende Einheit beträgt 1 Stunde.<br>
+Die Leistung "Biologie" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. Die gebuchte Person hat die Verpflichtung sich <br>
+mit dem Kunden über Biologie zu unterhalten, Fragen wahrheitsgetreu zu beantworten, Gespräche über eventspezifische Themen zu führen und Meinungen wahrheitsgetreu wiederzugeben.<br>
+Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Musik Theorie</strong><br>
+Eine abzurechnende Einheit beträgt 1 Stunde.<br>
+Die Leistung "Musik Theorie" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. Die gebuchte Person hat die Verpflichtung <br>
+sich mit dem Kunden über Musiktheorie zu unterhalten, Fragen wahrheitsgetreu zu beantworten, Gespräche über eventspezifische Themen zu führen und Meinungen wahrheitsgetreu wiederzugeben. <br>
+Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Musik Praxis</strong><br>
+Eine abzurechnende Einheit beträgt 1 Stunde.<br>
+Die Leistung "Musik Praxis" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. Die gebuchte Person hat die Verpflichtung mit <br>
+dem Kunden zu musizieren, Fragen wahrheitsgetreu zu beantworten, Gespräche über eventspezifische Themen zu führen und Meinungen wahrheitsgetreu wiederzugeben. Der Kunde trägt sämtliche Anreise-, Materialkosten <br>
+etc., die nachweisbar sind.<br><br>
+
+<strong>Geografie</strong><br>
+Eine abzurechnende Einheit beträgt 1 Stunde.<br>
+Die Leistung "Geografie" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. Die gebuchte Person hat die Verpflichtung sich <br>
+mit dem Kunden über Geografie zu unterhalten, Fragen wahrheitsgetreu zu beantworten, Gespräche über eventspezifische Themen zu führen und Meinungen wahrheitsgetreu wiederzugeben. <br>
+Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Alltag</strong><br>
+Eine abzurechnende Einheit beträgt 1 Stunde.<br>
+Die Leistung "Alltag" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. Die gebuchte Person hat die Verpflichtung sich mit <br>
+dem Kunden über den Alltag zu unterhalten, Fragen wahrheitsgetreu zu beantworten, Gespräche über eventspezifische Themen zu führen und Meinungen wahrheitsgetreu wiederzugeben. <br>
+Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Wirtschaft Theorie</strong><br>
+Eine abzurechnende Einheit beträgt 1 Stunde.<br>
+Die Leistung "Wirtschaft Theorie" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. Die gebuchte Person hat die Verpflichtung <br>
+sich mit dem Kunden über Wirtschafttheorie zu unterhalten, Fragen wahrheitsgetreu zu beantworten, Gespräche über eventspezifische Themen zu führen und Meinungen wahrheitsgetreu wiederzugeben.<br>
+Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Wirtschaft Möglichkeiten</strong><br>
+Eine abzurechnende Einheit beträgt 1 Stunde.<br>
+Die Leistung "Wirtschaft Möglichkeiten" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. Die gebuchte Person hat die Verpflichtung <br>
+sich mit dem Kunden über Wirtschaftsmöglichkeiten zu unterhalten, Fragen wahrheitsgetreu zu beantworten, Gespräche über eventspezifische Themen zu führen und Meinungen wahrheitsgetreu wiederzugeben.<br>
+Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Wirtschaft Ideen</strong><br>
+Eine abzurechnende Einheit beträgt 1 Stunde.<br>
+Die Leistung "Wirtschaft Ideen" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. Die gebuchte Person hat die Verpflichtung <br>
+sich mit dem Kunden über Wirtschaftsideen zu unterhalten, Fragen wahrheitsgetreu zu beantworten, Gespräche über eventspezifische Themen zu führen und Meinungen wahrheitsgetreu wiederzugeben. <br>
+Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Wirtschaft Börse</strong><br>
+Eine abzurechnende Einheit beträgt 1 Stunde.<br>
+Die Leistung "Wirtschaft Börse" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. Die gebuchte Person hat die Verpflichtung <br>
+sich mit dem Kunden über die Börse zu unterhalten, Fragen wahrheitsgetreu zu beantworten, Gespräche über eventspezifische Themen zu führen und Meinungen wahrheitsgetreu wiederzugeben. <br>
+Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Sport Sportart</strong><br>
+Eine abzurechnende Einheit beträgt 1 Stunde.<br>
+Die Leistung "Sport Sportart" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. Die gebuchte Person hat die Verpflichtung sich <br>
+mit dem Kunden über eine gewählte Sportart zu unterhalten, Fragen wahrheitsgetreu zu beantworten, Gespräche über eventspezifische Themen zu führen und Meinungen wahrheitsgetreu wiederzugeben. <br>
+Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Männer Psychologie</strong><br>
+Eine abzurechnende Einheit beträgt 1 Stunde.<br>
+Die Leistung "Männer Psychologie" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. Die gebuchte Person hat die Verpflichtung <br>
+sich mit dem Kunden über die Männerpsyche zu unterhalten, Fragen wahrheitsgetreu zu beantworten, Gespräche über eventspezifische Themen zu führen und Meinungen wahrheitsgetreu wiederzugeben.<br>
+Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Frauen Psychologie</strong><br>
+Eine abzurechnende Einheit beträgt 1 Stunde.<br>
+Die Leistung "Frauen Psychologie" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. Die gebuchte Person hat die Verpflichtung<br>
+sich mit dem Kunden über Frauenpsyche zu unterhalten, Fragen wahrheitsgetreu zu beantworten, Gespräche über eventspezifische Themen zu führen und Meinungen wahrheitsgetreu wiederzugeben. <br>
+Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Literatur Autoren</strong><br>
+Eine abzurechnende Einheit beträgt 1 Stunde.<br>
+Die Leistung "Literatur Autoren" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. Die gebuchte Person hat die Verpflichtung<br>
+sich mit dem Kunden über gewählte Autoren der Literatur zu unterhalten, Fragen wahrheitsgetreu zu beantworten, Gespräche über eventspezifische Themen zu führen und Meinungen wahrheitsgetreu<br>
+wiederzugeben. Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Literatur Bücher</strong><br>
+Eine abzurechnende Einheit beträgt 1 Stunde.<br>
+Die Leistung "Literatur Bücher" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. Die gebuchte Person hat die Verpflichtung<br>
+sich mit dem Kunden über ein gewähltes Buch der Literatur zu unterhalten, Fragen wahrheitsgetreu zu beantworten, Gespräche über eventspezifische Themen zu führen und Meinungen wahrheitsgetreu <br>
+wiederzugeben. Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Technik Theorie</strong><br>
+Eine abzurechnende Einheit beträgt 1 Stunde.<br>
+Die Leistung "Technik Theorie" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. Die gebuchte Person hat die Verpflichtung <br>
+sich mit dem Kunden über Techniktheorie zu unterhalten, Fragen wahrheitsgetreu zu beantworten, Gespräche über eventspezifische Themen zu führen und Meinungen wahrheitsgetreu wiederzugeben.<br>
+Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Technik Ethik</strong><br>
+Eine abzurechnende Einheit beträgt 1 Stunde.<br>
+Die Leistung "Technik Ethik" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. Die gebuchte Person hat die Verpflichtung<br>
+sich mit dem Kunden über ethische Technik zu unterhalten, ethische Zusammenhänge zur Realität darzustellen, Fragen wahrheitsgetreu zu beantworten, Gespräche über eventspezifische Themen zu führen<br>
+und Meinungen wahrheitsgetreu wiederzugeben. Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Technik Alte Medien</strong>(<br>
+Eine abzurechnende Einheit beträgt 1 Stunde.<br>
+Die Leistung "Technik alte Medien" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. Die gebuchte Person hat die Verpflichtung<br>
+sich mit dem Kunden über alte Geräte & Medien der Vergangenheit zu unterhalten, Fragen wahrheitsgetreu zu beantworten, Gespräche über eventspezifische Themen zu führen und Meinungen wahrheitsgetreu<br>
+wiederzugeben. Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Technik Neue Medien</strong><br>
+Eine abzurechnende Einheit beträgt 1 Stunde.<br>
+Die Leistung "Technik neue Medien" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. Die gebuchte Person hat die Verpflichtung<br>
+sich mit dem Kunden über neue Geräte & Medien der Neuzeit zu unterhalten, Fragen wahrheitsgetreu zu beantworten, Gespräche über eventspezifische Themen zu führen und Meinungen wahrheitsgetreu <br>
+wiederzugeben. Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Technik praktisch Alte Medien</strong><br>
+Eine abzurechnende Einheit beträgt 1 Stunde.<br>
+Die Leistung "Technik praktisch alte Medien" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. Die gebuchte Person hat die<br>
+Verpflichtung sich mit dem Kunden praxisorientiert mit alten Geräten & Medien der Vergangenheit auseinander zu setzen, Fragen wahrheitsgetreu zu beantworten, Gespräche über eventspezifische Themen<br>
+zu führen und Meinungen wahrheitsgetreu wiederzugeben. Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Technik praktisch Neue Medien</strong><br>
+Eine abzurechnende Einheit beträgt 1 Stunde.<br>
+Die Leistung "Technik praktisch neue Medien" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. <br>
+Die gebuchte Person hat die Verpflichtung sich mit dem Kunden praxisorientiert mit neuen Geräten & Medien der Neuzeit auseinander zu setzen, Fragen wahrheitsgetreu zu beantworten,<br>
+Gespräche über eventspezifische Themen zu führen und Meinungen wahrheitsgetreu wiederzugeben. Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Sprachen Sprachwahl Theorie</strong><br>
+Eine abzurechnende Einheit beträgt 1 Stunde.<br>
+Die Leistung "Sprachen Sprachwahl Theorie" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. Die gebuchte Person hat die Verpflichtung <br>
+sich mit dem Kunden über die Theorie einer gewählten Sprache zu unterhalten, Fragen wahrheitsgetreu zu beantworten, Gespräche über eventspezifische Themen zu führen und Meinungen wahrheitsgetreu wiederzugeben.<br>
+Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Sprachen Sprachwahl Praxis</strong><br>
+Eine abzurechnende Einheit beträgt 1 Stunde.<br>
+Die Leistung "Sprachen Sprachwahl Praxis" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. Die gebuchte Person hat die Verpflichtung <br>
+sich mit dem Kunden über die Theorie einer gewählten Sprache zu unterhalten, Sprachübungen durchzuführen, Fragen wahrheitsgetreu zu beantworten, Gespräche über eventspezifische Themen zu führen und Meinungen <br>
+wahrheitsgetreu wiederzugeben. Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Handwerk Baugewerbe</strong><br>
+Eine abzurechnende Einheit beträgt 1 Stunde.<br>
+Die Leistung "Handwerk Baugewerbe" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. Die gebuchte Person hat die Verpflichtung <br>
+sich mit dem Kunden über das Handwerk, Bereich Baugewerbe zu unterhalten, Fragen wahrheitsgetreu zu beantworten, Gespräche über eventspezifische Themen zu führen und Meinungen wahrheitsgetreu wiederzugeben. <br>
+Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Handwerk Feinarbeit</strong><br>
+Eine abzurechnende Einheit beträgt 1 Stunde.<br>
+Die Leistung "Handwerk Feinarbeit" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. Die gebuchte Person hat die Verpflichtung <br>
+sich mit dem Kunden über das Handwerk, Bereich Feinarbeit zu unterhalten, Fragen wahrheitsgetreu zu beantworten, Gespräche über eventspezifische Themen zu führen und Meinungen wahrheitsgetreu wiederzugeben. <br>
+Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Landschaftsfotos</strong><br>
+Eine abzurechnende Einheit beträgt 1 Stunde.<br>
+Die Leistung "Landschaftsfotos" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. Die gebuchte Person hat die Verpflichtung <br>
+mit dem Kunden Landschaftsbilder zu fotografieren, Fragen wahrheitsgetreu zu beantworten, Gespräche über eventspezifische Themen zu führen und Meinungen wahrheitsgetreu wiederzugeben. <br>
+Die gebuchte Person hat einen Fotoapparat mitzubringen. Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Industriefotos</strong><br>
+Eine abzurechnende Einheit beträgt 1 Stunde.<br>
+Die Leistung "Industriefotos" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. Die gebuchte Person hat die Verpflichtung <br>
+mit dem Kunden Industriebilder zu fotografieren, Fragen wahrheitsgetreu zu beantworten, Gespräche über eventspezifische Themen zu führen und Meinungen wahrheitsgetreu wiederzugeben. <br>
+Die gebuchte Person hat einen Fotoapparat mitzubringen. Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Personenfotos</strong><br>
+Eine abzurechnende Einheit beträgt 1 Stunde.<br>
+Die Leistung "Personenfotos" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. Die gebuchte Person hat die Verpflichtung mit <br>
+dem Kunden Personenfotos zu fotografieren, Fragen wahrheitsgetreu zu beantworten, Gespräche über eventspezifische Themen zu führen und Meinungen wahrheitsgetreu wiederzugeben. Die gebuchte Person<br>
+hat einen Fotoapparat mitzubringen. Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Gruppenfotos</strong><br>
+Eine abzurechnende Einheit beträgt 1 Stunde.<br>
+Die Leistung "Gruppenfotos" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. Die gebuchte Person hat die Verpflichtung <br>
+mit dem Kunden Gruppenbilder zu fotografieren, Fragen wahrheitsgetreu zu beantworten, Gespräche über eventspezifische Themen zu führen und Meinungen wahrheitsgetreu wiederzugeben. <br>
+Die gebuchte Person hat einen Fotoapparat mitzubringen. Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Klassischer Tanz öffentlich</strong><br>
+Eine abzurechnende Einheit beträgt 1 Stunde.<br>
+Die Leistung "Klassischer Tanz öffentlich" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. Die gebuchte Person hat die Verpflichtung <br>
+mit dem Kunden öffentlich klassische Tänze zu tanzen, Fragen wahrheitsgetreu zu beantworten, Gespräche über eventspezifische Themen zu führen und Meinungen wahrheitsgetreu wiederzugeben. <br>
+Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Bauchtanz öffentlich</strong><br>
+Eine abzurechnende Einheit beträgt 1 Vorstellung / 2 x 15min.<br>
+Die Leistung "Bauchtanz öffentlich" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. Die gebuchte Person hat die Verpflichtung <br>
+dem Kunden öffentlich einen Bauchtanz zu tanzen, Fragen wahrheitsgetreu zu beantworten, Gespräche über eventspezifische Themen zu führen und Meinungen wahrheitsgetreu wiederzugeben. <br>
+Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Bauchtanz privat</strong><br>
+Eine abzurechnende Einheit beträgt 1 Vorstellung / 2 x 15min.<br>
+Die Leistung "Bauchtanz privat" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. Die gebuchte Person hat die Verpflichtung <br>
+dem Kunden privat einen Bauchtanz vor zu tanzen, Fragen wahrheitsgetreu zu beantworten, Gespräche über eventspezifische Themen zu führen und Meinungen wahrheitsgetreu wiederzugeben. Der Kunde trägt sämtliche Anreise-,<br>
+Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Animationstanz privat</strong><br>
+Eine abzurechnende Einheit beträgt 1 Vorstellung / 3 x 10min.<br>
+Die Leistung "Animationstanz privat" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. Die gebuchte Person hat die Verpflichtung <br>
+dem Kunden privat einen Animationstanz (Gogo) vor zu tanzen, Fragen wahrheitsgetreu zu beantworten, Gespräche über eventspezifische Themen zu führen und Meinungen wahrheitsgetreu wiederzugeben. <br>
+Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>Animationstanz öffentlich</strong><br>
+Eine abzurechnende Einheit beträgt 1 Vorstellung / 3 x 10min.<br>
+Die Leistung "Animationstanz öffentlich" beinhaltet ein Treffen zweier Personen an einem Ort zu einer gewählten Uhrzeit, welche vom Kunden frei bestimmt wird. Die gebuchte Person hat die Verpflichtung <br>
+dem Kunden öffentlich einen Animationstanz (Gogo) vor zu tanzen, Fragen wahrheitsgetreu zu beantworten, Gespräche über eventspezifische Themen zu führen und Meinungen wahrheitsgetreu wiederzugeben. <br>
+Der Kunde trägt sämtliche Anreise-, Materialkosten etc., die nachweisbar sind.<br><br>
+
+<strong>5.Anmeldung</strong><br>
+Es erfolgt eine Anmeldung („Dreambeem“) in fünf Schritten. Der erste Schritt beinhaltet die Angabe von Personendaten. Im zweiten Schriitt sind drei Wissensgebiete Pflichtwahl.<br>
+Jeweilige Dienstleistungen werden im dritten Anmelde – Dialog gewählt. Gesprochene Sprachen und Verfügungszeiten sind im vierten Schritt anzugeben. Schritt fünf stellt die Eingabedaten zur Änderung <br>
+bereit. Ein Vertragsschluss findet hiermit statt.<br><br>
+
+<strong>6.Buchungsvereinbarung</strong><br>
+Jede ausgeführte Buchung ist verbindlich und kostenpflichtig, bevor der „Dreambeem“ elektronisch zugestimmt hat („buchen“). Der Kunde ist verpflichtet, den kompletten Leistungsbetrag sofort<br>
+per “Guthaben“ an die Dreambeem.com abzutreten.<br>
+Die Betriebsstätte, die Zeit und die gebuchte Person sind bindend.<br>
+Der Anteil des Mitgliedes beträgt 80% vor Steuern. Bei einer Verzögerung ist die Buchung verbindlich. Elektronische Absprachen sind geltend. Es können angefragte Buchungen per Klick abgelehnt werden.<br>
+Bei Ablehnung der Buchungsanfrage durch den “Dreambeem“, ist eine sofortige Rückzahlung (innerhalb von drei Tagen) durch die Dreambeem.com an den Kunden fällig.<br>
+Nachdem das Treffen erfolgte, ist eine Bewertung abzugeben. Kunden jeglicher Art können unbegrenzt buchen.<br><br>
+
+
+<strong>7.Mitgliedschaft</strong><br>
+Dreambeem – Mitgliedschaft ist kostenlos. Stammdaten der Dreambeem – Mitglieder sind änderbar.<br>
+Behindert bzw. Schwerbehinderte Menschen werden nach Vorlage eines Nachweises nicht ausgeschlossen.<br><br>
+
+<strong>8.Steuerrechtliche Angaben</strong><br>
+Die Dreambeem.com hat steuerrechtliche Pflichten gegenüber des Mitgliedes gemäß § 238 HGB.<br><br>
+
+<strong>9.Vermittlung §</strong><br>
+Die Dreambeem.com vermittelt sowohl juristische als auch natürliche Personen. Für natürliche Personen, welche nicht steuerrechtlich erfasst sind, gilt GeWo. <br>
+Eine Reisegewerbekarte ist nicht erforderlich:<br>
+(1) Der Betrieb eines Gewerbes ist jedermann gestattet, soweit nicht durch dieses Gesetz Ausnahmen oder Beschränkungen vorgeschrieben oder zugelassen sind.<br>
+(2) Wer gegenwärtig zum Betrieb eines Gewerbes berechtigt ist, kann von demselben nicht deshalb ausgeschlossen werden, weil er den Erfordernissen dieses Gesetzes nicht genügt.<br><br>
+
+<strong>GewO § 55f Haftpflichtversicherung</strong><br>
+Das Bundesministerium für Wirtschaft und Technologie wird ermächtigt, durch Rechtsverordnung mit Zustimmung des Bundesrates zum Schutze der Allgemeinheit und der Veranstaltungsteilnehmer<br>
+für Tätigkeiten nach §55 Abs. 1 Nr. 2, die mit besonderen Gefahren verbunden sind, Vorschriften über die Verpflichtung des Gewerbetreibenden zum Abschluß und zum Nachweis des Bestehens einer Haftpflichtversicherung<br>
+zu erlassen.<br>
+Im Reisegewerbe sind verboten<br>
+1. der Vertrieb von<br>
+b) Giften und gifthaltigen Waren; zugelassen ist das Aufsuchen von Bestellungen auf Pflanzenschutzmittel, Schädlingsbekämpfungsmittel sowie auf Holzschutzmittel, für die nach baurechtlichen <br>
+Vorschriften ein Prüfbescheid mit Prüfzeichen erteilt worden ist,<br>
+d) Bruchbändern, medizinischen Leibbinden, medizinischen Stützapparaten und Bandagen, orthopädischen Fußstützen, Brillen und Augengläsern; zugelassen sind Schutzbrillen und Fertiglesebrillen,<br>
+f) elektromedizinischen Geräten einschließlich elektronischer Hörgeräte; zugelassen sind Geräte mit unmittelbarer Wärmeeinwirkung,<br>
+h) Wertpapieren, Lotterielosen, Bezugs- und Anteilscheinen auf Wertpapiere und Lotterielose; zugelassen ist der Verkauf von Lotterielosen im Rahmen genehmigter Lotterien zu gemeinnützigen Zwecken<br>
+auf öffentlichen Wegen, Straßen oder Plätzen oder anderen öffentlichen Orten,<br>
+i) Schriften, die unter Zusicherung von Prämien oder Gewinnen vertrieben werden;<br>
+2. das Feilbieten und der Ankauf von<br>
+a) Edelmetallen (Gold, Silber, Platin und Platinbimetallen) und edelmetallhaltigen Legierungen in jeder Form sowie Waren mit Edelmetallauflagen; zugelassen sind Silberschmuck bis zu einem Verkaufspreis <br>
+von 40 Euro und Waren mit Silberauflagen,<br>
+b) Edelsteinen, Schmucksteinen und synthetischen Steinen sowie von Perlen,<br>
+3. das Feilbieten von<br>
+b) geistigen Getränken; zugelassen sind Bier und Wein in fest verschlossenen Behältnissen sowie alkoholische Getränke im Sinne von § 67 Abs. 1 Nr. 1 zweiter und dritter Halbsatz;<br>
+4. der Abschluß sowie die Vermittlung von Rückkaufgeschäften (§ 34 Abs. 4) und die für den Darlehensnehmer entgeltliche Vermittlung von Darlehensgeschäften.<br>
+(2) Das Bundesministerium für Wirtschaft und Technologie kann durch Rechtsverordnung mit Zustimmung des Bundesrates Ausnahmen von den in Absatz 1 aufgeführten Beschränkungen zulassen,<br>
+soweit hierdurch eine Gefährdung der Allgemeinheit oder der öffentlichen Sicherheit oder Ordnung nicht zu besorgen ist. Die gleiche Befugnis steht den Landesregierungen für den Bereich ihres Landes zu,<br>
+solange und soweit das Bundesministerium für Wirtschaft und Technologie von seiner Ermächtigung keinen Gebrauch gemacht hat. Die zuständige Behörde kann im Einzelfall für ihren Bereich Ausnahmen <br>
+von den Verboten des Absatzes 1 mit dem Vorbehalt des Widerrufs und für einen Zeitraum bis zu fünf Jahren zulassen, wenn sich aus der Person des Antragstellers oder aus sonstigen Umständen keine <br>
+Bedenken ergeben §55 Abs. 3 und §60c Abs. 1 gelten für die Ausnahmebewilligung entsprechend.<br><br>
+GewO § 29 Auskunft und Nachschau<br>
+(1) Gewerbetreibende oder sonstige Personen,<br>
+1. die einer Erlaubnis nach §§ 30, 33a, 33c, 33d, 33i, 34, 34a, 34b oder 34c bedürfen,<br>
+2. die nach § 34b Abs. 5 oder § 36 öffentlich bestellt sind,<br>
+3. die ein überwachungsbedürftiges Gewerbe im Sinne des § 38 Abs. 1 betreiben oder<br>
+4. gegen die ein Untersagungsverfahren nach § 35 oder § 59 eröffnet oder abgeschlossen wurde<br>
+(Betroffene), haben den Beauftragten der zuständigen öffentlichen Stelle auf Verlangen die für die Überwachung des Geschäftsbetriebs<br>
+erforderlichen mündlichen und schriftlichen Auskünfte unentgeltlich zu erteilen.<br>
+(2) Die Beauftragten sind befugt, zum Zwecke der Überwachung Grundstücke und Geschäftsräume des Betroffenen während der üblichen Geschäftszeit zu betreten, dort Prüfungen und Besichtigungen <br>
+vorzunehmen, sich die geschäftlichen Unterlagen vorlegen zu lassen und in diese Einsicht zu nehmen. Zur Verhütung dringender Gefahren für die öffentliche Sicherheit oder Ordnung können die Grundstücke <br>
+und Geschäftsräume tagsüber auch außerhalb der in Satz 1 genannten Zeit sowie tagsüber auch dann betreten werden, wenn sie zugleich Wohnzwecken des Betroffenen dienen; das Grundrecht der <br>
+Unverletzlichkeit der Wohnung (Artikel 13 des Grundgesetzes) wird insoweit eingeschränkt.<br>
+(3) Der Betroffene kann die Auskunft auf solche Fragen verweigern, deren Beantwortung ihn selbst oder einen der in § 383 Abs. 1 Nr. 1 bis 3 der Zivilprozeßordnung bezeichneten Angehörigen der Gefahr <br>
+strafgerichtlicher Verfolgung oder eines Verfahrens nach dem Gesetz über Ordnungswidrigkeiten aussetzen würde.<br>
+(4) Die Absätze 1 bis 3 finden auch Anwendung, wenn Tatsachen die Annahme rechtfertigen, daß ein erlaubnispflichtiges, überwachungsbedürftiges oder untersagtes Gewerbe ausgeübt wird.<br>
+GewO § 33a Schaustellungen von Personen<br>
+(1) Wer gewerbsmäßig Schaustellungen von Personen in seinen Geschäftsräumen veranstalten oder für deren Veranstaltung seine Geschäftsräume zur Verfügung stellen will, bedarf der Erlaubnis <br>
+der zuständigen Behörde. Dies gilt nicht für Darbietungen mit überwiegend künstlerischem, sportlichem, akrobatischem oder ähnlichem Charakter. Die Erlaubnis kann mit einer Befristung erteilt und <br>
+mit Auflagen verbunden werden, soweit dies zum Schutze der Allgemeinheit, der Gäste oder der Bewohner des Betriebsgrundstücks oder der Nachbargrundstücke vor Gefahren, erheblichen Nachteilen oder<br>
+erheblichen Belästigungen erforderlich ist; unter denselben Voraussetzungen ist auch die nachträgliche Aufnahme, Änderung und Ergänzung von Auflagen zulässig.<br>
+(2) Die Erlaubnis ist zu versagen, wenn<br>
+1. Tatsachen die Annahme rechtfertigen, daß der Antragsteller die für den Gewerbebetrieb erforderliche Zuverlässigkeit nicht besitzt,<br>
+2. zu erwarten ist, daß die Schaustellungen den guten Sitten zuwiderlaufen werden oder<br>
+3. der Gewerbebetrieb im Hinblick auf seine örtliche Lage oder auf die Verwendung der Räume dem öffentlichen Interesse widerspricht, insbesondere schädliche Umwelteinwirkungen im Sinne des Bundes-Immissionsschutzgesetzes<br>
+oder sonst erhebliche Nachteile, Gefahren oder Belästigungen für die Allgemeinheit befürchten läßt.<br>
+GewO § 33b Tanzlustbarkeiten<br>
+Die Abhaltung von Tanzlustbarkeiten richtet sich nach den landesrechtlichen Bestimmungen.<br><br>
+<strong>10.Fame</strong><br>
+Nach jeder erfolgten Buchung, die nach Agb zustande kam, erfolgt eine Hochzählung des Fame Indikators.
+Für jede erfolgreiche Buchung, die mit "Bewertungen" bewertet worden ist, erhält die gebuchte Person einen "€ Fame" von 0,1 %.
+
+Das Datum der Bewertungsfälligkeit ist vier Kalendertage nach Buchungszeitpunkt.<br><br>
+
+<strong>11.Bezahlung</strong><br>
+Die Dreambeem.com entrichtet 80% des Erlöses an die gebundenen Handelspartner. Es erfolgt elektronischer Zahlungsverkehr.<br>
+Jeden Monat wird von der Dreambeem.com elektronisch (ausschließlich Paypal und Überweisung) der erwirtschaftete Umsatz für den jeweiligen Handelspartner ("Dream") bindend entrichtet.<br>
+Das Zahlungsziel für Handelspartner ist jeweils der 15. des darauf folgenden Kalendermonats.<br>
+Die Dreambeem.com erstellt elektronische Dokumente für die Fakturierung. Zahlungsfrist beträgt acht Kalendertage.<br><br>
+
+<strong>12.Bewertung</strong><br>
+<p>Nach erfolgter Buchung ist eine Bewertung der Dienstleistung abzugeben. Es gibt fünf verschiedene Bewertungsmöglichkeiten.<br>
+    1. "war exzellent"<br>
+    2. "war gut"<br>
+    3. "war mäßig"<br>
+    4. "ging so"<br>
+    5. "war nicht gut"<br><br>
+    Bei illegalen Handlungen nutzen Sie "Verstoß melden" um gesetzeswidrige Handlungen, welche bei Treffen zu Tage gelegt worden sind,  bei Dreambeem.com anzugeben. Dreambeem.com leitet diese Informationen direkt weiter an die zuständigen Behörden.
+</p>
+
+<strong>13.Verbotene Handlungen</strong><br>
+Dienstleistungen, die folgenden Tatbestand erfüllen, werden untersagt:<br>
+
+* das Verbreiten von Propagandamitteln verfassungswidriger Organisationen (§§ 86, 86a StGB)<br>
+* Volksverhetzung durch Verbreitung von Schriften verfassungswidriger Organisationen (§§ 130 II Nr. 1 StGB)<br>
+* Straftaten gegen die sexuelle Selbstbestimmung (§§ 174 – 184g StGB)<br>
+* Taten Betrug und Untreue (§§ 263 – 266b StGB)<br>
+* Diebstahl und Unterschlagung (§§ 242 – 248 a StGB)<br>
+* Raub und Erpressung (§§ 250 – 252 StGB)<br>
+* Begünstigung und Hehlerei (§ 260, 260 a StGB)<br>
+* Unerlaubter Handel mit Betäubungsmitteln (§ 29 a Betäubungsmittelgesetz (BtMG))<br>
+* Gewerbsmäßiger unerlaubter Handel mit Betäubungsmitteln (§ 30 BtMG)<br>
+* Bandenmäßiger gewerbsmäßiger unerlaubter Handel mit Betäubungsmitteln (§ 30 a BtMG)<br>
+* die Verleitung zu Straftaten (§ 130 a StGB)<br>
+* die Verbreitung Gewalt verherrlichender Schriften (§ 131 I StGB)<br>
+* die Beschimpfung von Bekenntnissen, Religionsgemeinschaften und Weltanschauungsvereinigungen (§ 166 StGB)<br>
+* die Verbreitung von pornographischen Schriften - Pornographie, worunter insbesondere Kinderpornographie, <br>
+sexuelle Handlungen von Menschen mit Tieren sowie Darstellungen der primären Geschlechtsorgane fallen (§ 184 StGB)<br>
+* Beleidigung, üble Nachrede und Verleumdung (§§ 185 ff. StGB)<br>
+* Verbotene Mitteilungen über nichtöffentliche Gerichtsverhandlungen (§ 353 d StGB)<br>
+* die Verbreitung jugendgefährdender Schriften, (§ 21 I Nr. 3a III, GJS)<br>
+* die unerlaubte Verbreitung urheberrechtlich geschützter Werke (§ 106 UrhG)<br><br>
+
+
+Jegliche Handlungen, die einen Straftatbestand in irgendeiner Weise erfüllen, sind nach StGB zu handhaben.<br><br>
+
+<strong>14.Schutzrechte</strong><br>
+Die Dreambeem.com enthält urheber- und marken- und sonstige schutzrechtlich geschützte Materialien der Dreambeem.com selbst und von seinen Lizenzgebern und Lizenznehmern.<br>
+Mitglieder urheber- oder sonst schutzrechtlich Marken nicht frei als Nicknamen, Bewertung oder Buchungsadjunktionen wählen. Der Missbrauch geschützter Marken wird strafrechtlich verfolgt.<br><br>
+
+<strong>15.Verfügbarkeit</strong><br>
+In der Regel stehen die Dreambeem.com 24 Stunden täglich an 7 Tagen der Woche zur Verfügung. Die Dreambeem.com bemüht sich um eine größtmögliche Verfügbarkeit der Server und damit der Inhalte<br>
+und gespeicherten Nachrichten, kann dies aber nicht garantieren oder sich hier zu bestimmten Verfügbarkeitsanteilen verpflichten. Die Dreambeem.com übernimmt keine Gewähr für ununterbrochene <br>
+Verfügbarkeit von Daten. Die Dreambeem.com schließt die Haftung für aufgrund technisch bedingter Ausfälle verursachte Datenverluste, abgebrochene Datenübertragungen oder sonstige Probleme aus.<br><br>
+
+<strong>16.Datensicherheit</strong><br>
+Die Dreambeem.com gewährleistet Aufbewahrung und Geheimhaltung der persönlichen Angaben. Verbindungen zu nicht existierenden oder falschen Daten sind nicht vorhanden und werden obstruierend behandelt.<br><br>
+
+<strong>17.Haftung</strong><br>
+Die Dreambeem.com haftet nicht für Aktivitäten, die von Nutzern stammen und nicht von Dreambeem.com verwaltet werden. Sie können die Dreambeem.com weder zugerechnet werden, noch stellen sie die Meinung
+der Dreambeem.com dar.<br>
+
+Jegliche Dienstleistungen, die durch die Dreambeem.com, aber nicht direkt von der Dreambeem.com zugänglich gemacht werden, sind die ihrer jeweiligen Beteiligten, nicht die der Dreambeem.com. <br>
+Ihre teilnehmenden Personen sind allein verantwortlich für Ihr Handeln. Die Dreambeem.com übernimmt keine Haftung für entstandene Schäden. Die Dreambeem.com kann für Schäden nach OWIG und StVG nicht
+haftbar gemacht werden.<br>
+
+Die Dreambeem.com haftet ausschließlich für Schäden, die seitens der Dreambeem.com, seiner gesetzlichen Vertreter oder seiner Erfüllungs- oder Verrichtungsgehilfen vorsätzlich oder grob fahrlässig
+infolge positiver Vertragsverletzung, Verschulden bei Vertragsschluss oder unerlaubter Handlung verursacht werden. Ausgenommen von dieser Haftungsbeschränkung sind zugesicherte Eigenschaften sowie die Verletzung
+von wesentlichen vertraglichen Pflichten.<br>
+
+Die Dreambeem.com haftet weiter nur für bei Vertragsschluss vorhersehbare, vertragstypische Schäden infolge von Leistungsausfällen und -verzögerungen, soweit nicht vorsätzliches oder grob fahrlässiges Handels
+gegeben ist.<br>
+
+Die Dreambeem.com aktualisiert und prüft die Informationen (Bilder, Texte) auf ihren Webseiten ständig. Eine Haftung oder Garantie für die Richtigkeit, Aktualität und Vollständigkeit der Informationen
+der Dreambeem.com kann nicht übernommen werden.<br>
+</md-content>

@@ -1,0 +1,265 @@
+<div ng-controller="MainCtrl">
+    <div ng-init="checkLogin();"></div>
+
+    <div ng-include="'views/document/customerheader.html'"></div>
+
+    <div ng-include="'views/sidenavs/customermenu.html'"></div>
+
+    <div ng-include="'views/sidenavs/dreambeem.html'"></div>
+
+    <div ng-include="'views/sidenavs/furnybeem.html'"></div>
+
+    <div class="spinner" ng-show="loading">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+    </div>
+</div>
+
+<div ng-cloak ng-init="initCustomer()">
+
+    <md-content flex layout-padding class="md-padding" layout="column">
+        <h1><strong>Dreamdaten</strong></h1>
+        <p>Hier kannst Du Deine Rechnungs- und Lieferadresse bzw. Deine Emailadresse und Deine Verfügbarkeit eintragen.</p>
+
+        <h2 class="md-title">Rechnungsadresse</h2>
+      <form name="customerForm" ng-submit="submitCustomer(customerForm.$valid,firstName,lastName,street,plz,town,country,phone,emaila)" novalidate>
+            <div layout="row" layout-wrap layout-align="start" flex>
+                <md-input-container class="md-icon-float md-block" flex="50" flex-md="50" flex-sm="50" flex-xs="100">
+                    <label>Vorname</label>
+                    <md-icon md-svg-src="name24" class="material-icons md-24"></md-icon>
+                    <input type="text" id="firstName" name="firstName" ng-model="firstName" required>
+
+                    <div class="errors" ng-messages="customerForm.firstName.$error">
+                        <div ng-message="required">Benötigt</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-icon-float" flex="50" flex-md="50" flex-sm="50" flex-xs="100">
+                    <label>Nachname</label>
+                    <md-icon md-svg-src="name24" class="material-icons md-24"></md-icon>
+                    <input type="text" id="lastName" name="lastName" ng-model="lastName" required>
+
+                    <div class="errors" ng-messages="customerForm.lastName.$error">
+                        <div ng-message="required">Benötigt</div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div layout="row" layout-wrap layout-align="start" flex>
+                <md-input-container class="md-icon-float md-block" flex="75" flex-md="75" flex-sm="75" flex-xs="100">
+                    <label>Straße + Hausnummer</label>
+                    <md-icon md-svg-src="bower_components/material-design-icons/action/svg/production/ic_label_24px.svg" class="material-icons md-24"></md-icon>
+                    <input type="text" id="street" name="street" ng-model="street" required>
+
+                    <div class="errors" ng-messages="customerForm.street.$error">
+                        <div ng-message="required">Benötigt</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-icon-float" flex="25" flex-md="25" flex-sm="25" flex-xs="100">
+                    <label>Postleitzahl</label>
+                    <md-icon md-svg-src="bower_components/material-design-icons/action/svg/production/ic_perm_media_24px.svg" class="material-icons md-24"></md-icon>
+                    <input type="text" id="plz" name="plz" ng-model="plz" required>
+
+                    <div class="errors" ng-messages="customerForm.plz.$error">
+                        <div ng-message="required">Benötigt</div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div layout="row" layout-wrap layout-align="start" flex>
+                <md-input-container class="md-icon-float md-block" flex="75" flex-md="75" flex-sm="75" flex-xs="100">
+                    <label>Stadt</label>
+                    <md-icon md-svg-src="bower_components/material-design-icons/action/svg/production/ic_receipt_24px.svg" class="material-icons md-24"></md-icon>
+                    <input type="text" id="town" name="town" ng-model="town" required>
+
+                    <div class="errors" ng-messages="customerForm.town.$error">
+                        <div ng-message="required">Benötigt</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-icon-float" flex="25" flex-md="25" flex-sm="25" flex-xs="100">
+                    <label>Land</label>
+                    <md-icon md-svg-src="bower_components/material-design-icons/action/svg/production/ic_room_24px.svg" class="material-icons md-24"></md-icon>
+                    <md-select name="country" ng-model="country" required>
+                        <md-option value="de">Deutschland</md-option>
+                        <md-option value="sui">Schweiz</md-option>
+                        <md-option value="aut">Österreich</md-option>
+                    </md-select>
+
+                    <div class="errors" ng-messages="customerForm.country.$error">
+                        <div ng-message="required">Benötigt</div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div layout="row" layout-wrap layout-align="start" flex>
+                <md-input-container class="md-icon-float md-block" flex="50" flex-md="50" flex-sm="50" flex-xs="100">
+                    <label>Telefon</label>
+                    <md-icon md-svg-src="bower_components/material-design-icons/communication/svg/production/ic_call_24px.svg" class="material-icons md-24"></md-icon>
+                    <input type="text" id="phone" name="phone" ng-model="phone" md-no-asterisk>
+                </md-input-container>
+                <md-input-container class="md-icon-float" flex="50" flex-md="50" flex-sm="50" flex-xs="100">
+                    <label>Email</label>
+                    <md-icon md-svg-src="bower_components/material-design-icons/communication/svg/production/ic_email_24px.svg" class="material-icons md-24"></md-icon>
+                    <input type="email" id="emaila" name="emaila" ng-model="emaila" required>
+
+                    <div class="errors" ng-messages="customerForm.emaila.$error">
+                        <div ng-message="required">Benötigt</div>
+                        <div ng-message="email">Keine korrekte Emailadresse</div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div layout="row" layout-align="end" flex>
+                <md-button type="submit" ng-disabled="customerForm.$invalid" class="md-button md-raised md-warn">
+                    Speichern
+                </md-button>
+            </div>
+        </form>
+
+        <h2 class="md-title">Lieferadresse</h2>
+        <form name="addressForm" novalidate ng-submit="submitAddress($event,a_firstName,a_lastName,a_street,a_plz,a_town,a_country)">
+            <div layout="row" layout-wrap layout-align="start" flex>
+                <md-input-container class="md-icon-float md-block" flex="50" flex-md="50" flex-sm="50" flex-xs="100">
+                    <label>Vorname</label>
+                    <md-icon md-svg-src="name24" class="material-icons md-24"></md-icon>
+                    <input type="text" id="a_firstName" name="a_firstName" ng-model="a_firstName" required>
+
+                    <div class="errors" ng-messages="addressForm.a_firstName.$error">
+                        <div ng-message="required">Benötigt</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-icon-float" flex="50" flex-md="50" flex-sm="50" flex-xs="100">
+                    <label>Nachname</label>
+                    <md-icon md-svg-src="name24" class="material-icons md-24"></md-icon>
+                    <input type="text" id="a_lastName" name="a_lastName" ng-model="a_lastName" required>
+
+                    <div class="errors" ng-messages="addressForm.a_lastName.$error">
+                        <div ng-message="required">Benötigt</div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div layout="row" layout-wrap layout-align="start" flex>
+                <md-input-container class="md-icon-float md-block" flex="75" flex-md="75" flex-sm="75" flex-xs="100">
+                    <label>Straße + Hausnummer</label>
+                    <md-icon md-svg-src="street24" class="material-icons md-24"></md-icon>
+                    <input type="text" id="a_street" name="a_street" ng-model="a_street" required>
+
+                    <div class="errors" ng-messages="addressForm.a_street.$error">
+                        <div ng-message="required">Benötigt</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-icon-float" flex="25" flex-md="25" flex-sm="25" flex-xs="100">
+                    <label>Postleitzahl</label>
+                    <md-icon md-svg-src="plz24" class="material-icons md-24"></md-icon>
+                    <input type="text" id="a_plz" name="a_plz" ng-model="a_plz" required>
+
+                    <div class="errors" ng-messages="addressForm.a_plz.$error">
+                        <div ng-message="required">Benötigt</div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div layout="row" layout-wrap layout-align="start" flex>
+                <md-input-container class="md-icon-float md-block" flex="75" flex-md="75" flex-sm="75" flex-xs="100">
+                    <label>Stadt</label>
+                    <md-icon md-svg-src="town24" class="material-icons md-24"></md-icon>
+                    <input type="text" id="a_town" name="a_town" ng-model="a_town" required>
+
+                    <div class="errors" ng-messages="addressForm.a_town.$error">
+                        <div ng-message="required">Benötigt</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-icon-float" flex="25" flex-md="25" flex-sm="25" flex-xs="100">
+                    <label>Land</label>
+                    <md-icon md-svg-src="country24" class="material-icons md-24"></md-icon>
+                    <md-select name="a_country" ng-model="a_country" required>
+                        <md-option value="de">Deutschland</md-option>
+                        <md-option value="sui">Schweiz</md-option>
+                        <md-option value="aut">Österreich</md-option>
+                    </md-select>
+
+                    <div class="errors" ng-messages="addressForm.a_country.$error">
+                        <div ng-message="required">Benötigt</div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div layout="row" layout-align="end" flex>
+                <md-button type="submit" ng-disabled="addressForm.$invalid" class="md-button md-raised md-warn">
+                    Speichern
+                </md-button>
+            </div>
+        </form>
+
+        <div layout="row" layout-wrap layout-align="start" flex ng-init="initAddresses()">
+            <div flex="100" md-flex="100" sm-flex="100" xs-flex="100">
+                <div layout="row" layout-wrap flex>
+                    <div class="text-center" flex-xs="50" flex="15" flex-sm="25" flex-md="25"><strong>Vorname</strong></div>
+                    <div class="text-center" flex-xs="50" flex="15" flex-sm="25" flex-md="25"><strong>Nachname</strong></div>
+                    <div class="text-center" flex-xs="50" flex="15" flex-sm="25" flex-md="25"><strong>Straße + HNr.</strong></div>
+                    <div class="text-center" flex-xs="50" flex="15" flex-sm="25" flex-md="25"><strong>Plz + Stadt</strong></div>
+                    <div class="text-center" flex-xs="50" flex="15" flex-sm="25" flex-md="25"><strong>Land</strong></div>
+                    <div class="text-center" flex-xs="50" flex="15" flex-sm="25" flex-md="25"><strong>Status</strong></div>
+                </div>
+                <md-divider></md-divider>
+                <div layout="row" class="p-t-lg" layout-wrap ng-repeat="tileAddress1 in addresses" flex>
+                    <div class="text-center" flex-xs="50" flex="15" flex-sm="25" flex-md="25">{{tileAddress1.firstname}}</div>
+                    <div class="text-center" flex-xs="50" flex="15" flex-sm="25" flex-md="25">{{tileAddress1.lastname}}</div>
+                    <div class="text-center" flex-xs="50" flex="15" flex-sm="25" flex-md="25">{{tileAddress1.street}}</div>
+                    <div class="text-center" flex-xs="50" flex="15" flex-sm="25" flex-md="25">{{tileAddress1.plz}} {{tileAddress1.town}}</div>
+                    <div class="text-center" flex-xs="50" flex="15" flex-sm="25" flex-md="25">{{tileAddress1.country}}</div>
+                    <div class="text-center" flex-xs="50" flex="15" flex-sm="25" flex-md="25">{{tileAddress1.status}}</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- <h2 class="md-title">Verfügbarkeit</h2>
+        <div layout="row" layout-wrap layout-align="start" flex>
+            <md-button ng-click="defineAvailability($event);" class="md-button md-raised md-primary">
+                Verfügbarkeit definieren
+            </md-button>
+        </div>
+
+        <div layout="row" layout-wrap flex>
+            <div class="text-center" flex-xs="100" flex="15" flex-sm="33" flex-md="33"><strong>Event - Kategorie</strong></div>
+            <div class="text-center" flex-xs="100" flex="15" flex-sm="33" flex-md="33"><strong>Event</strong></div>
+            <div class="text-center" flex-xs="100" flex="15" flex-sm="33" flex-md="33"><strong>verfügbar Uhrzeit</strong></div>
+            <div class="text-center" flex-xs="100" flex="15" flex-sm="33" flex-md="33"><strong>verfügbar Wochentag</strong></div>
+            <div class="text-center" flex-xs="100" flex="15" flex-sm="33" flex-md="33"><strong>verfügbar Ort (Umkreis in km)</strong></div>
+            <div class="text-center" flex-xs="100" flex="15" flex-sm="33" flex-md="33"><strong>Preis</strong></div>
+        </div>
+        <md-divider></md-divider>
+        <div layout="row" layout-wrap flex id="availableEvents" ng-init="initEvents();">
+            <span ng-if="availableMessage.length > 0" class="text-danger">{{availableMessage}}</span>
+        </div>
+        <div layout="row" class="m-t-lg" layout-wrap flex id="availableProfiles" ng-init="initProfileLinks();">
+            <md-input-container flex="33" flex-md="33" flex-sm="33" flex-xs="100">
+                <label for="fbl">Facebook - Profil - Link</label>
+                <input type="text" name="fbl" id="fbl" ng-model="fbl" value="{{fbl}}">
+            </md-input-container>
+            <md-input-container flex="33" flex-md="33" flex-sm="33" flex-xs="100">
+                <label for="twl">Twitter - Profil - Link</label>
+                <input type="text" name="twl" id="twl" ng-model="twl" value="{{twl}}">
+            </md-input-container>
+            <md-input-container flex="33" flex-md="33" flex-sm="33" flex-xs="100">
+                <label for="inl">Instagram - Profil - Link</label>
+                <input type="text" name="inl" id="inl" ng-model="inl" value="{{inl}}">
+            </md-input-container>
+        </div>
+        <div layout="row" layout-wrap layout-align="end" flex>
+            <md-button ng-click="saveProfiles($event,fbl,twl,inl);" class="md-button md-raised md-warn">
+                Profile speichern
+            </md-button>
+        </div>
+        <div layout="row" class="m-t-lg" layout-wrap flex id="availableNick" ng-init="initNickName();">
+            <md-input-container flex="25" flex-md="25" flex-sm="25" flex-xs="100">
+                <label for="fbl">Nickname</label>
+                <input type="text" name="nname" id="nname" ng-model="nname" value="{{nname}}">
+            </md-input-container>
+            <md-input-container flex="75" flex-md="75" flex-sm="75" flex-xs="100">
+                <label>Beschreibung</label>
+                <textarea name="nnameDescription" placeholder="mit einigen Worten Dich beschreiben" ng-model="nnameDescription" value="{{nnameDescription}}">
+                    </textarea>
+            </md-input-container>
+        </div>
+        <div layout="row" layout-wrap layout-align="end" flex>
+            <md-button ng-click="saveNickName($event,nname,nnameDescription);" class="md-button md-raised md-warn">
+                Nickname speichern
+            </md-button>
+        </div> -->
+    </md-content>
+</div>

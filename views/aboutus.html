@@ -1,0 +1,30 @@
+<div ng-controller="MainCtrl">
+    <div ng-init="checkLogin();"></div>
+
+    <div ng-include="'views/document/customerheader.html'"></div>
+
+    <div ng-include="'views/sidenavs/customermenu.html'"></div>
+
+    <div ng-include="'views/sidenavs/dreambeem.html'"></div>
+
+    <div ng-include="'views/sidenavs/furnybeem.html'"></div>
+
+    <div class="spinner" ng-show="loading">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+    </div>
+</div>
+
+<md-content layout-padding class="md-padding">
+    <h3>
+        <strong>
+            Über uns
+        </strong>
+    </h3>
+
+    <p>
+        <strong>Dreambeem.com</strong> ist ein 1 - Mann Betrieb. CEO Andras Seke kümmert sich um das Tagesgeschäft.
+        Bei jeglichen Fragen ist er rund um die Uhr für Dich da und hilft.<br>
+    </p>
+</md-content>
+
